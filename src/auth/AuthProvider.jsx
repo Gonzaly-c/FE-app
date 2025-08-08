@@ -1,12 +1,39 @@
 import { AuthContext } from "../context/AuthContext.jsx"
+import { useState } from "react"
+import { loginService, logoutService, getToken } from "./authService.js"
+import { useEffect } from "react"
+
 
 export const AuthProvider = ({ children }) => {
-  const authValue = '' //valor del contexto
+  const [user, setUser] = useState(null)
   
-  return(
-    //Aca validaciones del login mediante useState y otras cosas
+  useEffect(() => {
+    const token = getToken()
+    if (token) {
+      // Aquí podrías hacer una llamada a la API para obtener los datos del usuario
+      // usando el token, pero por simplicidad, solo lo guardamos en el estado.
+      setUser({ token }) // Simulando un usuario con el token
+    }
+  }, [] )
 
-    <AuthContext.Provider value={authValue}>
+    const login = async (email, password) => {
+      try {
+        const user = await loginService(email, password)
+        setUser(user)
+      } catch (error) {
+        console.error("Error during login:", error)
+        throw error
+      }}
+    
+    const logout = () => {
+      logoutService()
+      setUser(null)
+    }
+
+  return(
+    
+
+    <AuthContext.Provider value={{login, logout, user}}>
       {children}
     </AuthContext.Provider>
   )

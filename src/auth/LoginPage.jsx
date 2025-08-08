@@ -1,12 +1,32 @@
 import RailTrackerLogo from '../assets/RailTrackerImages/RailTrackerLogoRecorted.png';
 import { useForm } from 'react-hook-form';
+import { AuthContext } from '../context/AuthContext.jsx';
+import { useNavigate } from 'react-router-dom';
+import { useContext } from 'react';
 
 export function LoginPage(){
   
   const { register, handleSubmit, formState: { errors, isValid, isSubmitting }} = useForm();
+  const { login, user  } = useContext(AuthContext);
+  const navigate = useNavigate();
 
-  const onSubmit = async () => {
+  const onSubmit = async (data) => {
     await new Promise(resolve => setTimeout(resolve,4000))
+    try {
+      await login(data.email,data.password)
+      if(user.role == 'admin'){
+        console.log("admin loged in")
+        navigate('/admin/dashboard')
+      } else{
+        console.log("user loged in")
+        navigate('/user/dashboard')
+      }
+    } catch (error) {
+      console.error("Error during login:", error);
+      throw error;
+    }
+
+
   }
   
   const buttonClass = 'btn w-100 my-2 ' + (isSubmitting? 'btn-info': 'btn-success')
