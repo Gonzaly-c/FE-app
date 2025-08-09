@@ -1,13 +1,16 @@
 import { api } from "../services/api.js";
 
-export const loginService = async (emailToLogin, password) => {
-  const res = api.post('/auth/login', {emailToLogin, password})
-  const { token , email, role } = res.data
+export const loginService = async (email, password) => {
 
-  const user = {email, role}
+  const res = await api.post('/auth/login', {email, password})
+  
+  const { token , role } = res.data.userData
+
+  const user = {token, role}
 
   localStorage.setItem('token', token)
   return user
+
 }
 
 export const logoutService = () => {

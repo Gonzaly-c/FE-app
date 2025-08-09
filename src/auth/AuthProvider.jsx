@@ -12,14 +12,14 @@ export const AuthProvider = ({ children }) => {
     if (token) {
       // Aquí podrías hacer una llamada a la API para obtener los datos del usuario
       // usando el token, pero por simplicidad, solo lo guardamos en el estado.
-      setUser({ token }) // Simulando un usuario con el token
+      //setUser({ token }) // Simulando un usuario con el token
     }
   }, [] )
 
     const login = async (email, password) => {
       try {
-        const user = await loginService(email, password)
-        setUser(user)
+        const userToSet = await loginService(email, password)
+        return userToSet
       } catch (error) {
         console.error("Error during login:", error)
         throw error
@@ -33,7 +33,7 @@ export const AuthProvider = ({ children }) => {
   return(
     
 
-    <AuthContext.Provider value={{login, logout, user}}>
+    <AuthContext.Provider value={{login, logout, user, setUser}}>
       {children}
     </AuthContext.Provider>
   )

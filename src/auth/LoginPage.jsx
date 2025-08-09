@@ -7,26 +7,19 @@ import { useContext } from 'react';
 export function LoginPage(){
   
   const { register, handleSubmit, formState: { errors, isValid, isSubmitting }} = useForm();
-  const { login, user  } = useContext(AuthContext);
+  const { login, setUser  } = useContext(AuthContext);
   const navigate = useNavigate();
 
   const onSubmit = async (data) => {
-    await new Promise(resolve => setTimeout(resolve,4000))
     try {
-      await login(data.email,data.password)
-      if(user.role == 'admin'){
-        console.log("admin loged in")
-        navigate('/admin/dashboard')
-      } else{
-        console.log("user loged in")
-        navigate('/user/dashboard')
-      }
+      const userToSet = await login(data.email,data.password)
+      console.log(userToSet)
+      setUser(userToSet) //si uso directamente el estado user, no llega a cargar ya que los estados se manejan de manera asincrona, por lo que uso el user devuelto por la API
+      if(userToSet?.role) {navigate(userToSet.role == 'admin'? '/admin/dashboard': '/conductor/dashboard')}
     } catch (error) {
       console.error("Error during login:", error);
       throw error;
     }
-
-
   }
   
   const buttonClass = 'btn w-100 my-2 ' + (isSubmitting? 'btn-info': 'btn-success')
@@ -58,7 +51,7 @@ export function LoginPage(){
               {errors.password && <span className='text-danger'>{errors.password.message}</span>}
             </div>
             
-            <button type="submit" className={buttonClass} w-100 mt-1 disabled={!isValid}>{isSubmitting? 'Enviando..': 'INICIAR SESIÓN'}</button>
+            <button type="submit" className={buttonClass} disabled={!isValid}>{isSubmitting? 'Enviando..': 'INICIAR SESIÓN'}</button>
             
           </form>
 
