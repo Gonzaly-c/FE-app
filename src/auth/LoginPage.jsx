@@ -1,6 +1,29 @@
 import RailTrackerLogo from '../assets/RailTrackerImages/RailTrackerLogoRecorted.png';
+import { useForm } from 'react-hook-form';
+import { AuthContext } from '../context/AuthContext.jsx';
+import { useNavigate } from 'react-router-dom';
+import { useContext } from 'react';
 
 export function LoginPage(){
+  
+  const { register, handleSubmit, formState: { errors, isValid, isSubmitting }} = useForm();
+  const { login, setUser  } = useContext(AuthContext);
+  const navigate = useNavigate();
+
+  const onSubmit = async (data) => {
+    try {
+      const userToSet = await login(data.email,data.password)
+      console.log(userToSet)
+      setUser(userToSet) //si uso directamente el estado user, no llega a cargar ya que los estados se manejan de manera asincrona, por lo que uso el user devuelto por la API
+      if(userToSet?.role) {navigate(userToSet.role == 'admin'? '/admin/dashboard': '/conductor/dashboard')}
+    } catch (error) {
+      console.error("Error during login:", error);
+      throw error;
+    }
+  }
+  
+  const buttonClass = 'btn w-100 my-2 ' + (isSubmitting? 'btn-info': 'btn-success')
+
   return(
     <div className="bg-light d-flex justify-content-center align-items-center vh-100">
 
@@ -11,20 +34,29 @@ export function LoginPage(){
             RailTracker 
           </p>    
 
-          <form>
-            <div className="mb-3">
+          <form onSubmit={handleSubmit(onSubmit)}>
+            
+            <div className="">
               <label htmlFor="correo" className="form-label">Correo electrónico</label>
-              <input type="email" id="correo" name="correo" className="form-control" placeholder="Correo electrónico" required/>
+              <input id="correo" {...register('email', {required: "El email es requerido", pattern: {
+                value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i,
+                message: "Invalid email address"}})
+          } className="form-control" placeholder="Correo electrónico"/>
             </div>
-            <div className="mb-3">
+            {errors.email && <span className='text-danger'>{errors.email.message}</span>}
+
+            <div className="my-3">
               <label htmlFor="password" className="form-label">Contraseña</label>
-              <input type="password" id="password" name="password" className="form-control" placeholder="Contraseña" required/>
+              <input type="password" id="password" {...register('password', {required: "La contraseña es requerida", })} className="form-control" placeholder="Contraseña"/>
+              {errors.password && <span className='text-danger'>{errors.password.message}</span>}
             </div>
-            <button type="submit" className="btn btn-success w-100 mt-1">Iniciar Sesión</button>
+            
+            <button type="submit" className={buttonClass} disabled={!isValid}>{isSubmitting? 'Enviando..': 'INICIAR SESIÓN'}</button>
+            
           </form>
 
           <div className="text-center mt-3">
-            ¿No tienes cuenta? <a href="registro.html" className="fw-bold link-underline text-info">Regístrate</a>
+            ¿Quieres ser conductor? <a href="registro.html" className="fw-bold link-underline text-info">Contáctanos</a>
           </div>
 
           <div className="text-center mt-4 pt-3 border-top">
