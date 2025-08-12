@@ -103,7 +103,7 @@ export function RegisterPage() {
           <button
             type="button"
             className="btn btn-secondary"
-            onClick={() => navigate("/login")}
+            onClick={() => navigate("/")}
           >
             Volver
           </button>

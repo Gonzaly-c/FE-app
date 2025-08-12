@@ -49,13 +49,13 @@ export function LoginPage(){
             <div className="my-3">
               <label htmlFor="password" className="form-label">Contraseña</label>
               <input type="password" id="password" {...register('password', {required: "La contraseña es requerida", pattern: {
-  value: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/,
-  message: "La contraseña debe tener al menos 8 caracteres, incluyendo mayúsculas, minúsculas, números y un símbolo"
+                value: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/,
+                message: "La contraseña debe tener al menos 8 caracteres, incluyendo mayúsculas, minúsculas, números y un símbolo"
 } })} className="form-control" placeholder="Contraseña"/>
               {errors.password && <span className='text-danger'>{errors.password.message}</span>}
             </div>
             
-            <button type="submit" className={buttonClass} disabled={!isValid}>{isSubmitting? 'Enviando..': 'INICIAR SESIÓN'}</button>
+            <button type="submit" className={buttonClass}>{isSubmitting? 'Enviando..': 'INICIAR SESIÓN'}</button>
             
           </form>
 
