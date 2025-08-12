@@ -8,7 +8,7 @@ export function ProtectedRoute({ allowedRoles }){
   useEffect(() => {
     try {
       const res = api.get('/auth/check', {withCredentials: true})
-      setIsAuth({isAuth: true, role: res.data.role})
+      setIsAuth({isAuth: true, role: res.data.useraData.role})
     } catch(error) {
       console.error("Error en la autentificacion: " + error)
       setIsAuth({isAuth: false, role: null})
