@@ -107,7 +107,8 @@ export function RegisterPage() {
           >
             Volver
           </button>
-          <button type="submit" className="btn btn-success">
+          <button type="submit" className="btn btn-success" style={{backgroundColor: "#002050ff",
+          color: "#fff"}}  >
             Crear cuenta
           </button>
         </div>

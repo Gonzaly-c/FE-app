@@ -7,7 +7,7 @@ import { useContext } from 'react';
 export function LoginPage(){
   
   
-  const { register, handleSubmit, formState: { errors, isValid, isSubmitting }} = useForm({mode: "onBlur"});
+  const { register, handleSubmit, formState: { errors, isSubmitting }} = useForm({mode: "onBlur"});
   const { login, setUser  } = useContext(AuthContext);
   const navigate = useNavigate();
   
@@ -55,12 +55,13 @@ export function LoginPage(){
               {errors.password && <span className='text-danger'>{errors.password.message}</span>}
             </div>
             
-            <button type="submit" className={buttonClass}>{isSubmitting? 'Enviando..': 'INICIAR SESIÓN'}</button>
+            <button type="submit" className={buttonClass} style={{backgroundColor: "#002050ff", color: "#fff"}}>
+              {isSubmitting? 'Enviando..': 'INICIAR SESIÓN'}</button>
             
           </form>
 
           <div className="text-center mt-3">
-            ¿Quieres ser conductor? <a onClick={() => navigate("/register")} className="fw-bold link-underline text-info">Registrate</a>
+            ¿Quieres ser conductor? <a onClick={() => navigate("/register")} className="fw-bold link-underline text-info" >Registrate</a>
           </div>
 
           <div className="text-center mt-4 pt-3 border-top">
