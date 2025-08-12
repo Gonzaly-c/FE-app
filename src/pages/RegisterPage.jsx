@@ -5,9 +5,7 @@ import { useForm } from "react-hook-form";
 //import { registerUser } from "../services/api";
 
 export function RegisterPage() {
-  const { register, formState: { errors } , handleSubmit} = useForm({
-    mode: "onBlur"
-  })
+  const { register, formState: { errors } , handleSubmit} = useForm({mode: "onBlur"})
   
   const [form, setForm] = useState({
     nombre: "",
@@ -87,14 +85,17 @@ export function RegisterPage() {
             <label htmlFor="correo" className="form-label">Correo electrónico:</label>
             <input id="correo" {...register('email', {required: "El email es requerido", pattern: {
               value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i,
-              message: "Invalid email address"}})
+              message: "Correo electrónico inválido"}})
               } className="form-control" placeholder="Correo electrónico"/>
           </div>
           {errors.email && <span className='text-danger'>{errors.email.message}</span>}
         
           <div className="mb-2">
             <label htmlFor="password" className="form-label">Contraseña:</label>
-            <input type="password" id="password" {...register('password', {required: "La contraseña es requerida", })} className="form-control" placeholder="Contraseña"/>
+            <input type="password" id="password" {...register('password', {required: "La contraseña es requerida", pattern: {
+  value: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/,
+  message: "La contraseña debe tener al menos 8 caracteres, incluyendo mayúsculas, minúsculas, números y un símbolo"
+} })} className="form-control" placeholder="Contraseña"/>
             {errors.password && <span className='text-danger'>{errors.password.message}</span>}
           </div>
 
