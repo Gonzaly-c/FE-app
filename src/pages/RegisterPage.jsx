@@ -1,10 +1,11 @@
+import RailTrackerLogo from '../assets/RailTrackerImages/RailTrackerLogoRecorted.png';
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 //import { registerUser } from "../services/api";
 
 export function RegisterPage() {
-  const { register, formState: {isSubmitting, isValid, errors} , handleSubmit} = useForm({
+  const { register, formState: { errors } , handleSubmit} = useForm({
     mode: "onBlur"
   })
   
@@ -48,8 +49,16 @@ export function RegisterPage() {
 
   return (
     <div className="container d-flex justify-content-center align-items-center min-vh-100">
-      <div className="card p-4" style={{ maxWidth: "400px", width: "100%" }}>
-        <h1 className="mb-4 text-center">Registrarse</h1>
+      <div className="card p-4" style={{ maxWidth: "400px", width: "100%" }}> 
+        <div className="mb-4 text-center d-flex align-items-center justify-content-center gap-2" style={{textTransform: "none"}}>
+          <img
+            src={RailTrackerLogo}
+            alt="Ferrocarril Icono"
+            onClick={() => navigate("/")}
+            style={{ width: "60px", height: "60px", marginRight: "8px", cursor: 'pointer' }}
+          />
+          <span style={{fontSize: "2rem", fontWeight: "bold"}}>Registrarse</span>
+        </div>
 
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="mb-1">
@@ -110,17 +119,20 @@ export function RegisterPage() {
             <img
               src="https://img.icons8.com/color/48/google-logo.png"
               alt="Google"
+              onClick={() => navigate("/pagina-en-construccion")}
               style={{ width: "35px", cursor: "pointer" }}
             />
             <img
               src="https://img.icons8.com/color/48/facebook-new.png"
               alt="Facebook"
+              onClick={() => navigate("/pagina-en-construccion")}
               style={{ width: "35px", cursor: "pointer" }}
               className="mx-2"
             />
             <img
               src="https://img.icons8.com/ios-filled/50/mac-os.png"
               alt="Apple"
+              onClick={() => navigate("/pagina-en-construccion")}
               style={{ width: "35px", cursor: "pointer" }}
             />
           </div>
