@@ -2,7 +2,7 @@ import { api } from "../services/api.js";
 
 export const loginService = async (email, password) => {
 
-  const res = await api.post('/auth/login', {user: {email, password}})
+  const res = await api.post('/auth/login', {user: {email, password}}, {withCredentials: true})
   
   const { id , role } = res.data.userData
 

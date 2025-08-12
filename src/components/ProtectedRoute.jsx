@@ -3,20 +3,19 @@ import { useState, useEffect } from "react";
 import { api } from "../services/api.js";
 
 export function ProtectedRoute({ allowedRoles }){
-  const [auth, setIsAuth] = useState()
+  const [auth, setAuth] = useState({isAuth: false, role: null, isLoading: true});
 
   useEffect(() => {
-    try {
-      const res = api.get('/auth/check', {withCredentials: true})
-      setIsAuth({isAuth: true, role: res.data.useraData.role})
-    } catch(error) {
-      console.error("Error en la autentificacion: " + error)
-      setIsAuth({isAuth: false, role: null})
-    }
+    api.get('/auth/check', { withCredentials: true })
+      .then((res) => {setAuth({isAuth: true, role: res.data.userData.role, isLoading: false})})
+      .catch((error) => {
+        console.error("Error al verificar la autenticación:", error.response ? error.response.data : error.message);
+        setAuth({isAuth: false, role: null, isLoading: false});
+      });
 
   }, [])
 
-      
+  if(auth.isLoading) return <h1>Cargando...</h1>
   if(!auth.isAuth) return <Navigate to='/' />
   if(!allowedRoles.includes(auth.role)) return <Navigate to='/' />
   
