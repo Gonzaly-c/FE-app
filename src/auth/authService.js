@@ -2,13 +2,12 @@ import { api } from "../services/api.js";
 
 export const loginService = async (email, password) => {
 
-  const res = await api.post('/auth/login', {email, password})
+  const res = await api.post('/auth/login', {user: {email, password}})
   
-  const { token , role } = res.data.userData
+  const { id , role } = res.data.userData
 
-  const user = {token, role}
+  const user = {id, role}
 
-  localStorage.setItem('token', token)
   return user
 
 }
