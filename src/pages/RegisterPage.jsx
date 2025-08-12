@@ -1,12 +1,11 @@
+import RailTrackerLogo from '../assets/RailTrackerImages/RailTrackerLogoRecorted.png';
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 //import { registerUser } from "../services/api";
 
 export function RegisterPage() {
-  const { register, formState: {isSubmitting, isValid, errors} , handleSubmit} = useForm({
-    mode: "onBlur"
-  })
+  const { register, formState: { errors } , handleSubmit} = useForm({mode: "onBlur"})
   
   const [form, setForm] = useState({
     nombre: "",
@@ -48,8 +47,16 @@ export function RegisterPage() {
 
   return (
     <div className="container d-flex justify-content-center align-items-center min-vh-100">
-      <div className="card p-4" style={{ maxWidth: "400px", width: "100%" }}>
-        <h1 className="mb-4 text-center">Registrarse</h1>
+      <div className="card p-4" style={{ maxWidth: "400px", width: "100%" }}> 
+        <div className="mb-4 text-center d-flex align-items-center justify-content-center gap-2" style={{textTransform: "none"}}>
+          <img
+            src={RailTrackerLogo}
+            alt="Ferrocarril Icono"
+            onClick={() => navigate("/")}
+            style={{ width: "60px", height: "60px", marginRight: "8px", cursor: 'pointer' }}
+          />
+          <span style={{fontSize: "2rem", fontWeight: "bold"}}>Registrarse</span>
+        </div>
 
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="mb-1">
@@ -78,14 +85,17 @@ export function RegisterPage() {
             <label htmlFor="correo" className="form-label">Correo electrónico:</label>
             <input id="correo" {...register('email', {required: "El email es requerido", pattern: {
               value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i,
-              message: "Invalid email address"}})
+              message: "Correo electrónico inválido"}})
               } className="form-control" placeholder="Correo electrónico"/>
           </div>
           {errors.email && <span className='text-danger'>{errors.email.message}</span>}
         
           <div className="mb-2">
             <label htmlFor="password" className="form-label">Contraseña:</label>
-            <input type="password" id="password" {...register('password', {required: "La contraseña es requerida", })} className="form-control" placeholder="Contraseña"/>
+            <input type="password" id="password" {...register('password', {required: "La contraseña es requerida", pattern: {
+  value: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/,
+  message: "La contraseña debe tener al menos 8 caracteres, incluyendo mayúsculas, minúsculas, números y un símbolo"
+} })} className="form-control" placeholder="Contraseña"/>
             {errors.password && <span className='text-danger'>{errors.password.message}</span>}
           </div>
 
@@ -93,11 +103,12 @@ export function RegisterPage() {
           <button
             type="button"
             className="btn btn-secondary"
-            onClick={() => navigate("/login")}
+            onClick={() => navigate("/")}
           >
             Volver
           </button>
-          <button type="submit" className="btn btn-success">
+          <button type="submit" className="btn btn-success" style={{backgroundColor: "#002050ff",
+          color: "#fff"}}  >
             Crear cuenta
           </button>
         </div>
@@ -110,17 +121,20 @@ export function RegisterPage() {
             <img
               src="https://img.icons8.com/color/48/google-logo.png"
               alt="Google"
+              onClick={() => navigate("/pagina-en-construccion")}
               style={{ width: "35px", cursor: "pointer" }}
             />
             <img
               src="https://img.icons8.com/color/48/facebook-new.png"
               alt="Facebook"
+              onClick={() => navigate("/pagina-en-construccion")}
               style={{ width: "35px", cursor: "pointer" }}
               className="mx-2"
             />
             <img
               src="https://img.icons8.com/ios-filled/50/mac-os.png"
               alt="Apple"
+              onClick={() => navigate("/pagina-en-construccion")}
               style={{ width: "35px", cursor: "pointer" }}
             />
           </div>
