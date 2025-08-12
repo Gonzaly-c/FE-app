@@ -13,7 +13,7 @@ export function ProtectedRoute({ allowedRoles }){
         setAuth({isAuth: false, role: null, isLoading: false});
       });
 
-  }, [])
+  })
 
   if(auth.isLoading) return <h1>Cargando...</h1>
   if(!auth.isAuth) return <Navigate to='/' />
