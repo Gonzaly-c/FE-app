@@ -1,34 +1,15 @@
 import RailTrackerLogo from '../assets/RailTrackerImages/RailTrackerLogoRecorted.png';
-import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 //import { registerUser } from "../services/api";
 
 export function RegisterPage() {
   const { register, formState: { errors } , handleSubmit} = useForm({mode: "onBlur"})
-  
-  const [form, setForm] = useState({
-    nombre: "",
-    apellido: "",
-    correo: "",
-    password: ""
-  });
-  const navigate = useNavigate();
 
-  const handleChange = (e) => {
-    setForm({
-      ...form,
-      [e.target.name]: e.target.value
-    });
-  };
+  const navigate = useNavigate();
 
   const onSubmit = async (e) => {
     e.preventDefault();
-
-    if (!form.nombre || !form.apellido || !form.correo || !form.password) {
-      alert("Por favor completa todos los campos.");
-      return;
-    }
 
     try {
       throw new Error();
