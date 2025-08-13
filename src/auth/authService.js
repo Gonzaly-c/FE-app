@@ -12,8 +12,8 @@
 
 // }
 
-export const logoutService = () => {
-  localStorage.removeItem('token')
-}
+// export const logoutService = () => {
+//   localStorage.removeItem('token')
+// }
 
 export const getToken = () => localStorage.getItem('token')

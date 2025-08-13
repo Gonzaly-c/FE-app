@@ -5,10 +5,10 @@ import { useNavigate } from 'react-router-dom';
 import { useContext, useState } from 'react';
 
 export function LoginPage(){
-  const [ loginError, setLoginError ] = useState(false) //temporal, luego con react query se podria menejar mejor
+  //const [ loginError, setLoginError ] = useState(false) //temporal, luego con react query se podria menejar mejor
   
   const { register, handleSubmit, formState: { errors, isSubmitting }} = useForm({mode: "onBlur"});
-  const { setUser, /*isPending, isError ,,*/ login  } = useContext(AuthContext);
+  const { setUser,  isLoginError,  login  } = useContext(AuthContext);
   const navigate = useNavigate();
   
   const onSubmit = async (data) => {
@@ -18,7 +18,7 @@ export function LoginPage(){
       setUser(userToSet) //si uso directamente el estado user, no llega a cargar ya que los estados se manejan de manera asincrona, por lo que uso el user devuelto por la API
       if(userToSet?.role) {navigate(userToSet.role == 'admin'? '/admin/dashboard': '/conductor/dashboard')}
     } catch (error) {
-      setLoginError(true)
+      //setLoginError(true)
       console.error("Error during login:", error.response.data.message);
       throw error;
     }
@@ -59,7 +59,7 @@ export function LoginPage(){
             <button type="submit" className={buttonClass} style={{backgroundColor: "#002050ff", color: "#fff"}}>
               {isSubmitting? 'Enviando..': 'INICIAR SESIÓN'}</button>
             
-            {loginError && <span className='text-danger mt-1'>Los datos ingresados son incorrectos. Volver a intentar</span>}
+            {isLoginError && <span className='text-danger mt-1'>Los datos ingresados son incorrectos. Volver a intentar</span>}
 
           </form>
 
