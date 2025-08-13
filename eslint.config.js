@@ -27,5 +27,5 @@ export default defineConfig([
       'no-unused-vars': ['error', { varsIgnorePattern: '^[A-Z_]' }],
     },
   },
-  ...pluginQuery.configs('flat/recommended')
+  //...pluginQuery.configs('flat/recommended') Por algun motivo desactiva las demas configuraciones del eslint
 ])

@@ -5,13 +5,10 @@ import { RegisterPage } from "./pages/RegisterPage.jsx"
 import { EnConstruccion } from "./pages/EnConstruccion.jsx"
 import { ProtectedRoute } from "./components/ProtectedRoute.jsx"
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools"
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query"
-
-const queryClient = new QueryClient()
 
 function App() {
   return (
-    <QueryClientProvider client={queryClient}>
+    <>
       <BrowserRouter>
         
         <AuthProvider>
@@ -30,11 +27,11 @@ function App() {
           </Routes>
 
         </AuthProvider>
+
       </BrowserRouter>
 
       <ReactQueryDevtools initialIsOpen={false}></ReactQueryDevtools>
-
-    </QueryClientProvider>
+    </>
   )
 }
 
