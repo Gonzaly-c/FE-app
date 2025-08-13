@@ -5,16 +5,15 @@ import { useNavigate } from 'react-router-dom';
 import { useContext, useState } from 'react';
 
 export function LoginPage(){
-  
   const [ loginError, setLoginError ] = useState(false) //temporal, luego con react query se podria menejar mejor
   
   const { register, handleSubmit, formState: { errors, isSubmitting }} = useForm({mode: "onBlur"});
-  const { login, setUser  } = useContext(AuthContext);
+  const { setUser, /*isPending, isError ,,*/ login  } = useContext(AuthContext);
   const navigate = useNavigate();
   
   const onSubmit = async (data) => {
     try {
-      const userToSet = await login(data.email,data.password)
+      const userToSet = await login({ email: data.email , password: data.password})
       console.log(userToSet)
       setUser(userToSet) //si uso directamente el estado user, no llega a cargar ya que los estados se manejan de manera asincrona, por lo que uso el user devuelto por la API
       if(userToSet?.role) {navigate(userToSet.role == 'admin'? '/admin/dashboard': '/conductor/dashboard')}

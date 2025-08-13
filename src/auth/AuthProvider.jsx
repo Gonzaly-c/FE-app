@@ -1,7 +1,8 @@
 import { AuthContext } from "../context/AuthContext.jsx"
 import { useState } from "react"
-import { loginService, logoutService, getToken } from "./authService.js"
+import { logoutService, getToken } from "./authService.js"
 import { useEffect } from "react"
+import { useLoginMutation } from "../hooks/useLoginMutation.js"
 
 
 export const AuthProvider = ({ children }) => {
@@ -16,24 +17,27 @@ export const AuthProvider = ({ children }) => {
     }
   }, [] )
 
-    const login = async (email, password) => {
-      try {
-        const userToSet = await loginService(email, password)
-        return userToSet
-      } catch (error) {
-        console.error("Error during login:", error)
-        throw error
-      }}
+  
+    // const login = async (email, password) => {
+    //   try {
+    //     const userToSet = await loginService(email, password)
+    //     return userToSet
+    //   } catch (error) {
+    //     console.error("Error during login:", error)
+    //     throw error
+    //   }}
     
-    const logout = () => {
-      logoutService()
-      setUser(null)
-    }
+  const {mutateAsync: login, isPending, isError } = useLoginMutation() 
+
+  const logout = () => {
+    logoutService()
+    setUser(null)
+  }
 
   return(
     
 
-    <AuthContext.Provider value={{login, logout, user, setUser}}>
+    <AuthContext.Provider value={{logout, user, setUser, login, isPending, isError}}> 
       {children}
     </AuthContext.Provider>
   )

@@ -1,16 +1,16 @@
-import { api } from "../services/api.js";
+// import { api } from "../services/api.js";
 
-export const loginService = async (email, password) => {
+// export const loginService = async (email, password) => {
 
-  const res = await api.post('/auth/login', {user: {email, password}}, {withCredentials: true})
+//   const res = await api.post('/auth/login', {user: {email, password}}, {withCredentials: true})
   
-  const { id , role } = res.data.userData
+//   const { id , role } = res.data.userData
 
-  const user = {id, role}
+//   const user = {id, role}
 
-  return user
+//   return user
 
-}
+// }
 
 export const logoutService = () => {
   localStorage.removeItem('token')
