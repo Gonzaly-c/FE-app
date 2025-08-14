@@ -2,7 +2,7 @@ import RailTrackerLogo from '../assets/RailTrackerImages/RailTrackerLogoRecorted
 import { useForm } from 'react-hook-form';
 import { AuthContext } from '../context/AuthContext.jsx';
 import { useNavigate } from 'react-router-dom';
-import { useContext, useState } from 'react';
+import { useContext } from 'react';
 
 export function LoginPage(){
   //const [ loginError, setLoginError ] = useState(false) //temporal, luego con react query se podria menejar mejor
@@ -16,9 +16,12 @@ export function LoginPage(){
       const userToSet = await login({ email: data.email , password: data.password})
       console.log(userToSet)
       setUser(userToSet) //si uso directamente el estado user, no llega a cargar ya que los estados se manejan de manera asincrona, por lo que uso el user devuelto por la API
-      if(userToSet?.role) {navigate(userToSet.role == 'admin'? '/admin/dashboard': '/conductor/dashboard')}
+      switch(userToSet.role){
+        case 'admin': navigate('/admin/dashboard'); break
+        case 'conductor': navigate('/conductor/dashboard'); break
+        default: console.error('Rol no conocido') //nunca debería llegar a pasar 
+      }
     } catch (error) {
-      //setLoginError(true)
       console.error("Error during login:", error.response.data.message);
       throw error;
     }

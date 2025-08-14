@@ -18,10 +18,14 @@ function App() {
             
             <Route path= '/admin' element={<ProtectedRoute allowedRoles={'admin'}/>}>
               <Route path='dashboard' element={<Link to="/admin/CRUD-Recorrido">Ir a CRUD Recorrido</Link>}></Route>
-              <Route path='CRUD-Recorrido' element={<Link to="/admin/dashboard">Volver</Link>}></Route>
+              <Route path='CRUD-Recorrido' element={<Link to="/admin/dashboard">Volver a HOME</Link>}></Route>
             </Route>
             
-            <Route path='/conductor/dashboard' element={<h1>Conductor Home</h1>}></Route>
+            <Route path='/conductor' element={<ProtectedRoute allowedRoles={'conductor'}/>}>
+              <Route path='dashboard' element={<Link to='/conductor/misViajes'>Ir a mis viajes</Link>}></Route>
+              <Route path='misViajes' element={<Link to='/conductor/dashboard'>Volver a HOME</Link>}></Route>
+            </Route>
+                        
             <Route path='/' element={<LoginPage/>}></Route>
             <Route path='/register' element={<RegisterPage/>}></Route>
           </Routes>
