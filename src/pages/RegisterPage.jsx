@@ -1,7 +1,9 @@
 import RailTrackerLogo from '../assets/RailTrackerImages/RailTrackerLogoRecorted.png';
 import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
-//import { registerUser } from "../services/api";
+//import { registerUser } from "../services/api"; 
+// import { useState } from 'react';
+// import { registerUser } from "../services/api";
 
 export function RegisterPage() {
   const { register, formState: { errors } , handleSubmit} = useForm({mode: "onBlur"})
@@ -148,3 +150,38 @@ export function RegisterPage() {
     </div>
   );
 }
+
+/*export default function RegistrarConductor() {
+  const [formData, setFormData] = useState({
+    nombre: '',
+    apellido: '',
+    email: '',
+    password: ''});
+  const [error, setError] = useState('');
+  const navigate = useNavigate();
+
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setError('');
+
+    try {
+      const res = await fetch('http://localhost:3001/api/conductores', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData)
+      });
+
+      if (!res.ok) {
+        const data = await res.json();
+        throw new Error(data.error || 'Error en el registro');
+      }
+
+      navigate('/conductores'); // Redirigir a la lista
+    } catch (err) {
+      setError(err.message);
+    }
+  }}*/
