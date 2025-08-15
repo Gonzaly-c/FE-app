@@ -43,7 +43,7 @@ export function RegisterPage() {
           <div className="mb-1">
             <label className="form-label" htmlFor="nombre">Nombre:</label>
             <input id="nombre" type="text" {...register('nombre', {required: 'El nombre es requerido', pattern: {
-                value: /^[A-Za-zÁÉÍÓÚáéíóúÑñ\s]+$/,
+                // value: /^[A-Za-zÁÉÍÓÚáéíóúÑñ\s]+$/, ((comentado para ahorrar tiempo en las validaciones))
                 message: "Solo se permiten letras y espacios"
               }})}           
               className="form-control" placeholder="Nombre"/>
@@ -54,7 +54,7 @@ export function RegisterPage() {
             <label className="form-label" htmlFor="apellido">Apellido:</label>
             <input id="apellido" type="text" {...register('apellido', {required: 'El apellido es requerido',
               pattern: {
-                value: /^[A-Za-zÁÉÍÓÚáéíóúÑñ\s]+$/,
+                // value: /^[A-Za-zÁÉÍÓÚáéíóúÑñ\s]+$/, ((Comentado para ahorrar tiempo en las validaciones))
                 message: "Solo se permiten letras y espacios"
               }
             })} 
@@ -65,7 +65,7 @@ export function RegisterPage() {
           <div className="mb-1">
             <label htmlFor="correo" className="form-label">Correo electrónico:</label>
             <input id="correo" {...register('email', {required: "El email es requerido", pattern: {
-              value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i,
+              // value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i, ((comentado para ahorrar tiempo en las validaciones))
               message: "Correo electrónico inválido"}})
               } className="form-control" placeholder="Correo electrónico"/>
           </div>
@@ -73,13 +73,37 @@ export function RegisterPage() {
         
           <div className="mb-2">
             <label htmlFor="password" className="form-label">Contraseña:</label>
-            <input type="password" id="password" {...register('password', {required: "La contraseña es requerida", pattern: {
-  value: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/,
-  message: "La contraseña debe tener al menos 8 caracteres, incluyendo mayúsculas, minúsculas, números y un símbolo"
-} })} className="form-control" placeholder="Contraseña"/>
+            <input 
+            type="password" 
+            id="password" 
+            {...register('password', {
+              required: "La contraseña es requerida", 
+              pattern: {
+                // value: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/, ((Actualmente comentado para ahorra tiempo en las validaciones))
+                message: "La contraseña debe tener al menos 8 caracteres, incluyendo mayúsculas, minúsculas, números y un símbolo"
+                } 
+              })} 
+              className="form-control" 
+              placeholder="Contraseña"
+              />
             {errors.password && <span className='text-danger'>{errors.password.message}</span>}
           </div>
-
+          <div className="mb-2">
+            <label htmlFor="repeatPassword" className="form-label">Repetir Contraseña:</label>
+            <input
+              type="password"
+              id="repeatPassword"
+              {...register('repeatPassword', {
+                required: "Debe repetir la contraseña",
+                validate: (value) =>
+                  value === (document.getElementById('password')?.value || "") ||
+                  "Las contraseñas no coinciden"
+              })}
+              className="form-control"
+              placeholder="Repetir contraseña"
+            />
+            {errors.repeatPassword && <span className='text-danger'>{errors.repeatPassword.message}</span>}
+          </div>
           <div className="d-flex justify-content-between">
           <button
             type="button"
