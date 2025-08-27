@@ -12,7 +12,7 @@ export default defineConfig([
     extends: [
       js.configs.recommended,
       reactHooks.configs['recommended-latest'],
-      reactRefresh.configs.vite,
+      reactRefresh.configs.vite
     ],
     languageOptions: {
       ecmaVersion: 2020,
@@ -20,12 +20,12 @@ export default defineConfig([
       parserOptions: {
         ecmaVersion: 'latest',
         ecmaFeatures: { jsx: true },
-        sourceType: 'module',
-      },
+        sourceType: 'module'
+      }
     },
     rules: {
-      'no-unused-vars': ['error', { varsIgnorePattern: '^[A-Z_]' }],
-    },
-  },
-  //...pluginQuery.configs('flat/recommended') Por algun motivo desactiva las demas configuraciones del eslint
+      'no-unused-vars': ['error', { varsIgnorePattern: '^[A-Z_]' }]
+    }
+  }
+  // ...pluginQuery.configs('flat/recommended') Por algun motivo desactiva las demas configuraciones del eslint
 ])
