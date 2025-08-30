@@ -1,21 +1,19 @@
-import { Outlet, Navigate, useLocation } from "react-router-dom";
-//import { api } from "../services/api.js";
-import { useAuthQuery } from "../hooks/useAuthQuery.js";
-import { useContext } from "react";
-import { AuthContext } from "../context/AuthContext.jsx";
-import { useEffect } from "react";
+import { Outlet, Navigate, useLocation } from 'react-router-dom'
+// import { api } from "../services/api.js";
+import { useAuthQuery } from '../hooks/useAuthQuery.js'
+import { useContext, useEffect } from 'react'
+import { AuthContext } from '../context/AuthContext.jsx'
 
-export function ProtectedRoute({ allowedRoles }){
+export function ProtectedRoute ({ allowedRoles }) {
   const location = useLocation() // Para que cada vez que cambie el path actual hija se vuela a renderizar y asi poder autentificar de nuevo el token
   const { data, isLoading, isError } = useAuthQuery(location)
   const { logout, setUser } = useContext(AuthContext)
-  
-  useEffect( () => {
+
+  useEffect(() => {
     const verificarAuth = async () => {
-    
-    if (isError /*|| !allowedRoles.includes(data.role)*/) {
-      await logout()
-      setUser(null)
+      if (isError /* || !allowedRoles.includes(data.role) */) {
+        await logout()
+        setUser(null)
       }
     }
     
