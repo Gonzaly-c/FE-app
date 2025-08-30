@@ -5,7 +5,6 @@ import { useNavigate } from 'react-router-dom';
 import { useContext } from 'react';
 
 export function LoginPage(){
-  //const [ loginError, setLoginError ] = useState(false) //temporal, luego con react query se podria menejar mejor
   
   const { register, handleSubmit, formState: { errors, isSubmitting }} = useForm({mode: "onBlur"});
   const { setUser,  isLoginError,  login  } = useContext(AuthContext);
@@ -60,7 +59,8 @@ export function LoginPage(){
             </div>
             
             <button type="submit" className={buttonClass} style={{backgroundColor: "#002050ff", color: "#fff"}}>
-              {isSubmitting? 'Enviando..': 'INICIAR SESIÓN'}</button>
+              {isSubmitting? 'Enviando..': 'INICIAR SESIÓN'}
+            </button>
             
             {isLoginError && <span className='text-danger mt-1'>Los datos ingresados son incorrectos. Volver a intentar</span>}
 

@@ -18,12 +18,19 @@ export function ProtectedRoute({ allowedRoles }){
       setUser(null)
       }
     }
-      verificarAuth()
+    
+    verificarAuth()
+
   }, [isError])
 
   if(isLoading) return <h1>Cargando...</h1>
   if(isError || !allowedRoles.includes(data.role)) {
-    return <Navigate to='/'/>
+    if(isError) return <Navigate to='/'/>
+
+    if(data.role === 'admin') return <Navigate to='/admin/dashboard'/>
+    
+    if(data.role === 'conductor') return <Navigate to='/conductor/dashboard'/>
+    
   }
 
   return <Outlet />
