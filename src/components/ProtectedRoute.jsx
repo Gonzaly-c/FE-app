@@ -3,6 +3,7 @@ import { Outlet, Navigate, useLocation } from 'react-router-dom'
 import { useAuthQuery } from '../hooks/useAuthQuery.js'
 import { useContext, useEffect } from 'react'
 import { AuthContext } from '../context/AuthContext.jsx'
+import AdminLayout from './layouts/AdminLayout.jsx'
 
 export function ProtectedRoute ({ allowedRoles }) {
   const location = useLocation() // Para que cada vez que cambie el path actual hija se vuela a renderizar y asi poder autentificar de nuevo el token
@@ -21,7 +22,8 @@ export function ProtectedRoute ({ allowedRoles }) {
 
   }, [isError])
 
-  if(isLoading) return <h1>Cargando...</h1>
+  if(isLoading) return(<AdminLayout></AdminLayout>)
+
   if(isError || !allowedRoles.includes(data.role)) {
     if(isError) return <Navigate to='/'/>
 
@@ -31,5 +33,9 @@ export function ProtectedRoute ({ allowedRoles }) {
     
   }
 
-  return <Outlet />
+  return (
+    <AdminLayout>
+      <Outlet />
+    </AdminLayout>
+  )
 }

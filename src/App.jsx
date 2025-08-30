@@ -6,6 +6,7 @@ import { EnConstruccion } from './pages/EnConstruccion.jsx'
 import { ProtectedRoute } from './components/ProtectedRoute.jsx'
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 import Page404 from './pages/404.jsx'
+import AdminLayout from './components/layouts/AdminLayout.jsx'
 
 function App () {
   return (
@@ -18,12 +19,12 @@ function App () {
             <Route path='/pagina-en-construccion' element={<EnConstruccion />}> </Route>
 
             {/* Administrador */}
-            <Route path='/admin' element={<ProtectedRoute allowedRoles='admin' />}>
+            <Route path='/admin' element={<ProtectedRoute allowedRoles='admin' > </ProtectedRoute >}>
               <Route
                 path='dashboard'
                 element={<Link to='/admin/CRUD-Recorrido'>Ir a CRUD Recorrido</Link>}
               />
-
+    
               <Route
                 path='CRUD-Recorrido'
                 element={<Link to='/admin/dashboard'>Volver a HOME</Link>}
@@ -34,6 +35,7 @@ function App () {
                 path='*'
                 element={<Page404 role='admin' />}
               />
+
             </Route>
 
             {/* Conductor */}
