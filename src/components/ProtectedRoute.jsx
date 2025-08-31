@@ -4,6 +4,7 @@ import { useContext, useEffect } from 'react'
 import { AuthContext } from '../context/AuthContext.jsx'
 import AdminLayout from './layouts/AdminLayout.jsx'
 import ConductorLayout from './layouts/ConductorLayout.jsx'
+// import ConductorLayoutCopy from './layouts/ConductorLayout1.jsx'
 
 export function ProtectedRoute({ allowedRoles }) {
   const location = useLocation()
@@ -44,6 +45,11 @@ export function ProtectedRoute({ allowedRoles }) {
       <ConductorLayout>
         <Outlet />
       </ConductorLayout>
+      /*
+      <ConductorLayoutCopy>
+        <Outlet />
+      </ConductorLayouCopy>
+      */ 
     )
   }
 
