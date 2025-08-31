@@ -13,9 +13,9 @@ export default function AdminLayout() {
           <li className="nav-item mb-2 dropdown">
             <a className="nav-link text-white dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">📁 Gestión</a>
             <div class="dropdown-menu">
-                <a class="dropdown-item" role="button">Action</a>
-                <a class="dropdown-item" role="button">Another action</a>
-                <a class="dropdown-item" role="button">Something else here</a>
+                <a class="dropdown-item" role="button">Trenes</a>
+                <a class="dropdown-item" role="button">Recorridos</a>
+                <a class="dropdown-item" role="button">Conductores</a>
                 <div class="dropdown-divider"></div>
                 <a class="dropdown-item" role="button">Separated link</a>
             </div>
