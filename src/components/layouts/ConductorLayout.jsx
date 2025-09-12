@@ -1,138 +1,75 @@
 import { Outlet, Link } from "react-router-dom";
 import { useState } from "react";
 
-export default function ConductorLayout() {
-  const [gestionOpen, setGestionOpen] = useState(false);
-  const [viajesOpen, setViajesOpen] = useState(false);
-
-  // Pequeño componente para asegurar que los botones principales
-  // comparten exactamente las mismas clases y comportamiento.
-  const NavButton = ({ onClick, children, ariaControls, ariaExpanded }) => (
-    <button
-      type="button"
-      className="nav-link text-white d-flex align-items-center justify-content-start py-2 px-0 btn btn-link"
-      onClick={onClick}
-      aria-expanded={ariaExpanded}
-      aria-controls={ariaControls}
-    >
-      {children}
-    </button>
-  );
-
+export default function AdminLayout() {
+  const [isGestionOpen, setIsGestionOpen] = useState(false);
+  console.log(isGestionOpen)
+  
   return (
     <div className="d-flex">
-      <aside className="col-5 col-md-3 col-lg-3 bg-dark text-white p-3 vh-100 d-flex flex-column">
-        <h4 className="mb-4">RailTracker</h4>
+      {/* Sidebar */}
+      <div className="d-flex flex-column col-5 col-md-3 col-lg-2 bg-dark text-white p-3 vh-100">
+        <h2 className="mb-4 text-center">RailTracker</h2>
+        <ul className="nav flex-column flex-grow-1">
+          <li className="nav-item">
+            <Link className="nav-link text-white h4" to="/admin">
+              📊 Estadísticas Personales 
+            </Link>
+          </li>
 
-        <div className="flex-grow-1">
-          <ul className="nav flex-column">
-
-            {/* Panel */}
-            <li className="nav-item mb-2">
-              <Link to="/conductor" className="nav-link text-white d-flex align-items-center py-2 px-0">
-                <span className="me-2">📊</span>
-                <span>Panel de control</span>
-              </Link>
-            </li>
-
-            {/* Gestión con submenú (toggle como button para accesibilidad) */}
-            <li className="nav-item mb-2">
-              <button
-                className="nav-link text-white btn btn-link text-start p-0"
-                onClick={(e) => {
-                  e.preventDefault();
-                  setGestionOpen(!gestionOpen);
-                }}
-                aria-expanded={gestionOpen}
-                aria-controls="gestion-submenu"
-              >
-                📁 Gestión
-              </button>
-
-              {gestionOpen && (
-              <ul id="gestion-submenu" className="nav flex-column mt-2">
-                <li className="nav-item">
-                  <NavButton to="/conductor/gestion/trenes" compact icon="🚂">
-                    Trenes
-                  </NavButton>
+          {/* Gestión con estado */}
+          <li className="nav-item text-start my-4">
+            <a
+              className="nav-link text-white h4 "
+              onClick={() => setIsGestionOpen(!isGestionOpen)}
+              role="button"
+            >
+              🚆 Mis Viajes {isGestionOpen ? "▲" : "▼"}
+            </a>
+            {isGestionOpen && (
+              <ul className="list-unstyled w-100">
+                <li>
+                  <Link className="nav-link text-white h5" to="/admin/trenes">
+                    Pendientes
+                  </Link>
                 </li>
-                <li className="nav-item">
-                  <NavButton to="/conductor/gestion/conductores" compact icon="🗣️">
-                    Conductores
-                  </NavButton>
+                <li>
+                  <Link className="nav-link text-white h5" to="/admin/recorridos">
+                    En curso
+                  </Link>
                 </li>
-                <li className="nav-item">
-                  <NavButton to="/conductor/gestion/recorridos" compact icon="🚉">
-                    Recorridos
-                  </NavButton>
-                </li>
-                <li className="nav-item">
-                  <NavButton to="/conductor/gestion/recorridos" compact icon="🚃">
-                    Cargas
-                  </NavButton>
+                <li>
+                  <Link className="nav-link text-white h5" to="/admin/recorridos">
+                    Finalizados
+                  </Link>
                 </li>
               </ul>
             )}
-            </li>
+          </li>
 
-            {/* Viajes con submenú */}
-            <li className="nav-item mb-2">
-              <button
-                className="nav-link text-white btn btn-link text-start p-0"
-                onClick={(e) => {
-                  e.preventDefault();
-                  setViajesOpen(!viajesOpen);
-                }}
-                aria-expanded={viajesOpen}
-                aria-controls="viajes-submenu"
-              >
-                🚆 Viajes
-              </button>
+          <li className="nav-item mb-4 h4">
+            <Link className="nav-link text-white" to="/admin/perfil">
+              👤 Perfil
+            </Link>
+          </li>
 
-              {viajesOpen && (
-                <ul id="viajes-submenu" className="nav flex-column ms-4">
-                  <li className="nav-item">
-                    <Link className="nav-link text-white ps-3" to="/conductor/viajes/activos">
-                      ▶️ En curso
-                    </Link>
-                  </li>
-                  <li className="nav-item">
-                    <Link className="nav-link text-white ps-3" to="/conductor/viajes/pasados">
-                      ⏮️ Finalizados
-                    </Link>
-                  </li>
-                  <li className="nav-item">
-                    <Link className="nav-link text-white ps-3" to="/conductor/viajes/programados">
-                      📅 Programados
-                    </Link>
-                  </li>
-                </ul>
-              )}
-            </li>
-
-            {/* Perfil */}
-            <li className="nav-item mb-2">
-              <Link className="nav-link text-white d-flex align-items-center py-2 px-0" to="/conductor/perfil">
-                <span className="me-2">👤</span>
-                <span>Perfil</span>
-              </Link>
-            </li>
-
-          </ul>
+        </ul>
+        
+        <div className="d-flex align-bottom mb-3">
+            <button className="btn btn-outline-danger w-100" type="button">
+              Cerrar sesión
+            </button>
         </div>
+      </div>
 
-        {/* Cerrar sesión: queda pegado abajo */}
-        <div className="mt-auto">
-          <Link className="button text-white d-flex align-items-center py-2 px-0" to="/"> Cerrar sesión
-          </Link>
-          
-        </div>
-      </aside>
+      
 
-      <main className="flex-grow-1 p-4">
+      {/* Contenido principal */}
+      <div className="flex-grow-1 p-4">
         <Outlet />
-      </main>
+      </div>
     </div>
   );
 }
+
 
