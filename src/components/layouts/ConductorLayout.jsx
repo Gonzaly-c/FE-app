@@ -1,9 +1,21 @@
 import { Outlet, Link } from "react-router-dom";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useContext } from "react";
+import { AuthContext } from "../../context/AuthContext.jsx";
 
 export default function AdminLayout() {
   const [isGestionOpen, setIsGestionOpen] = useState(false);
   console.log(isGestionOpen)
+  const {setUser, logout} = useContext(AuthContext)
+
+  const navigate = useNavigate()
+
+  const handleLogout = async () => {
+    await logout()
+    setUser(null)
+    navigate('/')
+  }
   
   return (
     <div className="d-flex">
@@ -56,7 +68,7 @@ export default function AdminLayout() {
         </ul>
         
         <div className="d-flex align-bottom mb-3">
-            <button className="btn btn-outline-danger w-100" type="button">
+            <button className="btn btn-outline-danger w-100" type="button" onClick={handleLogout}>
               Cerrar sesión
             </button>
         </div>
