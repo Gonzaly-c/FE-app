@@ -6,8 +6,6 @@ import { EnConstruccion } from './pages/EnConstruccion.jsx'
 import { ProtectedRoute } from './components/ProtectedRoute.jsx'
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 import Page404 from './pages/404.jsx'
-import AdminLayout from './components/layouts/AdminLayout.jsx'
-import ConductorLayout from './components/layouts/ConductorLayout.jsx'
 
 function App () {
   return (
