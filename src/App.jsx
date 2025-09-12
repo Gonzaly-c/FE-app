@@ -6,6 +6,7 @@ import { EnConstruccion } from './pages/EnConstruccion.jsx'
 import { ProtectedRoute } from './components/ProtectedRoute.jsx'
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 import Page404 from './pages/404.jsx'
+import ConductoresPage from './pages/conductoresAdmin.jsx'
 
 function App () {
   return (
@@ -29,6 +30,11 @@ function App () {
                 element={<Link to='/admin/dashboard'>Volver a HOME</Link>}
               />
 
+              <Route
+                path='conductores'
+                element={<ConductoresPage/>}
+              />
+              
               {/* 404 protegido para /admin/... */}
               <Route
                 path='*'
