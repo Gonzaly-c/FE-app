@@ -31,12 +31,14 @@ export function LoginPage(){
   return (
     <div className='bg-light d-flex justify-content-center align-items-center vh-100'>
 
-      <div className='card shadow-sm py-3 px-2' style={{ width: '400px' }}>
-        <div className='card-body'>
-          <p className='h1 card-title text-center mb-4 text-dark-emphasis'>
-            <img src={RailTrackerLogo} className='mr-3' style={{ width: '60px', height: '60px' }} />
-            Mi Ferrocarril
-          </p>
+      <div className='card shadow-sm py-3' style={{ width: '430px' }}>
+        
+        <p className='h1 card-title text-center mt-4 text-dark-emphasis'>
+          <img src={RailTrackerLogo} className='me-3' style={{ width: '60px', height: '60px' }} />
+          Mi Ferrocarril
+        </p>
+
+        <div className='card-body mx-4'>
 
           <form onSubmit={handleSubmit(onSubmit)}>
 

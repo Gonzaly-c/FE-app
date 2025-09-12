@@ -6,7 +6,7 @@ import { useRegisterMutation } from '../hooks/useRegisterMutation.js'
 export function RegisterPage () {
   const { register, formState: { errors }, handleSubmit } = useForm({ mode: 'onBlur' })
   const navigate = useNavigate()
-  const {isError, mutateAsync: registerMutation, isSuccess, isPending } = useRegisterMutation()
+  const {isError, mutateAsync: registerMutation, isPending } = useRegisterMutation()
 
   const onSubmit = async (formData) => {
     try {
@@ -30,8 +30,8 @@ export function RegisterPage () {
       //   throw new Error(data.error || 'Error en el registro')
       // }
 
-      registerMutation(conductorData)
-
+      await registerMutation(conductorData)
+      console.log(isError)
       if(isError){
         throw new Error('Error en el registro')
       }

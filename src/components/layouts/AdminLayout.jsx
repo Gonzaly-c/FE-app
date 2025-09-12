@@ -19,48 +19,41 @@ export default function AdminLayout() {
     <div className="d-flex">
       {/* Sidebar */}
       <div className="d-flex flex-column col-5 col-md-3 col-lg-2 bg-dark text-white p-3 vh-100">
-        <h2 className="mb-4 text-center">RailTracker</h2>
+        <h1 className="mb-4 text-center">RailTracker</h1>
         <ul className="nav flex-column flex-grow-1">
-          <li className="nav-item mb-4">
-            <Link className="nav-link text-white h4" to="/admin">
+          <li className="nav-item mb-4 h4">
+            <Link className="nav-link text-white" to="/admin">
               📊 Panel de control
             </Link>
           </li>
 
           {/* Gestión con estado */}
-          <li className="nav-item text-start ">
+          <li className="nav-item text-start h4">
             <a
-              className="nav-link text-white h4 "
+              className="nav-link text-white"
               onClick={() => setIsGestionOpen(!isGestionOpen)}
               role="button"
             >
               📁 Gestión {isGestionOpen ? "▲" : "▼"}
             </a>
             {isGestionOpen && (
-              <ul className="list-unstyled ml-3 w-100">
-                <li>
-                  <Link className="nav-link text-white h5" to="/admin/trenes">
+              <ul className="list-unstyled ms-3 w-100 h5">
+                <li className="">
+                  <Link className="nav-link text-white mt-2" to="/admin/trenes">
                     🚂 Trenes
                   </Link>
                 </li>
                 <li>
-                  <Link className="nav-link text-white h5" to="/admin/recorridos">
+                  <Link className="nav-link text-white mt-2" to="/admin/recorridos">
                     🗺️ Recorridos
                   </Link>
                 </li>
                 <li>
-                  <Link className="nav-link text-white h5" to="/admin/conductores">
+                  <Link className="nav-link text-white mt-2" to="/admin/conductores">
                     👨‍✈️ Conductores
                   </Link>
                 </li>
-                <li>
-                  <hr className="dropdown-divider bg-white" />
-                </li>
-                <li>
-                  <Link className="nav-link text-white h5" to="/admin/extra">
-                    🔗 Separated link
-                  </Link>
-                </li>
+                
               </ul>
             )}
           </li>
@@ -88,7 +81,7 @@ export default function AdminLayout() {
       
 
       {/* Contenido principal */}
-      <div className="flex-grow-1 p-4">
+      <div className="flex-grow-1 p-4  ">
         <Outlet />
       </div>
     </div>
