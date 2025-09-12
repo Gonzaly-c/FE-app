@@ -6,6 +6,13 @@ import { useNavigate } from "react-router-dom";
 
 export default function AdminLayout() {
   const [isGestionOpen, setIsGestionOpen] = useState(false);
+  const sidebarLogic = {
+    sidebarOpenClass: "d-flex flex-column bg-dark text-white p-3 h-100 position-fixed",
+    sidebarClosed: "d-none",
+    marginContent: { marginLeft: "300px"},
+    marginContentClosed: { marginLeft: "20px"},
+  }
+  const [showSidebar, setShowSidebar] = useState(true)
   const { logout, setUser } = useContext(AuthContext)
   const navigate = useNavigate()
 
@@ -16,9 +23,12 @@ export default function AdminLayout() {
   }
    
   return (
-    <div className="d-flex">
-      {/* Sidebar */}
-      <div className="d-flex flex-column col-5 col-md-3 col-lg-2 bg-dark text-white p-3 vh-100">
+
+  <div className="d-flex">
+
+      <div className={showSidebar? sidebarLogic.sidebarOpenClass: sidebarLogic.sidebarClosed} style={{width: '300px'}}>
+        
+
         <h1 className="mb-4 text-center">RailTracker</h1>
         <ul className="nav flex-column flex-grow-1">
           <li className="nav-item mb-4 h4">
@@ -27,7 +37,7 @@ export default function AdminLayout() {
             </Link>
           </li>
 
-          {/* Gestión con estado */}
+          
           <li className="nav-item text-start h4">
             <a
               className="nav-link text-white"
@@ -71,6 +81,12 @@ export default function AdminLayout() {
 
         </ul>
         
+
+        <div className="d-flex align-bottom mb-3">
+            <button className="btn btn-outline-info w-100" onClick={() => setShowSidebar(false)}>
+              Cerrar Sidebar
+            </button>
+        </div>
         <div className="d-flex align-bottom mb-3">
             <button className="btn btn-outline-danger w-100" onClick={handleLogout}>
               Cerrar sesión
@@ -78,12 +94,20 @@ export default function AdminLayout() {
         </div>
       </div>
 
+      {!showSidebar && 
+        <button 
+          className="btn btn-primary position-fixed h-100 pe-3" 
+          style={{width: "20px"}} 
+          onClick={()=>{setShowSidebar(true)}}>
+            ☰
+        </button>
+      }
       
-
-      {/* Contenido principal */}
-      <div className="flex-grow-1 p-4  ">
+      <div className="flex-grow-1 p-4" style={showSidebar? sidebarLogic.marginContent: sidebarLogic.marginContentClosed}>
         <Outlet />
       </div>
-    </div>
+    </div>  
+    
+    
   );
 }
