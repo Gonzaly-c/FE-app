@@ -1,10 +1,12 @@
 import RailTrackerLogo from '../assets/RailTrackerImages/RailTrackerLogoRecorted.png'
 import { useNavigate } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
+import { useRegisterMutation } from '../hooks/useRegisterMutation.js'
 
 export function RegisterPage () {
   const { register, formState: { errors }, handleSubmit } = useForm({ mode: 'onBlur' })
   const navigate = useNavigate()
+  const {isError, mutateAsync: registerMutation, isSuccess, isPending } = useRegisterMutation()
 
   const onSubmit = async (formData) => {
     try {
@@ -17,15 +19,21 @@ export function RegisterPage () {
         estado: 'activo' // Asignar estado por defecto
       }
 
-      const res = await fetch('http://localhost:3000/api/conductor', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(conductorData)
-      })
+      // const res = await fetch('http://localhost:3000/api/conductor', {
+      //   method: 'POST',
+      //   headers: { 'Content-Type': 'application/json' },
+      //   body: JSON.stringify(conductorData)
+      // })
 
-      if (!res.ok) {
-        const data = await res.json()
-        throw new Error(data.error || 'Error en el registro')
+      // if (!res.ok) {
+      //   const data = await res.json()
+      //   throw new Error(data.error || 'Error en el registro')
+      // }
+
+      registerMutation(conductorData)
+
+      if(isError){
+        throw new Error('Error en el registro')
       }
 
       alert('Cuenta creada con éxito')
@@ -117,7 +125,7 @@ export function RegisterPage () {
               Volver
             </button>
             <button type='submit' className='btn btn-success' style={{ backgroundColor: '#002050ff', color: '#fff' }}>
-              Crear cuenta
+              {isPending? 'Enviando...' : 'Registrarse'}
             </button>
           </div>
         </form>
