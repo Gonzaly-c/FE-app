@@ -1,80 +1,79 @@
-import { Outlet, Link } from "react-router-dom";
-import { useState } from "react";
-import { useContext } from "react";
-import { AuthContext } from "../../context/AuthContext.jsx";
-import { useNavigate } from "react-router-dom";
+import { Outlet, Link, useNavigate } from 'react-router-dom'
+import { useState, useContext } from 'react'
 
-export default function AdminLayout() {
-  const [isGestionOpen, setIsGestionOpen] = useState(false);
+import { AuthContext } from '../../context/AuthContext.jsx'
+
+export default function AdminLayout () {
+  const [isGestionOpen, setIsGestionOpen] = useState(false)
   const sidebarLogic = {
     sidebarOpenClass:
-      "d-flex flex-column justify-content-between bg-dark text-white h-100 p-3 position-fixed overflow-y-auto",
-    sidebarClosed: "d-none",
-    marginContent: { marginLeft: "300px" },
-    marginContentClosed: { marginLeft: "20px" },
-  };
-  const [showSidebar, setShowSidebar] = useState(true);
-  const { logout, setUser } = useContext(AuthContext);
-  const navigate = useNavigate();
+      'd-flex flex-column justify-content-between bg-dark text-white h-100 p-3 position-fixed overflow-y-auto',
+    sidebarClosed: 'd-none',
+    marginContent: { marginLeft: '300px' },
+    marginContentClosed: { marginLeft: '20px' }
+  }
+  const [showSidebar, setShowSidebar] = useState(true)
+  const { logout, setUser } = useContext(AuthContext)
+  const navigate = useNavigate()
 
   const handleLogout = async () => {
-    await logout();
-    setUser(null);
-    navigate("/");
-  };
+    await logout()
+    setUser(null)
+    navigate('/')
+  }
 
   return (
-    <div className="d-flex">
-      
+    <div className='d-flex'>
+
       <div
         className={
           showSidebar
             ? sidebarLogic.sidebarOpenClass
             : sidebarLogic.sidebarClosed
         }
-        style={{ width: "300px", minHeight: "100vh", overflowY: "auto", transition: "0.3s"}}
+        style={{ width: '300px', minHeight: '100vh', overflowY: 'auto', transition: '0.3s' }}
       >
-       
+
         <div>
-          <h1 className="mb-4 text-center">RailTracker</h1>
-          <ul className="nav flex-column">
-            <li className="nav-item mb-4 h4">
-              <Link className="nav-link text-white" to="/admin">
+          <h1 className='mb-4 text-center'>RailTracker</h1>
+          <ul className='nav flex-column'>
+            <li className='nav-item mb-4 h4'>
+              <Link className='nav-link text-white' to='/admin'>
                 📊 Panel de control
               </Link>
             </li>
 
-            <li className="nav-item text-start h4">
+            <li className='nav-item text-start h4'>
               <a
-                className="nav-link text-white"
+                className='nav-link text-white'
                 onClick={() => setIsGestionOpen(!isGestionOpen)}
-                role="button"
+                role='button'
               >
-                📁 Gestión {isGestionOpen ? "▲" : "▼"}
+                📁 Gestión {isGestionOpen ? '▲' : '▼'}
               </a>
               {isGestionOpen && (
-                <ul className="list-unstyled ms-3 w-100 h5">
+                <ul className='list-unstyled ms-3 w-100 h5'>
                   <li>
                     <Link
-                      className="nav-link text-white mt-2"
-                      to="/admin/trenes"
+                      className='nav-link text-white mt-2'
+                      to='/admin/trenes'
                     >
                       🚂 Trenes
                     </Link>
                   </li>
                   <li>
                     <Link
-                      className="nav-link text-white mt-2"
-                      to="/admin/recorridos"
+                      className='nav-link text-white mt-2'
+                      to='/admin/recorridos'
                     >
                       🗺️ Recorridos
                     </Link>
                   </li>
-                  
+
                   <li>
                     <Link
-                      className="nav-link text-white mt-2"
-                      to="/admin/conductores"
+                      className='nav-link text-white mt-2'
+                      to='/admin/conductores'
                     >
                       👨‍✈️ Conductores
                     </Link>
@@ -83,13 +82,13 @@ export default function AdminLayout() {
               )}
             </li>
 
-            <li className="nav-item my-4 h4">
-              <Link className="nav-link text-white" to="/admin/viajes">
+            <li className='nav-item my-4 h4'>
+              <Link className='nav-link text-white' to='/admin/viajes'>
                 🚆 Viajes
               </Link>
             </li>
-            <li className="nav-item mb-4 h4">
-              <Link className="nav-link text-white" to="/admin/perfil">
+            <li className='nav-item mb-4 h4'>
+              <Link className='nav-link text-white' to='/admin/perfil'>
                 👤 Perfil
               </Link>
             </li>
@@ -97,17 +96,17 @@ export default function AdminLayout() {
         </div>
 
         <div>
-          <div className="d-flex mb-3">
+          <div className='d-flex mb-3'>
             <button
-              className="btn btn-outline-info w-100"
+              className='btn btn-outline-info w-100'
               onClick={() => setShowSidebar(false)}
             >
               Cerrar Sidebar
             </button>
           </div>
-          <div className="d-flex mb-3">
+          <div className='d-flex mb-3'>
             <button
-              className="btn btn-outline-danger w-100"
+              className='btn btn-outline-danger w-100'
               onClick={handleLogout}
             >
               Cerrar sesión
@@ -118,10 +117,10 @@ export default function AdminLayout() {
 
       {!showSidebar && (
         <button
-          className="btn btn-primary position-fixed h-100 pe-3"
-          style={{ width: "20px" }}
+          className='btn btn-primary position-fixed h-100 pe-3'
+          style={{ width: '20px' }}
           onClick={() => {
-            setShowSidebar(true);
+            setShowSidebar(true)
           }}
         >
           ☰
@@ -129,7 +128,7 @@ export default function AdminLayout() {
       )}
 
       <div
-        className="flex-grow-1 p-4"
+        className='flex-grow-1 p-4'
         style={
           showSidebar
             ? sidebarLogic.marginContent
@@ -139,5 +138,5 @@ export default function AdminLayout() {
         <Outlet />
       </div>
     </div>
-  );
+  )
 }

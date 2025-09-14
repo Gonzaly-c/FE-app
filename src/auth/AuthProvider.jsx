@@ -1,7 +1,7 @@
-import { AuthContext } from "../context/AuthContext.jsx"
-import { useState } from "react"
-import { useLoginMutation } from "../hooks/useLoginMutation.js"
-import { useLogoutMutation } from "../hooks/useLogoutMutation.js"
+import { AuthContext } from '../context/AuthContext.jsx'
+import { useState } from 'react'
+import { useLoginMutation } from '../hooks/useLoginMutation.js'
+import { useLogoutMutation } from '../hooks/useLogoutMutation.js'
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null)
@@ -10,8 +10,8 @@ export const AuthProvider = ({ children }) => {
 
   const { mutateAsync: logout, isPending: isLogoutPending, isError: isLogoutError } = useLogoutMutation()
 
-  return(
-    <AuthContext.Provider value={{user, setUser, login, logout, isLoginPending, isLoginError, isLogoutError, isLogoutPending}}> 
+  return (
+    <AuthContext.Provider value={{ user, setUser, login, logout, isLoginPending, isLoginError, isLogoutError, isLogoutPending }}>
       {children}
     </AuthContext.Provider>
   )

@@ -6,13 +6,13 @@ import { useRegisterMutation } from '../hooks/useRegisterMutation.js'
 export function RegisterPage () {
   const { register, formState: { errors }, handleSubmit } = useForm({ mode: 'onBlur' })
   const navigate = useNavigate()
-  const {isError, mutateAsync: registerMutation, isPending } = useRegisterMutation()
+  const { isError, mutateAsync: registerMutation, isPending } = useRegisterMutation()
 
   const onSubmit = async (formData) => {
     try {
     // Mapeo de los nombres al formato que espera el backend
       const conductorData = {
-        name: formData.nombre, 
+        name: formData.nombre,
         apellido: formData.apellido,
         email: formData.email,
         password: formData.password,
@@ -32,7 +32,7 @@ export function RegisterPage () {
 
       await registerMutation(conductorData)
       console.log(isError)
-      if(isError){
+      if (isError) {
         throw new Error('Error en el registro')
       }
 
@@ -61,9 +61,10 @@ export function RegisterPage () {
           <div className='mb-1'>
             <label className='form-label' htmlFor='nombre'>Nombre:</label>
             <input
-              id='nombre' type='text' {...register('nombre', { required: 'El nombre es requerido', 
-                // pattern: { value: /^[A-Za-zÁÉÍÓÚáéíóúÑñ\s]+$/, message: 'Solo se permiten letras y espacios' } 
-            })}
+              id='nombre' type='text' {...register('nombre', {
+                required: 'El nombre es requerido'
+                // pattern: { value: /^[A-Za-zÁÉÍÓÚáéíóúÑñ\s]+$/, message: 'Solo se permiten letras y espacios' }
+              })}
               className='form-control' placeholder='Ej: Juan'
             />
             {errors.nombre && <span className='text-danger'>{errors.nombre.message}</span>}
@@ -72,7 +73,8 @@ export function RegisterPage () {
           <div className='mb-1'>
             <label className='form-label' htmlFor='apellido'>Apellido:</label>
             <input
-              id='apellido' type='text' {...register('apellido', { required: 'El apellido es requerido', 
+              id='apellido' type='text' {...register('apellido', {
+                required: 'El apellido es requerido'
                 // pattern: { value: /^[A-Za-zÁÉÍÓÚáéíóúÑñ\s]+$/, message: 'Solo se permiten letras y espacios' }
               })}
               className='form-control' placeholder='Ej: Pérez'
@@ -83,8 +85,9 @@ export function RegisterPage () {
           <div className='mb-1'>
             <label htmlFor='email' className='form-label'>Correo electrónico:</label>
             <input
-              id='email' type='email' {...register('email', { required: 'El email es requerido' ,
-              pattern: { value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i, message: "Correo electrónico inválido"}
+              id='email' type='email' {...register('email', {
+                required: 'El email es requerido',
+                pattern: { value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i, message: 'Correo electrónico inválido' }
               })}
               className='form-control' placeholder='Ej: algo@otroalgo.com'
             />
@@ -96,7 +99,8 @@ export function RegisterPage () {
             <input
               type='password'
               id='password'
-              {...register('password', { required: 'La contraseña es requerida' ,
+              {...register('password', {
+                required: 'La contraseña es requerida'
                 // pattern: { value: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/, message: "La contraseña debe tener al menos 8 caracteres, incluyendo mayúsculas, minúsculas, números y un símbolo" }
               })}
               className='form-control'
@@ -125,7 +129,7 @@ export function RegisterPage () {
               Volver
             </button>
             <button type='submit' className='btn btn-success' style={{ backgroundColor: '#002050ff', color: '#fff' }}>
-              {isPending? 'Enviando...' : 'Registrarse'}
+              {isPending ? 'Enviando...' : 'Registrarse'}
             </button>
           </div>
         </form>

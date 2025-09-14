@@ -4,12 +4,11 @@ import { AuthContext } from '../context/AuthContext.jsx'
 import { useNavigate } from 'react-router-dom'
 import { useContext } from 'react'
 
-export function LoginPage(){
-  
-  const { register, handleSubmit, formState: { errors, isSubmitting }} = useForm({mode: "onBlur"});
-  const { setUser,  isLoginError,  login  } = useContext(AuthContext);
-  const navigate = useNavigate();
-  
+export function LoginPage () {
+  const { register, handleSubmit, formState: { errors, isSubmitting } } = useForm({ mode: 'onBlur' })
+  const { setUser, isLoginError, login } = useContext(AuthContext)
+  const navigate = useNavigate()
+
   const onSubmit = async (data) => {
     try {
       const userToSet = await login({ email: data.email, password: data.password })
@@ -32,7 +31,7 @@ export function LoginPage(){
     <div className='bg-light d-flex justify-content-center align-items-center vh-100'>
 
       <div className='card shadow-sm py-3' style={{ width: '430px' }}>
-        
+
         <p className='h1 card-title text-center mt-4 text-dark-emphasis'>
           <img src={RailTrackerLogo} className='me-3' style={{ width: '60px', height: '60px' }} />
           Mi Ferrocarril
@@ -68,11 +67,11 @@ export function LoginPage(){
               />
               {errors.password && <span className='text-danger'>{errors.password.message}</span>}
             </div>
-            
-            <button type="submit" className={buttonClass} style={{backgroundColor: "#002050ff", color: "#fff"}}>
-              {isSubmitting? 'Enviando..': 'INICIAR SESIÓN'}
+
+            <button type='submit' className={buttonClass} style={{ backgroundColor: '#002050ff', color: '#fff' }}>
+              {isSubmitting ? 'Enviando..' : 'INICIAR SESIÓN'}
             </button>
-            
+
             {isLoginError && <span className='text-danger mt-1'>Los datos ingresados son incorrectos. Volver a intentar</span>}
 
           </form>

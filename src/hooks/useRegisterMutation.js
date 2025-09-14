@@ -1,7 +1,7 @@
-import { useMutation } from "@tanstack/react-query";
-import { api } from "../services/api.js";
+import { useMutation } from '@tanstack/react-query'
+import { api } from '../services/api.js'
 
-export function useRegisterMutation(){
+export function useRegisterMutation () {
   return useMutation({
     mutationKey: ['register'],
     mutationFn: async (conductorData) => {

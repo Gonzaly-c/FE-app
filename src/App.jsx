@@ -20,12 +20,12 @@ function App () {
             <Route path='/pagina-en-construccion' element={<EnConstruccion />}> </Route>
 
             {/* Administrador */}
-            <Route path='/admin' element={<ProtectedRoute allowedRoles='admin' > </ProtectedRoute >}>
+            <Route path='/admin' element={<ProtectedRoute allowedRoles='admin'> </ProtectedRoute>}>
               <Route
                 path='dashboard'
                 element={<Link to='/admin/CRUD-Recorrido'>Ir a CRUD Recorrido</Link>}
               />
-    
+
               <Route
                 path='CRUD-Recorrido'
                 element={<Link to='/admin/dashboard'>Volver a HOME</Link>}
@@ -33,15 +33,14 @@ function App () {
 
               <Route
                 path='conductores'
-                element={<ConductoresPage/>}
+                element={<ConductoresPage />}
               />
 
-              <Route 
-                path='trenes' 
-                element={<TrenCrud/>}
+              <Route
+                path='trenes'
+                element={<TrenCrud />}
               />
 
-              
               {/* 404 protegido para /admin/... */}
               <Route
                 path='*'
@@ -55,7 +54,7 @@ function App () {
               path='/conductor'
               element={<ProtectedRoute
                 allowedRoles='conductor'
-            />}
+                       />}
             >
 
               <Route
