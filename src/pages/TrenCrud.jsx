@@ -68,6 +68,7 @@ export function TrenCrud () {
               <td style={{ borderRightWidth: 1 }}>ID</td>
               <td>Modelo</td>
               <td>Color</td>
+              <td>Estado Actual</td>
               <td>Fecha de creación</td>
               <td className='text-end' style={{ paddingRight: 75 }}>Acción</td>
             </tr>
@@ -80,6 +81,7 @@ export function TrenCrud () {
                   <td className='border-dark' style={{ borderRightWidth: 1 }}>{tren.id}</td>
                   <td>{tren.modelo}</td>
                   <td>{tren.color}</td>
+                  <td>{tren.estadoActual? tren.estadoActual.nombre : 'Sin Estado'}</td>
                   <td>{tren.createdAt.slice(0, 10)}</td>
 
                   <td className='text-end'>
