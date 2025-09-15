@@ -1,12 +1,20 @@
 import { Outlet, Link, useNavigate } from 'react-router-dom'
 import { useState, useContext } from 'react'
+
 import { AuthContext } from '../../context/AuthContext.jsx'
 
-export default function AdminLayout () {
-  const [isGestionOpen, setIsGestionOpen] = useState(false)
-  console.log(isGestionOpen)
-  const { setUser, logout } = useContext(AuthContext)
+export default function ConductorLayout () {
+  const [isMisViajesOpen, setIsMisViajesOpen] = useState(false)
 
+  const sidebarLogic = {
+    sidebarOpenClass:
+      'd-flex flex-column justify-content-between bg-dark text-white h-100 p-3 position-fixed overflow-y-auto',
+    sidebarClosed: 'd-none',
+    marginContent: { marginLeft: '300px' },
+    marginContentClosed: { marginLeft: '20px' }
+  }
+  const [showSidebar, setShowSidebar] = useState(true)
+  const { logout, setUser } = useContext(AuthContext)
   const navigate = useNavigate()
 
   const handleLogout = async () => {
@@ -17,63 +25,101 @@ export default function AdminLayout () {
 
   return (
     <div className='d-flex'>
-      {/* Sidebar */}
-      <div className='d-flex flex-column col-5 col-md-3 col-lg-2 bg-dark text-white p-3 vh-100'>
-        <h2 className='mb-4 text-center'>RailTracker</h2>
-        <ul className='nav flex-column flex-grow-1'>
-          <li className='nav-item'>
-            <Link className='nav-link text-white h4' to='/admin'>
-              📊 Estadísticas Personales
-            </Link>
-          </li>
 
-          {/* Gestión con estado */}
-          <li className='nav-item text-start my-4'>
-            <a
-              className='nav-link text-white h4 '
-              onClick={() => setIsGestionOpen(!isGestionOpen)}
-              role='button'
+      <div
+        className={showSidebar
+          ? sidebarLogic.sidebarOpenClass
+          : sidebarLogic.sidebarClosed}
+        style={{ width: '300px', minHeight: '100vh', overflowY: 'auto', transition: '0.3s' }}
+      >
+
+        <div>
+          <h1 className='mb-4 text-center'>RailTracker</h1>
+          <ul className='nav flex-column'>
+            <li className='nav-item mb-4 h4'>
+              <Link className='nav-link text-white' to='/conductor/dashboard'>
+                📊 Estadísticas Personales
+              </Link>
+            </li>
+
+            {/* Mis Viajes con submenú */}
+            <li className='nav-item text-start h4'>
+              <a
+                className='nav-link text-white'
+                onClick={() => setIsMisViajesOpen(!isMisViajesOpen)}
+                role='button'
+              >
+                🚆 Mis Viajes {isMisViajesOpen ? '▲' : '▼'}
+              </a>
+              {isMisViajesOpen && (
+                <ul className='list-unstyled ms-3 w-100 h5'>
+                  <li>
+                    <Link className='nav-link text-white mt-2' to='/conductor/trenes'>
+                      Pendientes
+                    </Link>
+                  </li>
+                  <li>
+                    <Link className='nav-link text-white mt-2' to='/conductor/recorridos'>
+                      En curso
+                    </Link>
+                  </li>
+                  <li>
+                    <Link className='nav-link text-white mt-2' to='/conductor/recorridos'>
+                      Finalizados
+                    </Link>
+                  </li>
+                </ul>
+              )}
+            </li>
+
+            <li className='nav-item mb-4 h4'>
+              <Link className='nav-link text-white' to='/conductor/perfil'>
+                👤 Perfil
+              </Link>
+            </li>
+          </ul>
+        </div>
+
+        {/* Botones inferiores */}
+        <div>
+          <div className='d-flex mb-3'>
+            <button
+              className='btn btn-outline-info w-100'
+              onClick={() => setShowSidebar(false)}
             >
-              🚆 Mis Viajes {isGestionOpen ? '▲' : '▼'}
-            </a>
-            {isGestionOpen && (
-              <ul className='list-unstyled w-100'>
-                <li>
-                  <Link className='nav-link text-white h5' to='/admin/trenes'>
-                    Pendientes
-                  </Link>
-                </li>
-                <li>
-                  <Link className='nav-link text-white h5' to='/admin/recorridos'>
-                    En curso
-                  </Link>
-                </li>
-                <li>
-                  <Link className='nav-link text-white h5' to='/admin/recorridos'>
-                    Finalizados
-                  </Link>
-                </li>
-              </ul>
-            )}
-          </li>
-
-          <li className='nav-item mb-4 h4'>
-            <Link className='nav-link text-white' to='/admin/perfil'>
-              👤 Perfil
-            </Link>
-          </li>
-
-        </ul>
-
-        <div className='d-flex align-bottom mb-3'>
-          <button className='btn btn-outline-danger w-100' type='button' onClick={handleLogout}>
-            Cerrar sesión
-          </button>
+              Cerrar Sidebar
+            </button>
+          </div>
+          <div className='d-flex mb-3'>
+            <button
+              className='btn btn-outline-danger w-100'
+              onClick={handleLogout}
+            >
+              Cerrar sesión
+            </button>
+          </div>
         </div>
       </div>
 
+      {/* Botón para abrir sidebar cuando está cerrado */}
+      {!showSidebar && (
+        <button
+          className='btn btn-primary position-fixed h-100 pe-3'
+          style={{ width: '20px' }}
+          onClick={() =>
+            setShowSidebar(true)}
+        >
+          ☰
+        </button>
+      )}
+
       {/* Contenido principal */}
-      <div className='flex-grow-1 p-4'>
+      <div
+        className='flex-grow-1 p-4'
+        style={showSidebar
+          ? sidebarLogic.marginContent
+          : sidebarLogic.marginContentClosed}
+      >
         <Outlet />
       </div>
     </div>
