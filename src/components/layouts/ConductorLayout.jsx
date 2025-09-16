@@ -38,12 +38,12 @@ export default function ConductorLayout () {
           <ul className='nav flex-column'>
             <li className='nav-item mb-4 h4'>
               <Link className='nav-link text-white' to='/conductor/dashboard'>
-                📊 Estadísticas Personales
+                📊 Estadísticas
               </Link>
             </li>
 
             {/* Mis Viajes con submenú */}
-            <li className='nav-item text-start h4'>
+            <li className='nav-item text-start h4 mb-3'>
               <a
                 className='nav-link text-white'
                 onClick={() => setIsMisViajesOpen(!isMisViajesOpen)}
