@@ -60,7 +60,7 @@ export function TrenForm({ onSuccess, trenToEdit }) {
             </div>
 
             {isErrorPost && <span className='text-danger'>Error al crear el tren</span>}
-            {isErrorPost && <span className='text-danger'>Error al actualizar el tren</span>}       
+            {isErrorPut && <span className='text-danger'>Error al actualizar el tren</span>}       
         </form>
     )
 }
