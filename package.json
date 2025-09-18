@@ -18,6 +18,7 @@
     "react": "19.1.0",
     "react-dom": "19.1.0",
     "react-hook-form": "7.62.0",
+    "react-infinite-scroll-component": "6.1.0",
     "react-router-dom": "7.8.0"
   },
   "devDependencies": {
@@ -32,13 +33,13 @@
     "globals": "16.3.0",
     "standard": "17.1.2",
     "vite": "7.0.4"
-  }
-  ,
-
+  },
   "standard": {
     "ignore": [
       "build/*"
     ],
-    "globals": [ "React" ]
-    }
+    "globals": [
+      "React"
+    ]
+  }
 }

@@ -3,22 +3,26 @@ import { useTrenesQuery } from '../hooks/tren/useTrenesQuery'
 import { useTrenesDelete } from '../hooks/tren/useTrenesDelete'
 import { Modal } from '../components/Modal'
 import { TrenForm } from '../components/forms/TrenForm'
+import InfiniteScroll from 'react-infinite-scroll-component'
+import { useTrenesInfinite } from '../hooks/tren/useTrenesInfinite'
 
-export function TrenCrud () {
+export function TrenCrud() {
   const [filteredTrenes, setFilteredTrenes] = useState([])
   const [showModal, setShowModal] = useState(false)
   const trenToEdit = useRef(null) // variable para menejar si es edicion o creacion
-  const { data: trenes, isLoading, isError, error } = useTrenesQuery()
+  // const { data: trenes, isLoading, isError, error } = useTrenesQuery()
   const { mutateAsync: deleteMutation } = useTrenesDelete()
+  const { data, fetchNextPage, hasNextPage, isLoading, isError, error } = useTrenesInfinite()
 
   useEffect(() => {
+    const trenes = data?.pages.flatMap(page => page.items) ?? []
     if (trenes) setFilteredTrenes(trenes)
     // logica que va a ser necesaria para hacer filtrados locales
-  }, [trenes])
+  }, [data])
 
   const handleFilter = (e) => {
     setFilteredTrenes(
-      trenes.filter((tren) => tren.id.toString().includes(e.target.value))
+      filteredTrenes.filter((tren) => tren.id.toString().includes(e.target.value))
     )
   }
 
@@ -75,37 +79,47 @@ export function TrenCrud () {
           </thead>
 
           <tbody>
-            {filteredTrenes.map((tren) => {
-              return (
-                <tr key={tren.id}>
-                  <td className='border-dark' style={{ borderRightWidth: 1 }}>{tren.id}</td>
-                  <td>{tren.modelo}</td>
-                  <td>{tren.color}</td>
-                  <td>{tren.estadoActual? tren.estadoActual.nombre : 'Sin Estado'}</td>
-                  <td>{tren.createdAt.slice(0, 10)}</td>
+            <InfiniteScroll
+              dataLength={filteredTrenes.length}
+              next={fetchNextPage}
+              hasMore={hasNextPage}
+              loader={<h4>Cargando más trenes...</h4>}
+              endMessage={<p className='text-center'>No hay más trenes</p>}
+            >
+              {filteredTrenes.map((tren) => {
+                return (
+                  <tr key={tren.id}>
+                    <td className='border-dark' style={{ borderRightWidth: 1 }}>{tren.id}</td>
+                    <td>{tren.modelo}</td>
+                    <td>{tren.color}</td>
+                    <td>{tren.estadoActual ? tren.estadoActual.nombre : 'Sin Estado'}</td>
+                    <td>{tren.createdAt.slice(0, 10)}</td>
 
-                  <td className='text-end'>
-                    <button
-                      className='btn btn-sm bg-info text-white me-2'
-                      onClick={handleEdit.bind(this, tren)}
-                    >
-                      Editar
-                    </button>
-                    <button className='btn btn-sm bg-danger text-white' onClick={async () => deleteMutation(tren.id)}>
-                      Eliminar
-                    </button>
-                  </td>
-                </tr>
-              )
-            })}
+                    <td className='text-end'>
+                      <button
+                        className='btn btn-sm bg-info text-white me-2'
+                        onClick={handleEdit.bind(this, tren)}
+                      >
+                        Editar
+                      </button>
+                      <button className='btn btn-sm bg-danger text-white' onClick={async () => deleteMutation(tren.id)}>
+                        Eliminar
+                      </button>
+                    </td>
+                  </tr>
+                )
+              })}
+            </InfiniteScroll>
           </tbody>
         </table>
       </div>
 
-      {showModal &&
+      {
+        showModal &&
         <Modal onClose={() => setShowModal(false)} title={(trenToEdit.current ? 'Editar' : 'Crear') + ' Tren'}>
           <TrenForm onSuccess={() => setShowModal(false)} trenToEdit={trenToEdit.current} />
-        </Modal>}
+        </Modal>
+      }
     </div>
 
   )
