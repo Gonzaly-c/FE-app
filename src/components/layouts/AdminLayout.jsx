@@ -1,142 +1,75 @@
-import { Outlet, Link, useNavigate } from 'react-router-dom'
-import { useState, useContext } from 'react'
+import { useState, useContext } from "react";
+import { Link, Outlet, useNavigate } from "react-router-dom";
+import { AuthContext } from "../../context/AuthContext";
+import "./AdminLayout.css"; 
 
-import { AuthContext } from '../../context/AuthContext.jsx'
-
-export default function AdminLayout () {
-  const [isGestionOpen, setIsGestionOpen] = useState(false)
-  const sidebarLogic = {
-    sidebarOpenClass:
-      'd-flex flex-column justify-content-between bg-dark text-white h-100 p-3 position-fixed overflow-y-auto',
-    sidebarClosed: 'd-none',
-    marginContent: { marginLeft: '300px' },
-    marginContentClosed: { marginLeft: '20px' }
-  }
-  const [showSidebar, setShowSidebar] = useState(true)
-  const { logout, setUser } = useContext(AuthContext)
-  const navigate = useNavigate()
+export default function AdminLayout() {
+  const [isGestionOpen, setIsGestionOpen] = useState(false);
+  const [showSidebar, setShowSidebar] = useState(true);
+  const { logout, setUser } = useContext(AuthContext);
+  const navigate = useNavigate();
 
   const handleLogout = async () => {
-    await logout()
-    setUser(null)
-    navigate('/')
-  }
+    await logout();
+    setUser(null);
+    navigate("/");
+  };
 
   return (
-    <div className='d-flex'>
+    <div className="app-root d-flex">
+       {/* SIDEBAR */}
+    <aside className={`sidebar ${showSidebar ? 'open' : 'closed'}`}>
+      <div className="sidebar-top">
+        <h1 className="brand">RailTracker</h1>
 
-      <div
-        className={
-          showSidebar
-            ? sidebarLogic.sidebarOpenClass
-            : sidebarLogic.sidebarClosed
-        }
-        style={{ width: '300px', minHeight: '100vh', overflowY: 'auto', transition: '0.3s' }}
-      >
+        <div className="sidebar-scroll">
+            <ul className="nav flex-column">
+              <li className="nav-item mb-4 h4">
+                <Link className="nav-link text-white" to="/admin">📊 Panel de control</Link>
+              </li>
 
-        <div>
-          <h1 className='mb-4 text-center'>RailTracker</h1>
-          <ul className='nav flex-column'>
-            <li className='nav-item mb-4 h4'>
-              <Link className='nav-link text-white' to='/admin'>
-                📊 Panel de control
-              </Link>
-            </li>
+              <li className="nav-item text-start h4">
+                <a
+                  className="nav-link text-white"
+                  onClick={() => setIsGestionOpen(!isGestionOpen)}
+                  role="button"
+                >
+                  📁 Gestión {isGestionOpen ? "▲" : "▼"}
+                </a>
 
-            <li className='nav-item text-start h4'>
-              <a
-                className='nav-link text-white'
-                onClick={() => setIsGestionOpen(!isGestionOpen)}
-                role='button'
-              >
-                📁 Gestión {isGestionOpen ? '▲' : '▼'}
-              </a>
-              {isGestionOpen && (
-                <ul className='list-unstyled ms-3 w-100 h5'>
-                  <li>
-                    <Link
-                      className='nav-link text-white mt-2'
-                      to='/admin/trenes'
-                    >
-                      🚂 Trenes
-                    </Link>
-                  </li>
-                  <li>
-                    <Link
-                      className='nav-link text-white mt-2'
-                      to='/admin/recorridos'
-                    >
-                      🗺️ Recorridos
-                    </Link>
-                  </li>
+                {isGestionOpen && (
+                  <ul className="list-unstyled ms-3 w-100 h5">
+                    <li><Link className="nav-link text-white mt-2" to="/admin/trenes">🚂 Trenes</Link></li>
+                    <li><Link className="nav-link text-white mt-2" to="/admin/recorridos">🗺️ Recorridos</Link></li>
+                    <li><Link className="nav-link text-white mt-2" to="/admin/conductores">👨‍✈️ Conductores</Link></li>
+                  </ul>
+                )}
+              </li>
 
-                  <li>
-                    <Link
-                      className='nav-link text-white mt-2'
-                      to='/admin/conductores'
-                    >
-                      👨‍✈️ Conductores
-                    </Link>
-                  </li>
-                </ul>
-              )}
-            </li>
-
-            <li className='nav-item my-4 h4'>
-              <Link className='nav-link text-white' to='/admin/viajes'>
-                🚆 Viajes
-              </Link>
-            </li>
-            <li className='nav-item mb-4 h4'>
-              <Link className='nav-link text-white' to='/admin/perfil'>
-                👤 Perfil
-              </Link>
-            </li>
-          </ul>
-        </div>
-
-        <div>
-          <div className='d-flex mb-3'>
-            <button
-              className='btn btn-outline-info w-100'
-              onClick={() => setShowSidebar(false)}
-            >
-              Cerrar Sidebar
-            </button>
-          </div>
-          <div className='d-flex mb-3'>
-            <button
-              className='btn btn-outline-danger w-100'
-              onClick={handleLogout}
-            >
-              Cerrar sesión
-            </button>
+              <li className="nav-item my-4 h4">
+                <Link className="nav-link text-white" to="/admin/viajes">🚆 Viajes</Link>
+              </li>
+              <li className="nav-item mb-4 h4">
+                <Link className="nav-link text-white" to="/admin/perfil">👤 Perfil</Link>
+              </li>
+            </ul>
           </div>
         </div>
-      </div>
 
-      {!showSidebar && (
-        <button
-          className='btn btn-primary position-fixed h-100 pe-3'
-          style={{ width: '20px' }}
-          onClick={() => {
-            setShowSidebar(true)
-          }}
-        >
-          ☰
-        </button>
-      )}
+         <div className="sidebar-bottom">
+          <button className="btn btn-outline-info w-100 mb-2" onClick={() => setShowSidebar(false)}>Cerrar Sidebar</button>
+          <button className="btn btn-outline-danger w-100" onClick={handleLogout}>Cerrar sesión</button>
+        </div>
+      </aside>
 
-      <div
-        className='flex-grow-1 p-4'
-        style={
-          showSidebar
-            ? sidebarLogic.marginContent
-            : sidebarLogic.marginContentClosed
-        }
-      >
-        <Outlet />
-      </div>
+    {!showSidebar && (
+      <button className="sidebar-toggle btn btn-primary" onClick={() => setShowSidebar(true)}>☰</button>
+    )}
+
+      {/* CONTENIDO PRINCIPAL */}
+      <main id='scrollableDiv' className="content p-4" style={{ marginLeft: showSidebar ? 300 : 20 }}> 
+      <Outlet />
+    </main>
     </div>
-  )
+  );
 }

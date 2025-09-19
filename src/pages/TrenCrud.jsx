@@ -2,12 +2,13 @@ import { useEffect, useState, useRef } from 'react'
 //import { useTrenesQuery } from '../hooks/tren/useTrenesQuery'
 import { useTrenesDelete } from '../hooks/tren/useTrenesDelete'
 import { Modal } from '../components/Modal'
-import { TrenForm } from '../components/forms/TrenForm'
-import InfiniteScroll from 'react-infinite-scroll-component'
+import { TrenForm } from '../components/tren/TrenForm.jsx'
 import { useTrenesInfinite } from '../hooks/tren/infinityScrollTren.js'
+import { TrenList } from '../components/tren/TrenList.jsx'
 
 export function TrenCrud() {
-  const [filteredTrenes, setFilteredTrenes] = useState([])
+  const [trenes, setTrenes] = useState([])
+  const [orderedTrenes, setOrderedTrenes] = useState(null)
   const [showModal, setShowModal] = useState(false)
   const trenToEdit = useRef(null) // variable para menejar si es edicion o creacion
   // const { data: trenes, isLoading, isError, error } = useTrenesQuery()
@@ -15,16 +16,16 @@ export function TrenCrud() {
   const { data, fetchNextPage, hasNextPage, isLoading, isError, error } = useTrenesInfinite()
 
   useEffect(() => {
-    const trenes = data?.pages.flatMap(page => page.items) ?? []
-    console.log(trenes)
-    if (trenes) setFilteredTrenes(trenes)
+    setTrenes(data?.pages.flatMap(page => page.items) ?? [])
     // logica que va a ser necesaria para hacer filtrados locales
   }, [data])
 
-  const handleFilter = (e) => {
-    setFilteredTrenes(
-      filteredTrenes.filter((tren) => tren.id.toString().includes(e.target.value))
-    )
+  const handleFilter = () => {
+    // if(e.target.value === '') setTrenes(data?.pages.flatMap(page => page.items) ?? [])
+    // else(setTrenes(
+    //   trenes.filter((tren) => tren.id.toString().includes(e.target.value))
+    // ))
+    alert('No implementado en backend aún')
   }
 
   const handleEdit = (tren) => {
@@ -65,57 +66,8 @@ export function TrenCrud() {
           </span>
         </div>
       </div>
-
-      <InfiniteScroll
-        dataLength={filteredTrenes.length}
-        next={fetchNextPage}
-        hasMore={hasNextPage}
-        loader={<h4 className='text-center'>Cargando más trenes...</h4>}
-        endMessage={<p className='text-center'>No hay más trenes</p>}
-        scrollThreshold={1}
-      >
-        <div className='table-responsive'>
-          <table className='table'>
-            <thead className='border-info fw-bold'>
-              <tr>
-                <td style={{ borderRightWidth: 1 }}>ID</td>
-                <td>Modelo</td>
-                <td>Color</td>
-                <td>Estado Actual</td>
-                <td>Fecha de creación</td>
-                <td className='text-end' style={{ paddingRight: 75 }}>Acción</td>
-              </tr>
-            </thead>
-
-            <tbody>
-                {filteredTrenes.map((tren) => {
-                  return (
-                    <tr key={tren.id}>
-                      <td className='border-dark' style={{ borderRightWidth: 1 }}>{tren.id}</td>
-                      <td>{tren.modelo}</td>
-                      <td>{tren.color}</td>
-                      <td>{tren.estadoActual ? tren.estadoActual.nombre : 'Sin Estado'}</td>
-                      <td>{tren.createdAt.slice(0, 10)}</td>
-
-                      <td className='text-end'>
-                        <button
-                          className='btn btn-sm bg-info text-white me-2'
-                          onClick={handleEdit.bind(this, tren)}
-                        >
-                          Editar
-                        </button>
-                        <button className='btn btn-sm bg-danger text-white' onClick={async () => deleteMutation(tren.id)}>
-                          Eliminar
-                        </button>
-                      </td>
-                    </tr>
-                  )
-                })}
-              
-            </tbody>
-          </table>
-        </div>
-      </InfiniteScroll>
+      {/* Logica pensada para ordenar los trenes segun el atributo que apreta el usuario, todavian no hecha */ }
+      <TrenList trenes={orderedTrenes? orderedTrenes:trenes} setOrderedTrenes={setOrderedTrenes} fetchNextPage={fetchNextPage} hasNextPage={hasNextPage} handleEdit={handleEdit} deleteMutation={deleteMutation}/>
       
       {
         showModal &&
