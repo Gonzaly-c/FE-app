@@ -1,5 +1,5 @@
 import { useInfiniteQuery } from "@tanstack/react-query"
-import { api } from "../services/api"
+import { api } from "../../services/api.js"
 
 export function useTrenesInfinite() {
   return useInfiniteQuery({
@@ -14,6 +14,7 @@ export function useTrenesInfinite() {
     getNextPageParam: (lastPage) => {
       return lastPage.hasNextPage ? lastPage.nextCursor : undefined
     },
+
   })
 }
 
