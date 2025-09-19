@@ -13,8 +13,7 @@ export function useTrenesInfinite() {
     },
     getNextPageParam: (lastPage) => {
       return lastPage.hasNextPage ? lastPage.nextCursor : undefined
-    },
-
+    }
   })
 }
 

@@ -2,8 +2,10 @@ import { Modal } from '../components/Modal'
 import { TrenForm } from '../components/tren/TrenForm.jsx'
 import { TrenList } from '../components/tren/TrenList.jsx'
 import { useTrenCrud } from '../hooks/tren/useTrenCrud.js'
+import { useQueryClient } from '@tanstack/react-query'
 
 export function TrenCrud() {
+  const queryClient = useQueryClient()
   const {
     trenes,
     showModal,
@@ -19,7 +21,7 @@ export function TrenCrud() {
     handleFilter,
     handleEdit,
     handleCreate,
-    handleAscOrder,
+    handleAscOrder
   } = useTrenCrud()
 
 
@@ -40,13 +42,14 @@ export function TrenCrud() {
         </button>
 
         <div className='input-group w-auto'>
+          <p role='button' onClick={async () => {document.getElementById("findOneInput").value = ''; await queryClient.invalidateQueries({queryKey: ['trenesInfinite']})}}>X</p>
           <input
-            type='text'
+            type='number'
             className='form-control'
             placeholder='Buscar por id'
-            onChange={handleFilter}
+            id='findOneInput'
           />
-          <span className='input-group-text'>
+          <span role='button' className='input-group-text' onClick={() => handleFilter(document.getElementById("findOneInput").value)}>
             🔍
           </span>
         </div>

@@ -1,6 +1,8 @@
 import { useState, useEffect, useRef } from "react"
 import { useTrenesDelete } from "./useTrenesDelete.js"
 import { useTrenesInfinite } from "./useTrenInfinite.js"
+import { useTrenQuery } from "./useTrenQuery.js"
+
 
 export function useTrenCrud() {
   const [trenes, setTrenes] = useState([])
@@ -9,7 +11,7 @@ export function useTrenCrud() {
   const { mutateAsync: deleteMutation } = useTrenesDelete()
   const { data, fetchNextPage, hasNextPage, isLoading, isError, error } = useTrenesInfinite()
   const [ascOrder, setAscOrder] = useState(false);
-
+  const { mutateAsync: findOneMutation} = useTrenQuery() // find one 
   
   useEffect(() => {
     const trenes = data?.pages.flatMap(page => page.items) ?? []
@@ -18,12 +20,10 @@ export function useTrenCrud() {
     // logica que va a ser necesaria para hacer filtrados locales
   }, [data, ascOrder])
 
-  const handleFilter = () => {
-    // if(e.target.value === '') setTrenes(data?.pages.flatMap(page => page.items) ?? [])
-    // else(setTrenes(
-    //   trenes.filter((tren) => tren.id.toString().includes(e.target.value))
-    // ))
-    alert('No implementado en backend aún')
+  const handleFilter = async (trenId) => {
+    const tren = await findOneMutation(trenId)
+    setTrenes([tren])
+
   }
 
   const handleEdit = (tren) => {
@@ -55,6 +55,6 @@ export function useTrenCrud() {
     handleFilter,
     handleEdit,
     handleCreate,
-    handleAscOrder,
+    handleAscOrder
   }
 }
