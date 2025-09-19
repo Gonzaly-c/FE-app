@@ -6,7 +6,7 @@ export function useTrenPut () {
   return useMutation({
     mutationKey: ['trenPut'],
     mutationFn: async (tren) => {
-      await api.put('/tren/'+tren.id, tren, { withCredential: true })
+      await api.put('/tren/'+tren.id, tren, { withCredentials: true })
     },
     onSuccess: () => {
       queryClient.invalidateQueries(['trenesQuery'])

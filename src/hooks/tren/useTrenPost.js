@@ -6,7 +6,7 @@ export function useTrenPost () {
   return useMutation({
     mutationKey: ['trenPost'],
     mutationFn: async (tren) => {
-      await api.post('/tren', tren, { withCredential: true })
+      await api.post('/tren', tren, { withCredentials: true })
     },
     onSuccess: () => {
       queryClient.invalidateQueries(['trenesQuery'])
