@@ -9,6 +9,7 @@ import Page404 from './pages/404.jsx'
 import ConductoresPage from './pages/conductoresAdmin.jsx'
 import { TrenCrud } from './pages/TrenCrud.jsx'
 import { RecorridoCrud } from './pages/RecorridoCrud.jsx'
+import { CargaCrud } from './pages/CargaCrud.jsx'
 
 function App () {
   return (
@@ -30,6 +31,11 @@ function App () {
               <Route
                 path='recorridos'
                 element={<RecorridoCrud />}
+              />
+
+              <Route
+                path='cargas'
+                element={<CargaCrud />}
               />
 
               <Route
@@ -55,7 +61,7 @@ function App () {
               path='/conductor'
               element={<ProtectedRoute
                 allowedRoles='conductor'
-                       />}
+            />}
             >
 
               <Route

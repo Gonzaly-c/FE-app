@@ -1,11 +1,11 @@
 import { api } from '../../services/api.js'
 import { useQuery } from '@tanstack/react-query'
 
-export function useRecorridosQuery () {
+export function useCargasQuery () {
   return (useQuery({
-    queryKey: ['recorridosQuery'],
+    queryKey: ['cargasQuery'],
     queryFn: async () => {
-      const res = await api.get('/recorrido', { withCredentials: true })
+      const res = await api.get('/carga', { withCredentials: true })
       return res.data.data
     }
   }))
