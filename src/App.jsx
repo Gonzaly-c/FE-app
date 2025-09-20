@@ -8,6 +8,7 @@ import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 import Page404 from './pages/404.jsx'
 import ConductoresPage from './pages/conductoresAdmin.jsx'
 import { TrenCrud } from './pages/TrenCrud.jsx'
+import { RecorridoCrud } from './pages/RecorridoCrud.jsx'
 
 function App () {
   return (
@@ -27,8 +28,8 @@ function App () {
               />
 
               <Route
-                path='CRUD-Recorrido'
-                element={<Link to='/admin/dashboard'>Volver a HOME</Link>}
+                path='recorridos'
+                element={<RecorridoCrud />}
               />
 
               <Route

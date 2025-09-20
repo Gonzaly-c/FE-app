@@ -35,7 +35,8 @@ export function TrenList({ trenes, fetchNextPage, hasNextPage, handleEdit, delet
                     <td>{tren.modelo}</td>
                     <td>{tren.color}</td>
                     <td>{tren.estadoActual ? tren.estadoActual.nombre : 'Sin Estado'}</td>
-                    <td>{tren.createdAt.slice(0, 10)}</td>
+                    <td>{tren.createdAt ? tren.createdAt.slice(0, 10) : 'Sin fecha'}</td>
+
 
                     <td className='text-end'>
                       <button

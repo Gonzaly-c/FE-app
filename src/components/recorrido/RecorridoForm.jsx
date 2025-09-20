@@ -9,8 +9,9 @@ export function RecorridoForm({ onSuccess, recorridoToEdit }) {
 
     const onSubmit = async(formData) =>{
         const recorrido = {
-            modelo: formData.modelo,
-            color: formData.color,
+            ciudadSalida: formData.ciudadSalida,
+            ciudadLlegada: formData.ciudadLlegada,
+            totalKm: formData.totalKm
         }
 
         if(recorridoToEdit){
@@ -30,31 +31,54 @@ export function RecorridoForm({ onSuccess, recorridoToEdit }) {
     return(
         <form onSubmit={handleSubmit(onSubmit)}>
             <div className='mb-1'>
-                <label className='form-label' htmlFor='modelo'>Modelo:</label>
+                <label className='form-label' htmlFor='ciudadSalida'>Ciudad Salida:</label>
                 <input
-                id='modelo' type='text' {...register('modelo', { required: 'El modelo es requerido'
-                , value: recorridoToEdit ? recorridoToEdit.modelo : ''})}
-                className='form-control' placeholder='Modelo del recorrido'
+                id='ciudadSalida' type='text' {...register('ciudadSalida', { required: 'La ciudad de salida es requerida'
+                , value: recorridoToEdit ? recorridoToEdit.ciudadSalida : ''})}
+                className='form-control' placeholder='Ciudad de salida del recorrido'
                 />
-                {errors.modelo && <span className='text-danger'>{errors.modelo.message}</span>}
+                {errors.ciudadSalida && <span className='text-danger'>{errors.ciudadSalida.message}</span>}
             </div>
 
             <div className='mb-1'>
-                <label className='form-label' htmlFor='color'>Color:</label>
+                <label className='form-label' htmlFor='ciudadLlegada'>Ciudad Llegada:</label>
                 <input
-                id='color' type='text' {...register('color', { required: 'El color es requerido'
-                , value: recorridoToEdit ? recorridoToEdit.color : ''})}
-                className='form-control' placeholder='Color del recorrido'
+                id='ciudadLlegada' type='text' {...register('ciudadLlegada', { required: 'La ciudad de llegada es requerida'
+                , value: recorridoToEdit ? recorridoToEdit.ciudadLlegada : ''})}
+                className='form-control' placeholder='Ciudad de llegada del recorrido'
                 />
-                {errors.color && <span className='text-danger'>{errors.color.message}</span>}
+                {errors.ciudadLlegada && <span className='text-danger'>{errors.ciudadLlegada.message}</span>}
             </div>
+
+            
+            <div className='mb-1'>
+            <label className='form-label' htmlFor='totalKm'>
+                Total de Km: 
+            </label>
+            <input
+                id='totalKm'
+                type='text'
+                defaultValue={recorridoToEdit?.totalKm || ''}
+                {...register('totalKm', {
+                required: 'El total de KM es requerido',
+                validate: (value) =>
+                    /^\d+$/.test(value) || 'Solo se permite número enteros'
+                })}
+                className='form-control'
+                placeholder='Total de Km del recorrido'
+            />
+            {errors.totalKm && (
+                <span className='text-danger'>{errors.totalKm.message}</span>
+            )}
+            </div>
+
 
             <div className='d-flex justify-content-between'>
                 <button className="btn btn-secondary" onClick={onSuccess}>
                     Volver
                 </button>
                 
-                <button type='submit' className='btn btn-success d-block mt-2' style={{ backgroundColor: '#002050ff', color: '#fff' }}>
+                <button type='submit' className='btn btn-success d-block mt-2' style={{ backgroundColor: '#002050ff', ciudadLlegada: '#fff' }}>
                 {isPendingForm? 'Enviando...' : 'Enviar'}
                 </button>
             </div>
