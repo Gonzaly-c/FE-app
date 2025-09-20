@@ -1,15 +1,15 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { api } from '../../services/api'
 
-export function useTrenPost () {
+export function useRecorridoPost () {
   const queryClient = useQueryClient()
   return useMutation({
-    mutationKey: ['trenPost'],
-    mutationFn: async (tren) => {
-      await api.post('/tren', tren, { withCredentials: true })
+    mutationKey: ['recorridoPost'],
+    mutationFn: async (recorrido) => {
+      await api.post('/recorrido', recorrido, { withCredentials: true })
     },
     onSuccess: () => {
-      queryClient.invalidateQueries(['trenesQuery'])
+      queryClient.invalidateQueries(['recorridosQuery'])
     }
   })
 }

@@ -1,11 +1,11 @@
 import { useInfiniteQuery } from "@tanstack/react-query"
 import { api } from "../../services/api.js"
 
-export function useTrenesInfinite() {
+export function useRecorridosInfinite() {
   return useInfiniteQuery({
-    queryKey: ["trenesInfinite"],
+    queryKey: ["recorridosInfinite"],
     queryFn: async ({ pageParam = null }) => {
-      const res = await api.get("/tren", {
+      const res = await api.get("/recorrido", {
         params: { limit: 10, cursor: pageParam },
         withCredentials: true,
       })

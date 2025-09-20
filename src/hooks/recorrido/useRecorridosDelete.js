@@ -1,16 +1,16 @@
 import { api } from '../../services/api'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 
-export function useTrenesDelete () {
+export function useRecorridosDelete () {
   const queryClient = useQueryClient()
 
   return useMutation({
-    mutationKey: ['trenDelete'],
+    mutationKey: ['recorridoDelete'],
     mutationFn: async (idToDelete) => {
-      await api.delete('/tren/' + idToDelete, { withCredentials: true })
+      await api.delete('/recorrido/' + idToDelete, { withCredentials: true })
     },
     onSuccess: () => {
-      queryClient.invalidateQueries(['trenesQuery'])
+      queryClient.invalidateQueries(['recorridosQuery'])
     }
   })
 }

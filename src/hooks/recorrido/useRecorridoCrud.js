@@ -1,38 +1,38 @@
 import { useState, useEffect, useRef } from "react"
-import { useTrenesDelete } from "./useTrenesDelete.js"
-import { useTrenesInfinite } from "./useTrenInfinite.js"
-import { useTrenQuery } from "./useTrenQuery.js"
+import { useRecorridosDelete } from "./useRecorridosDelete.js"
+import { useRecorridosInfinite } from "./useRecorridoInfinite.js"
+import { useRecorridoQuery } from "./useRecorridoQuery.js"
 
 
-export function useTrenCrud() {
-  const [trenes, setTrenes] = useState([])
+export function useRecorridoCrud() {
+  const [recorridos, setRecorridos] = useState([])
   const [showModal, setShowModal] = useState(false)
-  const trenToEdit = useRef(null) // variable para menejar si es edicion o creacion
-  const { mutateAsync: deleteMutation } = useTrenesDelete()
-  const { data, fetchNextPage, hasNextPage, isLoading, isError, error } = useTrenesInfinite()
+  const recorridoToEdit = useRef(null) // variable para menejar si es edicion o creacion
+  const { mutateAsync: deleteMutation } = useRecorridosDelete()
+  const { data, fetchNextPage, hasNextPage, isLoading, isError, error } = useRecorridosInfinite()
   const [ascOrder, setAscOrder] = useState(false);
-  const { mutateAsync: findOneMutation} = useTrenQuery() // find one 
+  const { mutateAsync: findOneMutation} = useRecorridoQuery() // find one 
   
   useEffect(() => {
-    const trenes = data?.pages.flatMap(page => page.items) ?? []
-    if(ascOrder && trenes.length != 0) setTrenes(trenes.sort((a, b) => a.id - b.id));
-    else setTrenes(trenes)
+    const recorridos = data?.pages.flatMap(page => page.items) ?? []
+    if(ascOrder && recorridos.length != 0) setRecorridos(recorridos.sort((a, b) => a.id - b.id));
+    else setRecorridos(recorridos)
     // logica que va a ser necesaria para hacer filtrados locales
   }, [data, ascOrder])
 
-  const handleFilter = async (trenId) => {
-    const tren = await findOneMutation(trenId)
-    setTrenes([tren])
+  const handleFilter = async (recorridoId) => {
+    const recorrido = await findOneMutation(recorridoId)
+    setRecorridos([recorrido])
 
   }
 
-  const handleEdit = (tren) => {
-    trenToEdit.current = tren
+  const handleEdit = (recorrido) => {
+    recorridoToEdit.current = recorrido
     setShowModal(true)
   }
 
   const handleCreate = () => {
-    trenToEdit.current = null
+    recorridoToEdit.current = null
     setShowModal(true)
   }
 
@@ -41,10 +41,10 @@ export function useTrenCrud() {
   }
 
   return {
-    trenes,
+    recorridos,
     showModal,
     setShowModal,
-    trenToEdit,
+    recorridoToEdit,
     deleteMutation,
     fetchNextPage,
     hasNextPage,

@@ -1,27 +1,27 @@
 import { useForm } from 'react-hook-form'
-import { useTrenPost } from '../../hooks/tren/useTrenPost'
-import { useTrenPut } from '../../hooks/tren/useTrenesPut'
+import { useRecorridoPost } from '../../hooks/recorrido/useRecorridoPost'
+import { useRecorridoPut } from '../../hooks/recorrido/useRecorridosPut'
 
-export function TrenForm({ onSuccess, trenToEdit }) {
+export function RecorridoForm({ onSuccess, recorridoToEdit }) {
     const { register, formState: { errors }, handleSubmit, isPending: isPendingForm } = useForm({ mode: 'onBlur' })
-    const { mutateAsync: handlePost, isError: isErrorPost } = useTrenPost()
-    const { mutateAsync: handlePut, isError: isErrorPut } = useTrenPut() 
+    const { mutateAsync: handlePost, isError: isErrorPost } = useRecorridoPost()
+    const { mutateAsync: handlePut, isError: isErrorPut } = useRecorridoPut() 
 
     const onSubmit = async(formData) =>{
-        const tren = {
+        const recorrido = {
             modelo: formData.modelo,
             color: formData.color,
         }
 
-        if(trenToEdit){
-            tren.id = trenToEdit.id
-            await handlePut(tren)
+        if(recorridoToEdit){
+            recorrido.id = recorridoToEdit.id
+            await handlePut(recorrido)
             
             if(!isErrorPut) onSuccess()
             return
         }
 
-        await handlePost(tren)
+        await handlePost(recorrido)
         
         if(!isErrorPost) onSuccess()
         return
@@ -33,8 +33,8 @@ export function TrenForm({ onSuccess, trenToEdit }) {
                 <label className='form-label' htmlFor='modelo'>Modelo:</label>
                 <input
                 id='modelo' type='text' {...register('modelo', { required: 'El modelo es requerido'
-                , value: trenToEdit ? trenToEdit.modelo : ''})}
-                className='form-control' placeholder='Modelo del tren'
+                , value: recorridoToEdit ? recorridoToEdit.modelo : ''})}
+                className='form-control' placeholder='Modelo del recorrido'
                 />
                 {errors.modelo && <span className='text-danger'>{errors.modelo.message}</span>}
             </div>
@@ -43,8 +43,8 @@ export function TrenForm({ onSuccess, trenToEdit }) {
                 <label className='form-label' htmlFor='color'>Color:</label>
                 <input
                 id='color' type='text' {...register('color', { required: 'El color es requerido'
-                , value: trenToEdit ? trenToEdit.color : ''})}
-                className='form-control' placeholder='Color del tren'
+                , value: recorridoToEdit ? recorridoToEdit.color : ''})}
+                className='form-control' placeholder='Color del recorrido'
                 />
                 {errors.color && <span className='text-danger'>{errors.color.message}</span>}
             </div>
@@ -59,8 +59,8 @@ export function TrenForm({ onSuccess, trenToEdit }) {
                 </button>
             </div>
 
-            {isErrorPost && <span className='text-danger'>Error al crear el tren</span>}
-            {isErrorPut && <span className='text-danger'>Error al actualizar el tren</span>}       
+            {isErrorPost && <span className='text-danger'>Error al crear el recorrido</span>}
+            {isErrorPut && <span className='text-danger'>Error al actualizar el recorrido</span>}       
         </form>
     )
 }

@@ -1,15 +1,15 @@
 import InfiniteScroll from "react-infinite-scroll-component"
 
-export function TrenList({ trenes, fetchNextPage, hasNextPage, handleEdit, deleteMutation, handleAscOrder, ascOrder }) { 
+export function RecorridoList({ recorridos, fetchNextPage, hasNextPage, handleEdit, deleteMutation, handleAscOrder, ascOrder }) { 
 
   return(
 
     <InfiniteScroll
-      dataLength={trenes.length}
+      dataLength={recorridos.length}
       next={fetchNextPage}
       hasMore={hasNextPage}
-      loader={<h4 className='text-center'>Cargando más trenes...</h4>}
-      endMessage={<p className='text-center'>No hay más trenes</p>}
+      loader={<h4 className='text-center'>Cargando más recorridos...</h4>}
+      endMessage={<p className='text-center'>No hay más recorridos</p>}
       scrollThreshold={1}
       scrollableTarget='scrollableDiv'
     >
@@ -27,24 +27,24 @@ export function TrenList({ trenes, fetchNextPage, hasNextPage, handleEdit, delet
           </thead>
 
           <tbody>
-              {console.log(trenes)}
-              {trenes.map((tren) => {
+              {console.log(recorridos)}
+              {recorridos.map((recorrido) => {
                 return (
-                  <tr key={tren.id}>
-                    <td className='border-dark' style={{ borderRightWidth: 1 }}>{tren.id}</td>
-                    <td>{tren.modelo}</td>
-                    <td>{tren.color}</td>
-                    <td>{tren.estadoActual ? tren.estadoActual.nombre : 'Sin Estado'}</td>
-                    <td>{tren.createdAt.slice(0, 10)}</td>
+                  <tr key={recorrido.id}>
+                    <td className='border-dark' style={{ borderRightWidth: 1 }}>{recorrido.id}</td>
+                    <td>{recorrido.modelo}</td>
+                    <td>{recorrido.color}</td>
+                    <td>{recorrido.estadoActual ? recorrido.estadoActual.nombre : 'Sin Estado'}</td>
+                    <td>{recorrido.createdAt.slice(0, 10)}</td>
 
                     <td className='text-end'>
                       <button
                         className='btn btn-sm bg-info text-white me-2'
-                        onClick={handleEdit.bind(this, tren)}
+                        onClick={handleEdit.bind(this, recorrido)}
                       >
                         Editar
                       </button>
-                      <button className='btn btn-sm bg-danger text-white' onClick={async () => deleteMutation(tren.id)}>
+                      <button className='btn btn-sm bg-danger text-white' onClick={async () => deleteMutation(recorrido.id)}>
                         Eliminar
                       </button>
                     </td>
