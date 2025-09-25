@@ -22,6 +22,7 @@ export function RecorridoList({ recorridos, fetchNextPage, hasNextPage, handleEd
               <td>Ciudad Llegada</td>
               <td>Total de Km</td>
               <td>Fecha de creación</td>
+              <td>Estado</td>
               <td className='text-end' style={{ paddingRight: 75 }}>Acción</td>
             </tr>
           </thead>
@@ -36,7 +37,7 @@ export function RecorridoList({ recorridos, fetchNextPage, hasNextPage, handleEd
                     <td>{recorrido.ciudadLlegada}</td>
                     <td>{recorrido.totalKm}</td>
                     <td>{recorrido.createdAt ? recorrido.createdAt.slice(0, 10) : 'Sin fecha'}</td>
-
+                    <td>{recorrido.estado}</td>
 
                     <td className='text-end'>
                       <button

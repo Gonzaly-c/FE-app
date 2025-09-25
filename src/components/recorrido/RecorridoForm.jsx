@@ -11,7 +11,8 @@ export function RecorridoForm({ onSuccess, recorridoToEdit }) {
         const recorrido = {
             ciudadSalida: formData.ciudadSalida,
             ciudadLlegada: formData.ciudadLlegada,
-            totalKm: formData.totalKm
+            totalKm: formData.totalKm,
+            estado: formData.estado
         }
 
         if(recorridoToEdit){
@@ -70,6 +71,22 @@ export function RecorridoForm({ onSuccess, recorridoToEdit }) {
             {errors.totalKm && (
                 <span className='text-danger'>{errors.totalKm.message}</span>
             )}
+            </div>
+
+            <div className='mb-1'>
+                <label className='form-label' htmlFor='estado'>Estado:</label>
+                <select
+                id='estado' {...register('estado', {
+                    required: 'El estado es requerido',
+                    value: recorridoToEdit ? recorridoToEdit.estado : ''
+                })}
+                className='form-select'
+                >
+                <option value=''>Seleccione un estado</option>
+                <option value='activo'>Activo</option>
+                <option value='inactivo'>Inactivo</option>
+                </select>
+                {errors.estado && <span className='text-danger'>{errors.estado.message}</span>}
             </div>
 
 
