@@ -13,6 +13,7 @@ import { RecorridoCrud } from './pages/RecorridoCrud.jsx'
 import { CargaCrud } from './pages/CargaCrud.jsx'
 // import { TestCrud } from './pages/test.jsx'
 import { ConductorCrud } from './pages/ConductorCrud.jsx'
+import { TipoCargaCrud } from './pages/TipoCargaCrud.jsx'
 
 function App () {
   return (
@@ -29,6 +30,11 @@ function App () {
               <Route
                 path='dashboard'
                 element={<Link to='/admin/CRUD-Recorrido'>Ir a CRUD Recorrido</Link>}
+              />
+
+              <Route
+                path='tipoCargas'
+                element={<TipoCargaCrud />}
               />
 
               <Route
