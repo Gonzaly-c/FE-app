@@ -14,6 +14,7 @@ import { CargaCrud } from './pages/CargaCrud.jsx'
 // import { TestCrud } from './pages/test.jsx'
 import { ConductorCrud } from './pages/ConductorCrud.jsx'
 import { TipoCargaCrud } from './pages/TipoCargaCrud.jsx'
+import { CategoriaDenunciaCrud } from './pages/CategoriaDenunciaCrud.jsx'
 
 function App () {
   return (
@@ -35,6 +36,11 @@ function App () {
               <Route
                 path='tipoCargas'
                 element={<TipoCargaCrud />}
+              />
+
+              <Route
+                path='categoriaDenuncias'
+                element={<CategoriaDenunciaCrud />}
               />
 
               <Route

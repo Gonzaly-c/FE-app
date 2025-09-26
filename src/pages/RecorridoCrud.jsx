@@ -1,4 +1,4 @@
-import { Modal } from '../components/Modal'
+import { Modal } from '../components/Modal.jsx'
 import { RecorridoForm } from '../components/recorrido/RecorridoForm.jsx'
 import { RecorridoList } from '../components/recorrido/RecorridoList.jsx'
 import { useRecorridoCrud } from '../hooks/recorrido/useRecorridoCrud.js'

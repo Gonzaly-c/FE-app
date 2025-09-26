@@ -72,7 +72,7 @@ export function LoginPage () {
               {isSubmitting ? 'Enviando..' : 'INICIAR SESIÓN'}
             </button>
 
-            {isLoginError && <span className='text-danger mt-1'>Los datos ingresados son incorrectos. Volver a intentar</span>}
+            {isLoginError && <span className='text-danger mt-1'>Los datos son erroneos o la cuenta no esta activa. Volver a intentar</span>}
 
           </form>
 
