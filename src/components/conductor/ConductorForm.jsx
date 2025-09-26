@@ -100,7 +100,7 @@ export function ConductorForm ({ onSuccess, conductorToEdit }) {
         {errors.estado && <span className='text-danger'>{errors.estado.message}</span>}
       </div>
       <div className='d-flex justify-content-between'>
-        <button className='btn btn-secondary' onClick={onSuccess}>
+        <button type='button' className='btn btn-secondary' onClick={onSuccess}>
           Volver
         </button>
 

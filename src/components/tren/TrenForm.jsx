@@ -50,7 +50,7 @@ export function TrenForm({ onSuccess, trenToEdit }) {
             </div>
 
             <div className='d-flex justify-content-between'>
-                <button className="btn btn-secondary" onClick={onSuccess}>
+                <button type='button' className="btn btn-secondary" onClick={onSuccess}>
                     Volver
                 </button>
                 
