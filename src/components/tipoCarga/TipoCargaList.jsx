@@ -20,9 +20,8 @@ export function TipoCargaList({ tipoCargas, fetchNextPage, hasNextPage, handleEd
               <td style={{ borderRightWidth: 1 }} onClick={handleAscOrder} role="button">ID <span className="text-info">{ascOrder ? "⋀" : "⋁"}</span></td>
               <td>Nombre</td>
               <td>Descripcion</td>
-              <td>Estado Actual</td>
+              <td>Estado</td>
               <td>Fecha de creación</td>
-              
               <td className='text-end' style={{ paddingRight: 75 }}>Acción</td>
             </tr>
           </thead>

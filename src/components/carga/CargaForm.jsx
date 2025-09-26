@@ -1,35 +1,70 @@
-import { useForm } from 'react-hook-form'
-import { useCargaPost } from '../../hooks/carga/useCargaPost'
-import { useCargaPut } from '../../hooks/carga/useCargasPut'
+import { useEffect } from 'react';
+import { useForm } from 'react-hook-form';
+import { useCargaPost } from '../../hooks/carga/useCargaPost';
+import { useCargaPut } from '../../hooks/carga/useCargasPut';
 
-export function CargaForm({ onSuccess, cargaToEdit }) {
-    const { register, formState: { errors }, handleSubmit, isPending: isPendingForm } = useForm({ mode: 'onBlur' })
-    const { mutateAsync: handlePost, isError: isErrorPost } = useCargaPost()
-    const { mutateAsync: handlePut, isError: isErrorPut } = useCargaPut() 
 
-    const onSubmit = async(formData) =>{
-        const carga = {
-            name: formData.name,
-            tara: Number(formData.tara),
-        }
+export function CargaForm({ onSuccess, cargaToEdit, tiposDeCarga = [] }) {
+    const {register, formState: { errors, isSubmitting: isPendingForm }, handleSubmit, reset, } = useForm({
+    mode: 'onBlur',
+    defaultValues: { name: '', tara: '', estado: '', idTipoCarga: '' },
+  });
+    const { mutateAsync: handlePost, isError: isErrorPost } = useCargaPost();
+    const { mutateAsync: handlePut, isError: isErrorPut } = useCargaPut();
 
-        if(cargaToEdit){
-            carga.id = cargaToEdit.id
-            await handlePut(carga)
-            
-            if(!isErrorPut) onSuccess()
-            return
-        }
+  // Precarga de valores cuando estamos editando (se mantiene de tu implementación actual)
+  useEffect(() => {
+    if (cargaToEdit) {
+      reset({
+        name: cargaToEdit.name ?? '',
+        tara: String(cargaToEdit.tara ?? ''),
+        estado: cargaToEdit.estado ?? '',
+        idTipoCarga: cargaToEdit.tipoCarga?.id ?? '',
+      });
+    }
+  }, [cargaToEdit, reset]);
 
-        await handlePost(carga)
-        
-        if(!isErrorPost) onSuccess()
-        return
+  
+
+  const onSubmit = async (formData) => {
+    const payload = {
+      name: formData.name,
+      tara: Number(formData.tara),
+      estado: formData.estado,
+    };
+
+    // Solo enviar idTipoCarga si se eligió uno
+    if (formData.idTipoCarga !== '') {
+      payload.idTipoCarga = Number(formData.idTipoCarga);
     }
 
-    return(
-        <form onSubmit={handleSubmit(onSubmit)}>
-            <div className='mb-1'>
+    if (cargaToEdit) {
+      payload.id = cargaToEdit.id;
+      await handlePut(payload);
+      if (!isErrorPut) onSuccess?.();
+      return;
+    }
+
+    await handlePost(payload);
+    if (!isErrorPost) onSuccess?.();
+  };
+
+  return (
+    <form onSubmit={handleSubmit(onSubmit)} noValidate>
+      {/* Tipo de Carga */}
+      <div>
+      <label className="form-label">Tipo de Carga:</label>
+      <select {...register('idTipoCarga')} className="form-select">
+        <option value="">Sin tipo Carga</option>
+        {tiposDeCarga.map((tc) => (
+          <option key={tc.id} value={tc.id}>
+            {tc.name}
+          </option>
+        ))}
+      </select>
+        </div>
+      {/* Nombre */}
+      <div className='mb-1'>
                 <label className='form-label' htmlFor='name'>Nombre:</label>
                 <input
                 id='name' type='text' {...register('name', { required: 'El nombre es requerido'
@@ -37,35 +72,32 @@ export function CargaForm({ onSuccess, cargaToEdit }) {
                 className='form-control' placeholder='Nombre de la carga'
                 />
                 {errors.name && <span className='text-danger'>{errors.name.message}</span>}
-            </div>
+        </div>
 
-            <div className='mb-1'>
-            <label className='form-label' htmlFor='tara'>
-                Tara: 
-            </label>
-            <input
-                id='tara'
-                type='text'
-                defaultValue={cargaToEdit?.tara || ''}
-                {...register('tara', {
-                required: 'La tara es requerida',
-                validate: (value) =>
-                    /^\d+$/.test(value) || 'Solo se permite número enteros'
-                })}
-                className='form-control'
-                placeholder='Tara de la carga'
-            />
-            {errors.tara && (
-                <span className='text-danger'>{errors.tara.message}</span>
-            )}
-            </div>
-            
-            <div className='mb-1'>
+      {/* Tara */}
+      <div className='mb-1'>
+      <label className="form-label" htmlFor='tara'>Tara:</label>
+      <input
+        {...register('tara', {
+          required: 'La tara es obligatoria',
+          validate: (value) =>
+            /^\d+$/.test(value) ? true : 'Solo se permiten números enteros',
+        })}
+        className="form-control"
+        placeholder="Tara de la carga"
+      />
+      {errors.tara && (
+        <span className="text-danger">{errors.tara.message}</span>
+      )}
+      </div>
+
+      {/* Estado */}
+    <div className='mb-1'>
                 <label className='form-label' htmlFor='estado'>Estado:</label>
                 <select
                 id='estado' {...register('estado', {
                     required: 'El estado es requerido',
-                    value: cargaToEdit ? cargaToEdit.estado : '',
+                    value: cargaToEdit ? cargaToEdit.estado : ''
                 })}
                 className='form-select'
                 >
@@ -76,18 +108,19 @@ export function CargaForm({ onSuccess, cargaToEdit }) {
                 {errors.estado && <span className='text-danger'>{errors.estado.message}</span>}
             </div>
 
-            <div className='d-flex justify-content-between'>
+      {/* Acciones */}
+      <div className='d-flex justify-content-between'>
                 <button className="btn btn-secondary" onClick={onSuccess}>
                     Volver
                 </button>
                 
-                <button type='submit' className='btn btn-success d-block mt-2' style={{ backgroundTara: '#002050ff', tara: '#fff' }}>
+                <button type='submit' className='btn btn-success d-block mt-2' style={{ backgroundColor: '#002050ff', desc: '#fff' }}>
                 {isPendingForm? 'Enviando...' : 'Enviar'}
                 </button>
             </div>
 
-            {isErrorPost && <span className='text-danger'>Error al crear el carga</span>}
-            {isErrorPut && <span className='text-danger'>Error al actualizar el carga</span>}       
-        </form>
-    )
+            {isErrorPost && <span className='text-danger'>Error al crear el tipoCarga</span>}
+            {isErrorPut && <span className='text-danger'>Error al actualizar el tipoCarga</span>}   
+    </form>
+  );
 }
