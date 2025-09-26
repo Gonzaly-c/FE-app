@@ -12,7 +12,7 @@ export function RegisterPage () {
     try {
     // Mapeo de los nombres al formato que espera el backend
       const conductorData = {
-        name: formData.nombre,
+        nombre: formData.nombre,
         apellido: formData.apellido,
         email: formData.email,
         password: formData.password,
