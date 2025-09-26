@@ -22,6 +22,7 @@ export function TipoCargaList({ tipoCargas, fetchNextPage, hasNextPage, handleEd
               <td>Descripcion</td>
               <td>Estado Actual</td>
               <td>Fecha de creación</td>
+              
               <td className='text-end' style={{ paddingRight: 75 }}>Acción</td>
             </tr>
           </thead>
@@ -34,7 +35,7 @@ export function TipoCargaList({ tipoCargas, fetchNextPage, hasNextPage, handleEd
                     <td className='border-dark' style={{ borderRightWidth: 1 }}>{tipoCarga.id}</td>
                     <td>{tipoCarga.name}</td>
                     <td>{tipoCarga.desc}</td>
-                    <td>{tipoCarga.estado ? tipoCarga.estado.nombre : 'Sin Estado'}</td>
+                    <td>{tipoCarga.estado ? tipoCarga.estado : 'Sin Estado'}</td>
                     <td>{tipoCarga.createdAt ? tipoCarga.createdAt.slice(0, 10) : 'Sin fecha'}</td>
 
 

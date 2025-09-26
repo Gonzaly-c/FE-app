@@ -78,13 +78,13 @@ export function RecorridoForm({ onSuccess, recorridoToEdit }) {
                 <select
                 id='estado' {...register('estado', {
                     required: 'El estado es requerido',
-                    value: recorridoToEdit ? recorridoToEdit.estado : ''
+                    value: recorridoToEdit ? recorridoToEdit.estado : '',
                 })}
                 className='form-select'
                 >
                 <option value=''>Seleccione un estado</option>
-                <option value='activo'>Activo</option>
-                <option value='inactivo'>Inactivo</option>
+                <option value='Activo'>Activo</option>
+                <option value='Inactivo'>Inactivo</option>
                 </select>
                 {errors.estado && <span className='text-danger'>{errors.estado.message}</span>}
             </div>

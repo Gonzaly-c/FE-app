@@ -10,8 +10,7 @@ export function CargaForm({ onSuccess, cargaToEdit }) {
     const onSubmit = async(formData) =>{
         const carga = {
             name: formData.name,
-            tara: formData.tara,
-            tipoCarga: formData.tipoCarga,
+            tara: Number(formData.tara),
         }
 
         if(cargaToEdit){
@@ -62,13 +61,19 @@ export function CargaForm({ onSuccess, cargaToEdit }) {
             </div>
             
             <div className='mb-1'>
-                <label className='form-label' htmlFor='tipoCarga'>Tipo de carga:</label>
-                <input
-                id='tipoCarga' type='text' {...register('tipoCarga', { required: 'El Tipo de carga es requerido'
-                , value: cargaToEdit ? cargaToEdit.tipoCarga : ''})}
-                className='form-control' placeholder='Tipo de carga de la carga'
-                />
-                {errors.name && <span className='text-danger'>{errors.name.message}</span>}
+                <label className='form-label' htmlFor='estado'>Estado:</label>
+                <select
+                id='estado' {...register('estado', {
+                    required: 'El estado es requerido',
+                    value: cargaToEdit ? cargaToEdit.estado : '',
+                })}
+                className='form-select'
+                >
+                <option value=''>Seleccione un estado</option>
+                <option value='Activo'>Activo</option>
+                <option value='Inactivo'>Inactivo</option>
+                </select>
+                {errors.estado && <span className='text-danger'>{errors.estado.message}</span>}
             </div>
 
             <div className='d-flex justify-content-between'>

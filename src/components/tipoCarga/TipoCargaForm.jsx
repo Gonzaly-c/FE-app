@@ -12,7 +12,7 @@ export function TipoCargaForm({ onSuccess, tipoCargaToEdit }) {
         const tipoCarga = {
             name: formData.name,
             desc: formData.desc,
-            estado: 'Activo',
+            estado: formData.estado,
         }
 
         if(tipoCargaToEdit){
@@ -49,6 +49,22 @@ export function TipoCargaForm({ onSuccess, tipoCargaToEdit }) {
                 className='form-control' placeholder='Descripcion del tipoCarga'
                 />
                 {errors.desc && <span className='text-danger'>{errors.desc.message}</span>}
+            </div>
+
+            <div className='mb-1'>
+                <label className='form-label' htmlFor='estado'>Estado:</label>
+                <select
+                id='estado' {...register('estado', {
+                    required: 'El estado es requerido',
+                    value: tipoCargaToEdit ? tipoCargaToEdit.estado : ''
+                })}
+                className='form-select'
+                >
+                <option value=''>Seleccione un estado</option>
+                <option value='Activo'>Activo</option>
+                <option value='Inactivo'>Inactivo</option>
+                </select>
+                {errors.estado && <span className='text-danger'>{errors.estado.message}</span>}
             </div>
 
             <div className='d-flex justify-content-between'>

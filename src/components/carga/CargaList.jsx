@@ -34,7 +34,7 @@ export function CargaList({ cargas, fetchNextPage, hasNextPage, handleEdit, dele
                     <td className='border-dark' style={{ borderRightWidth: 1 }}>{carga.id}</td>
                     <td>{carga.name}</td>
                     <td>{carga.tara}</td>
-                    <td>{carga.tipoCarga}</td>
+                    <td>{carga.tipoCarga ? carga.tipoCarga.name : 'Sin tipo carga'}</td>
                     <td>{carga.createdAt ? carga.createdAt.slice(0, 10) : 'Sin fecha'}</td>
 
                     <td className='text-end'>
