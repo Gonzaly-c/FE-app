@@ -76,7 +76,7 @@ export function ConductorForm ({ onSuccess, conductorToEdit }) {
         <input
           id='password' type='password' {...register('password', {
             required: 'El password es requerido',
-            minLength: { value: 8, message: 'El password debe tener al menos 8 caracteres' },
+            // minLength: { value: 8, message: 'El password debe tener al menos 8 caracteres' },
             value: conductorToEdit ? conductorToEdit.password : ''
           })}
           className='form-control' placeholder='Password del conductor'
@@ -94,8 +94,8 @@ export function ConductorForm ({ onSuccess, conductorToEdit }) {
           className='form-select'
         >
           <option value=''>Seleccione un estado</option>
-          <option value='activo'>Activo</option>
-          <option value='inactivo'>Inactivo</option>
+          <option value='Activo'>Activo</option>
+          <option value='Inactivo'>Inactivo</option>
         </select>
         {errors.estado && <span className='text-danger'>{errors.estado.message}</span>}
       </div>
