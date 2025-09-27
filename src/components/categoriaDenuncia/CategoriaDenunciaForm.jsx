@@ -34,20 +34,20 @@ export function CategoriaDenunciaForm({ onSuccess, categoriaDenunciaToEdit }) {
                 <label className='form-label' htmlFor='titulo'>Titulo:</label>
                 <input
                 id='titulo' type='text' {...register('titulo', { required: 'El Titulo es requerido'
-                , value: categoriaDenunciaToEdit ? categoriaDenunciaToEdit.name : ''})}
+                , value: categoriaDenunciaToEdit ? categoriaDenunciaToEdit.titulo : ''})}
                 className='form-control' placeholder='Titulo de la Categoria Denuncia'
                 />
-                {errors.name && <span className='text-danger'>{errors.name.message}</span>}
+                {errors.titulo && <span className='text-danger'>{errors.titulo.message}</span>}
             </div>
 
             <div className='mb-1'>
                 <label className='form-label' htmlFor='descripcion'>Descripcion:</label>
                 <input
-                id='descripcion' type='text' {...register('desc', { required: 'La Descripcion es requerida'
-                , value: categoriaDenunciaToEdit ? categoriaDenunciaToEdit.desc : ''})}
+                id='descripcion' type='text' {...register('descripcion', { required: 'La Descripcion es requerida'
+                , value: categoriaDenunciaToEdit ? categoriaDenunciaToEdit.descripcion : ''})}
                 className='form-control' placeholder='Descripcion de la Categoria Denuncia'
                 />
-                {errors.desc && <span className='text-danger'>{errors.desc.message}</span>}
+                {errors.descripcion && <span className='text-danger'>{errors.descripcion.message}</span>}
             </div>
 
             <div className='mb-1'>
