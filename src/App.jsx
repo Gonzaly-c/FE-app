@@ -13,6 +13,7 @@ import { ConductorCrud } from './pages/ConductorCrud.jsx'
 import { TipoCargaCrud } from './pages/TipoCargaCrud.jsx'
 import { LicenciaCrud } from './pages/LicenciaCrud.jsx'
 import { CategoriaDenunciaCrud } from './pages/CategoriaDenunciaCrud.jsx'
+import { ObservacionCrud } from './pages/ObservacionCrud.jsx'
 
 function App () {
   return (
@@ -54,6 +55,11 @@ function App () {
               <Route
                 path='conductores'
                 element={<ConductorCrud />}
+              />
+
+              <Route
+                path='observaciones'
+                element={<EnConstruccion/>}
               />
 
               <Route
