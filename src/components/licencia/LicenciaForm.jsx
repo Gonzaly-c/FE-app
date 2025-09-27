@@ -1,7 +1,7 @@
 import { useForm } from 'react-hook-form'
 import { useLicenciaPost } from '../../hooks/licencia/useLicenciaPost'
 import { useLicenciaPut } from '../../hooks/licencia/useLicenciasPut'
-import { traerConductoresQuery } from '../../hooks/conductor/useConductoresQuey.js'
+import { traerConductoresQuery } from '../../hooks/conductor/traerConductores.js'
 
 export function LicenciaForm ({ onSuccess, licenciaToEdit }) {
   const { data: conductores = [] } = traerConductoresQuery()

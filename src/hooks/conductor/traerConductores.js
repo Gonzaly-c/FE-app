@@ -17,7 +17,7 @@ export function traerConductoresQuery () {
     queryKey: ['conductores'],
     queryFn: async () => {
       const res = await axios.get('http://localhost:3000/api/conductor')
-      return res.data.items || [] // ajusta según tu backend
+      return res.data.items.filter(item => item.estado === 'Activo') || [] // ajusta según tu backend
     }
   })
 }

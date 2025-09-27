@@ -38,7 +38,7 @@ export function CargaCrud() {
           className='btn btn-info'
           onClick={handleCreate}
         >
-          Crear un carga
+          Crear una carga
         </button>
 
         <div className='input-group w-auto'>

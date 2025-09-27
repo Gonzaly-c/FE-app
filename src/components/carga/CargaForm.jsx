@@ -2,9 +2,11 @@ import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { useCargaPost } from '../../hooks/carga/useCargaPost';
 import { useCargaPut } from '../../hooks/carga/useCargasPut';
+import { useTipoCargasQuery } from '../../hooks/tipoCarga/traerTipoCargas.js';
 
 
-export function CargaForm({ onSuccess, cargaToEdit, tiposDeCarga = [] }) {
+export function CargaForm({ onSuccess, cargaToEdit }) {
+    const { data: tipoCargas = [] } = useTipoCargasQuery()
     const {register, formState: { errors, isSubmitting: isPendingForm }, handleSubmit, reset, } = useForm({
     mode: 'onBlur',
     defaultValues: { name: '', tara: '', estado: '', idTipoCarga: '' },
@@ -31,6 +33,7 @@ export function CargaForm({ onSuccess, cargaToEdit, tiposDeCarga = [] }) {
       name: formData.name,
       tara: Number(formData.tara),
       estado: formData.estado,
+      idTipoCarga: Number(formData.idTipoCarga),
     };
 
     // Solo enviar idTipoCarga si se eligió uno
@@ -52,17 +55,24 @@ export function CargaForm({ onSuccess, cargaToEdit, tiposDeCarga = [] }) {
   return (
     <form onSubmit={handleSubmit(onSubmit)} noValidate>
       {/* Tipo de Carga */}
-      <div>
-      <label className="form-label">Tipo de Carga:</label>
-      <select {...register('idTipoCarga')} className="form-select">
-        <option value="">Sin tipo Carga</option>
-        {tiposDeCarga.map((tc) => (
-          <option key={tc.id} value={tc.id}>
-            {tc.name}
-          </option>
-        ))}
-      </select>
-        </div>
+      <div className='mb-3'>
+        <label className='form-label'>Tipo de Carga</label>
+        <select
+          {...register('idTipoCarga', { required: 'El Tipo de Carga es requerido' })}
+          className='form-control'
+          defaultValue={cargaToEdit?.tipoCarga?.id || ''}
+        >
+          
+        <option value="">Selecciona un Tipo de Carga</option>
+          {tipoCargas.map((c) => (
+            <option key={c.id} value={c.id}>
+              {c.name}
+            </option>
+
+          ))}
+        </select>
+        {errors.idTipoCarga && <span className='text-danger'>{errors.idTipoCarga.message}</span>}
+      </div>
       {/* Nombre */}
       <div className='mb-1'>
                 <label className='form-label' htmlFor='name'>Nombre:</label>
