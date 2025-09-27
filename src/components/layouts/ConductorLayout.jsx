@@ -38,7 +38,7 @@ export default function ConductorLayout () {
           <ul className='nav flex-column'>
             <li className='nav-item mb-4 h4'>
               <Link className='nav-link text-white' to='/conductor/dashboard'>
-                📊 Estadísticas
+                📊Stats
               </Link>
             </li>
 
@@ -54,17 +54,17 @@ export default function ConductorLayout () {
               {isMisViajesOpen && (
                 <ul className='list-unstyled ms-3 w-100 h5'>
                   <li>
-                    <Link className='nav-link text-white mt-2' to='/conductor/trenes'>
+                    <Link className='nav-link text-white mt-2' to='/conductor/pendientes'>
                       Pendientes
                     </Link>
                   </li>
                   <li>
-                    <Link className='nav-link text-white mt-2' to='/conductor/recorridos'>
+                    <Link className='nav-link text-white mt-2' to='/conductor/enCursos'>
                       En curso
                     </Link>
                   </li>
                   <li>
-                    <Link className='nav-link text-white mt-2' to='/conductor/recorridos'>
+                    <Link className='nav-link text-white mt-2' to='/conductor/finalizados'>
                       Finalizados
                     </Link>
                   </li>

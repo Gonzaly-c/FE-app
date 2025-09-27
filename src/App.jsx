@@ -13,7 +13,7 @@ import { ConductorCrud } from './pages/ConductorCrud.jsx'
 import { TipoCargaCrud } from './pages/TipoCargaCrud.jsx'
 import { LicenciaCrud } from './pages/LicenciaCrud.jsx'
 import { CategoriaDenunciaCrud } from './pages/CategoriaDenunciaCrud.jsx'
-import { ObservacionCrud } from './pages/ObservacionCrud.jsx'
+import { EnConstruccionCopy } from './pages/EnConstruccion copy.jsx'
 
 function App () {
   return (
@@ -23,13 +23,15 @@ function App () {
 
           <Routes>
             {/* Pagina en construccion */}
-            <Route path='/pagina-en-construccion' element={<EnConstruccion />}> </Route>
+            <Route path='/pagina-en-construccion' 
+            element={<EnConstruccion />}> 
+            </Route>
 
             {/* Administrador */}
-            <Route path='/admin' element={<ProtectedRoute allowedRoles='admin'> </ProtectedRoute>}>
+            <Route path='/admin' element={<ProtectedRoute allowedRoles='admin' > </ProtectedRoute>}>
               <Route
                 path='dashboard'
-                element={<Link to='/admin/CRUD-Recorrido'>Ir a CRUD Recorrido</Link>}
+                element={<EnConstruccionCopy/>}
               />
 
               <Route
@@ -59,7 +61,17 @@ function App () {
 
               <Route
                 path='observaciones'
-                element={<EnConstruccion/>}
+                element={<EnConstruccionCopy/>}
+              />
+
+              <Route
+                path='viajes'
+                element={<EnConstruccionCopy/>}
+              />
+
+              <Route
+                path='perfil'
+                element={<EnConstruccionCopy/>}
               />
 
               <Route
@@ -90,12 +102,27 @@ function App () {
 
               <Route
                 path='dashboard'
-                element={<Link to='/conductor/misViajes'>Ir a mis viajes</Link>}
+                element={<EnConstruccionCopy/>}
               />
 
               <Route
-                path='misViajes'
-                element={<Link to='/conductor/dashboard'>Volver a HOME</Link>}
+                path='pendientes'
+                element={<EnConstruccionCopy/>}
+              />
+
+              <Route
+                path='enCursos'
+                element={<EnConstruccionCopy/>}
+              />
+
+              <Route
+                path='finalizados'
+                element={<EnConstruccionCopy/>}
+              />
+
+              <Route
+                path='perfil'
+                element={<EnConstruccionCopy/>}
               />
 
               {/* 404 protegido para /conductor/... */}

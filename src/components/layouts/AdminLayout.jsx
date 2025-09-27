@@ -25,7 +25,7 @@ export default function AdminLayout () {
           <div className='sidebar-scroll'>
             <ul className='nav flex-column'>
               <li className='nav-item mb-4 h4'>
-                <Link className='nav-link text-white' to='/admin'>📊 Panel de control</Link>
+                <Link className='nav-link text-white' to='/admin/dashboard'>📊 Panel de control</Link>
               </li>
 
               <li className='nav-item text-start h4'>
