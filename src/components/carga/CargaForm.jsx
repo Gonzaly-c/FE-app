@@ -2,11 +2,11 @@ import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { useCargaPost } from '../../hooks/carga/useCargaPost';
 import { useCargaPut } from '../../hooks/carga/useCargasPut';
-import { useTipoCargasQuery } from '../../hooks/tipoCarga/traerTipoCargas.js';
+import { traerTipoCargasQuery } from '../../hooks/tipoCarga/traerTipoCargas.js';
 
 
 export function CargaForm({ onSuccess, cargaToEdit }) {
-    const { data: tipoCargas = [] } = useTipoCargasQuery()
+    const { data: tipoCargas = [] } = traerTipoCargasQuery()
     const {register, formState: { errors, isSubmitting: isPendingForm }, handleSubmit, reset, } = useForm({
     mode: 'onBlur',
     defaultValues: { name: '', tara: '', estado: '', idTipoCarga: '' },

@@ -12,7 +12,7 @@ export function useTipoCargasQuery () {
   }))
 }
 
-export function useTraerTipoCargasQuery () {
+export function traerTipoCargasQuery () {
   return useQuery({
     queryKey: ['tipoCargas'],
     queryFn: async () => {
