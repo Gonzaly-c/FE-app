@@ -45,6 +45,7 @@ export default function AdminLayout () {
                     <li><Link className='nav-link text-white mt-2' to='/admin/cargas'>🔋 Cargas</Link></li>
                     <li><Link className='nav-link text-white mt-2' to='/admin/tipoCargas'>💙 Tipo Cargas</Link></li>
                     <li><Link className='nav-link text-white mt-2' to='/admin/licencias'>📃 Licencias</Link></li>
+                    <li><Link className="nav-link text-white mt-2" to="/admin/categoriaDenuncias">⚖ Categoria de Denuncias</Link></li>
                   </ul>
                 )}
               </li>

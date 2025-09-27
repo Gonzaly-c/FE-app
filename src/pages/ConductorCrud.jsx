@@ -1,4 +1,4 @@
-import { Modal } from '../components/Modal'
+import { Modal } from '../components/Modal.jsx'
 import { ConductorForm } from '../components/conductor/ConductorForm.jsx'
 import { ConductorList } from '../components/conductor/ConductorList.jsx'
 import { useConductorCrud } from '../hooks/conductor/useConductorCrud.js'

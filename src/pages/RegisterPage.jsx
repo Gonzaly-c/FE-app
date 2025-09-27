@@ -16,7 +16,7 @@ export function RegisterPage () {
         apellido: formData.apellido,
         email: formData.email,
         password: formData.password,
-        estado: 'Inactivo' // Le falta la validacion por parte del admin
+        estado: 'Pendiente' // Le falta la validacion por parte del admin
       }
 
       // const res = await fetch('http://localhost:3000/api/conductor', {
