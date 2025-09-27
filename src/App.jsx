@@ -6,14 +6,12 @@ import { EnConstruccion } from './pages/EnConstruccion.jsx'
 import { ProtectedRoute } from './components/ProtectedRoute.jsx'
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 import Page404 from './pages/404.jsx'
-// import ConductoresPage from './pages/conductoresAdmin.jsx'
-// import { ConductorCrud } from './pages/ConductorCrud.jsx'
 import { TrenCrud } from './pages/TrenCrud.jsx'
 import { RecorridoCrud } from './pages/RecorridoCrud.jsx'
 import { CargaCrud } from './pages/CargaCrud.jsx'
-// import { TestCrud } from './pages/test.jsx'
 import { ConductorCrud } from './pages/ConductorCrud.jsx'
 import { TipoCargaCrud } from './pages/TipoCargaCrud.jsx'
+import { LicenciaCrud } from './pages/LicenciaCrud.jsx'
 
 function App () {
   return (
@@ -50,6 +48,11 @@ function App () {
               <Route
                 path='conductores'
                 element={<ConductorCrud />}
+              />
+
+              <Route
+                path='licencias'
+                element={<LicenciaCrud />}
               />
 
               <Route

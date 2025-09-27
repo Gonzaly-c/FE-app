@@ -1,0 +1,93 @@
+import { useForm } from 'react-hook-form'
+import { useLicenciaPost } from '../../hooks/licencia/useLicenciaPost'
+import { useLicenciaPut } from '../../hooks/licencia/useLicenciasPut'
+import { traerConductoresQuery } from '../../hooks/conductor/useConductoresQuey.js'
+
+export function LicenciaForm ({ onSuccess, licenciaToEdit }) {
+  const { data: conductores = [] } = traerConductoresQuery()
+  const { register, formState: { errors }, handleSubmit, isPending: isPendingForm } = useForm({ mode: 'onBlur' })
+  const { mutateAsync: handlePost, isError: isErrorPost } = useLicenciaPost()
+  const { mutateAsync: handlePut, isError: isErrorPut } = useLicenciaPut()
+
+  const onSubmit = async (formData) => {
+    const licencia = {
+      estado: formData.estado,
+      fechaHecho: formData.fechaHecho,
+      fechaVencimiento: formData.fechaVencimiento,
+      idConductor: Number(formData.idConductor)
+    }
+
+    if (licenciaToEdit) {
+      licencia.id = licenciaToEdit.id
+      await handlePut(licencia)
+
+      if (!isErrorPut) onSuccess()
+      return
+    }
+
+    await handlePost(licencia)
+
+    if (!isErrorPost) onSuccess()
+  }
+
+  return (
+    <form onSubmit={handleSubmit(onSubmit)}>
+      <div className='mb-3'>
+        <label className='form-label'>Conductor</label>
+        <select
+          {...register('idConductor', { required: 'El conductor es requerido' })}
+          className='form-control'
+          defaultValue={licenciaToEdit?.conductor?.id || ''}
+        >
+          <option value=''>Selecciona un conductor</option>
+          {conductores.map(c => (
+            <option key={c.id} value={c.id}>
+              {c.nombre} {c.apellido} {/* el usuario ve nombre completo */}
+            </option>
+          ))}
+        </select>
+        {errors.idConductor && <span className='text-danger'>{errors.idConductor.message}</span>}
+      </div>
+
+      <div className='mb-1'>
+        <label className='form-label' htmlFor='estado'>Estado:</label>
+        <input
+          id='estado' type='text' {...register('estado', { required: 'El estado es requerido', value: licenciaToEdit ? licenciaToEdit.estado : '' })}
+          className='form-control' placeholder='Estado de la licencia'
+        />
+        {errors.estado && <span className='text-danger'>{errors.estado.message}</span>}
+      </div>
+
+      <div className='mb-1'>
+        <label className='form-label' htmlFor='fechaHecho'>Fecha Hecho:</label>
+        <input
+          id='fechaHecho' type='date' {...register('fechaHecho', { required: 'La fecha de hecho es requerida', value: licenciaToEdit ? licenciaToEdit.fechaHecho : '' })}
+          className='form-control' placeholder='Fecha de hecho'
+        />
+        {errors.fechaHecho && <span className='text-danger'>{errors.fechaHecho.message}</span>}
+      </div>
+
+      <div className='mb-1'>
+        <label className='form-label' htmlFor='fechaVencimiento'>Fecha de Vencimiento:</label>
+        <input
+          id='fechaVencimiento' type='date' {...register('fechaVencimiento', { required: 'La fecha de vencimiento es requerida', value: licenciaToEdit ? licenciaToEdit.fechaVencimiento : '' })}
+          className='form-control' placeholder='Fecha de vencimiento'
+        />
+        {errors.fechaVencimiento && <span className='text-danger'>{errors.fechaVencimiento.message}</span>}
+      </div>
+
+      <div className='d-flex justify-content-between'>
+        <button type='button' className='btn btn-secondary' onClick={onSuccess}>
+          Volver
+        </button>
+
+        <button type='submit' className='btn btn-success d-block mt-2' style={{ backgroundColor: '#002050ff', color: '#fff' }}>
+          {isPendingForm ? 'Enviando...' : 'Enviar'}
+        </button>
+      </div>
+
+      {isErrorPost && <span className='text-danger'>Error al crear la licencia</span>}
+      {isErrorPut && <span className='text-danger'>Error al actualizar la licencia</span>}
+    </form>
+  )
+}
