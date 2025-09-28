@@ -81,7 +81,7 @@ const MOCK = {
   ],
   alertas: [
     { id: 'a1', nivel: 'warning', tipo: 'Mantenimiento', mensaje: 'Chequeo preventivo pendiente en U-342' },
-    { id: 'a2', nivel: 'danger', tipo: 'Incidente', mensaje: 'Retraso por señalización en ramal Roca' },
+    { id: 'a2', nivel: 'danger', tipo: 'Incidente', mensaje: 'Retraso por hinchas de Newell\'s en estación Rosario Norte' },
   ],
 };
 
