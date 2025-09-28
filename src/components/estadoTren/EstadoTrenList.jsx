@@ -35,7 +35,7 @@ export function EstadoTrenList({ estadoTrenes, fetchNextPage, hasNextPage, handl
                     <td className='border-dark' style={{ borderRightWidth: 1 }}>{estadoTren.id}</td>
                     <td>{estadoTren.nombre}</td>
                     <td>{estadoTren.tren ? estadoTren.tren : 'Sin Tren'}</td>
-                    <td>{estadoTren.fechaVigencia}</td>
+                    <td>{estadoTren.fechaVigencia ? estadoTren.fechaVigencia : 'Sin fecha'}</td>
                     <td>{estadoTren.estado ? estadoTren.estado : 'Sin Estado'}</td>
                     <td>{estadoTren.createdAt ? estadoTren.createdAt.slice(0, 10) : 'Sin fecha'}</td>
 
