@@ -66,7 +66,7 @@ export function CargaForm({ onSuccess, cargaToEdit }) {
         <option value="">Selecciona un Tipo de Carga</option>
           {tipoCargas.map((c) => (
             <option key={c.id} value={c.id}>
-              {c.name}
+              {c.id}-{c.name}
             </option>
 
           ))}

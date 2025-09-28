@@ -42,7 +42,7 @@ export function LicenciaForm ({ onSuccess, licenciaToEdit }) {
           <option value=''>Selecciona un conductor</option>
           {conductores.map(c => (
             <option key={c.id} value={c.id}>
-              {c.nombre} {c.apellido} {/* el usuario ve nombre completo */}
+              {c.id}-{c.nombre} {c.apellido} {/* el usuario ve nombre completo */}
             </option>
           ))}
         </select>
@@ -50,13 +50,20 @@ export function LicenciaForm ({ onSuccess, licenciaToEdit }) {
       </div>
 
       <div className='mb-1'>
-        <label className='form-label' htmlFor='estado'>Estado:</label>
-        <input
-          id='estado' type='text' {...register('estado', { required: 'El estado es requerido', value: licenciaToEdit ? licenciaToEdit.estado : '' })}
-          className='form-control' placeholder='Estado de la licencia'
-        />
-        {errors.estado && <span className='text-danger'>{errors.estado.message}</span>}
-      </div>
+                <label className='form-label' htmlFor='estado'>Estado:</label>
+                <select
+                id='estado' {...register('estado', {
+                    required: 'El estado es requerido',
+                    value: licenciaToEdit ? licenciaToEdit.estado : ''
+                })}
+                className='form-select'
+                >
+                <option value=''>Seleccione un estado</option>
+                <option value='Activo'>Activo</option>
+                <option value='Inactivo'>Inactivo</option>
+                </select>
+                {errors.estado && <span className='text-danger'>{errors.estado.message}</span>}
+            </div>
 
       <div className='mb-1'>
         <label className='form-label' htmlFor='fechaHecho'>Fecha Hecho:</label>
