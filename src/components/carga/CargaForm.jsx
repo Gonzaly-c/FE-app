@@ -9,7 +9,7 @@ export function CargaForm({ onSuccess, cargaToEdit }) {
     const { data: tipoCargas = [] } = traerTipoCargasQuery()
     const {register, formState: { errors, isSubmitting: isPendingForm }, handleSubmit, reset, } = useForm({
     mode: 'onBlur',
-    defaultValues: { name: '', tara: '', estado: '', idTipoCarga: '' },
+    defaultValues: { name: '', precio: '', estado: '', idTipoCarga: '' },
   });
     const { mutateAsync: handlePost, isError: isErrorPost } = useCargaPost();
     const { mutateAsync: handlePut, isError: isErrorPut } = useCargaPut();
@@ -19,19 +19,17 @@ export function CargaForm({ onSuccess, cargaToEdit }) {
     if (cargaToEdit) {
       reset({
         name: cargaToEdit.name ?? '',
-        tara: String(cargaToEdit.tara ?? ''),
+        precio: String(cargaToEdit.precio ?? ''),
         estado: cargaToEdit.estado ?? '',
         idTipoCarga: cargaToEdit.tipoCarga?.id ?? '',
       });
     }
   }, [cargaToEdit, reset]);
 
-  
-
   const onSubmit = async (formData) => {
     const payload = {
       name: formData.name,
-      tara: Number(formData.tara),
+      precio: formData.precio,
       estado: formData.estado,
       idTipoCarga: Number(formData.idTipoCarga),
     };
@@ -84,20 +82,27 @@ export function CargaForm({ onSuccess, cargaToEdit }) {
                 {errors.name && <span className='text-danger'>{errors.name.message}</span>}
         </div>
 
-      {/* Tara */}
+      {/* Precio */}
       <div className='mb-1'>
-      <label className="form-label" htmlFor='tara'>Tara:</label>
+      <label className="form-label" htmlFor='precio'>Precio:</label>
       <input
-        {...register('tara', {
-          required: 'La tara es obligatoria',
-          validate: (value) =>
-            /^\d+$/.test(value) ? true : 'Solo se permiten números enteros',
+        {...register('precio', {
+          required: 'El precio es obligatorio',
+          validate: (value) => {
+            // Reemplazamos coma por punto para validar decimales
+            const normalized = value.replace(',', '.');
+            const num = parseFloat(normalized);
+
+            return !isNaN(num) && num > 0
+              ? true
+              : 'Tiene que ser un número mayor a 0';
+          },
         })}
         className="form-control"
-        placeholder="Tara de la carga"
+        placeholder="Precio de la carga"
       />
-      {errors.tara && (
-        <span className="text-danger">{errors.tara.message}</span>
+      {errors.precio && (
+        <span className="text-danger">{errors.precio.message}</span>
       )}
       </div>
 

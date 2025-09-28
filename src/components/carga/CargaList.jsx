@@ -19,7 +19,7 @@ export function CargaList({ cargas, fetchNextPage, hasNextPage, handleEdit, dele
             <tr>
               <td style={{ borderRightWidth: 1 }} onClick={handleAscOrder} role="button">ID <span className="text-info">{ascOrder ? "⋀" : "⋁"}</span></td>
               <td>Nombre</td>
-              <td>Tara</td>
+              <td>Precio</td>
               <td>Estado</td>
               <td>Tipo de carga</td>
               <td>Fecha de creación</td>
@@ -35,7 +35,7 @@ export function CargaList({ cargas, fetchNextPage, hasNextPage, handleEdit, dele
                   <tr key={carga.id}>
                     <td className='border-dark' style={{ borderRightWidth: 1 }}>{carga.id}</td>
                     <td>{carga.name}</td>
-                    <td>{carga.tara}</td>
+                    <td>{carga.precio}</td>
                     <td>{carga.estado}</td>
                     <td>{carga.tipoCarga ? carga.tipoCarga.name : 'Sin tipo de carga'}</td>
                     <td>{carga.createdAt ? carga.createdAt.slice(0, 10) : 'Sin fecha'}</td>

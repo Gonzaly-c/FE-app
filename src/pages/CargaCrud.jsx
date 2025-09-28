@@ -24,7 +24,6 @@ export function CargaCrud() {
     handleAscOrder
   } = useCargaCrud()
 
-
   if (isLoading) return <h1 className='text-center'>Cargando..</h1>
 
   if (isError) return <h1>{error}</h1>
