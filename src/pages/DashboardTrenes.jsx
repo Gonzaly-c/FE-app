@@ -11,8 +11,7 @@ import {
   Form,
   ButtonGroup,
 } from 'react-bootstrap';
-
-
+import { Link } from 'react-router-dom';
 
 /**
  * Utilidad: formatea fecha a formato local (DD/MM/AAAA) en español.
@@ -70,15 +69,15 @@ const MOCK = {
     retrasoPromedioMin: 6, // minutos
   },
   viajes: [
-    { id: 10021, origen: 'Retiro', destino: 'Tigre', salida: '2025-09-26T08:10:00Z', estado: 'A tiempo', ocupacion: 74 },
-    { id: 10022, origen: 'Constitución', destino: 'La Plata', salida: '2025-09-26T08:30:00Z', estado: 'Con retraso', ocupacion: 88 },
-    { id: 10023, origen: 'Once', destino: 'Moreno', salida: '2025-09-26T08:45:00Z', estado: 'A tiempo', ocupacion: 66 },
-    { id: 10024, origen: 'Retiro', destino: 'José C. Paz', salida: '2025-09-26T09:05:00Z', estado: 'Cancelado', ocupacion: 0 },
-    { id: 10025, origen: 'Retiro', destino: 'Tigre', salida: '2025-09-27T10:15:00Z', estado: 'Programado', ocupacion: 0 },
+    { id: 10021, origen: 'Rosario', destino: 'Cañada de Gomez', salida: '2025-09-26T08:10:00Z', estado: 'A tiempo', ocupacion: 74 },
+    { id: 10022, origen: 'Chavas', destino: 'Venado Tuerto', salida: '2025-09-26T08:30:00Z', estado: 'Con retraso', ocupacion: 88 },
+    { id: 10023, origen: 'Funes', destino: 'Galvez', salida: '2025-09-26T08:45:00Z', estado: 'A tiempo', ocupacion: 66 },
+    { id: 10024, origen: 'Rosario', destino: 'José C. Paz', salida: '2025-09-26T09:05:00Z', estado: 'Cancelado', ocupacion: 0 },
+    { id: 10025, origen: 'Rosario', destino: 'Cañada de Gomez', salida: '2025-09-27T10:15:00Z', estado: 'Programado', ocupacion: 0 },
   ],
   conductoresPendientes: [
-    { id: 1, nombre: 'María Gómez', licencia: 'CND-4812', enviado: '2025-09-25T12:00:00Z' },
-    { id: 2, nombre: 'Juan Pérez', licencia: 'CND-5120', enviado: '2025-09-26T09:30:00Z' },
+    { id: 1, nombre: 'Lucas Cossia', licencia: 'CND-4812', enviado: '2025-09-25T12:00:00Z' },
+    { id: 2, nombre: 'Mauro Perez', licencia: 'CND-5120', enviado: '2025-09-26T09:30:00Z' },
   ],
   alertas: [
     { id: 'a1', nivel: 'warning', tipo: 'Mantenimiento', mensaje: 'Chequeo preventivo pendiente en U-342' },
@@ -162,7 +161,7 @@ export default function DashboardTrenes() {
           <div className="text-muted">Monitoreo en tiempo real y métricas de la operación</div>
         </Col>
         <Col xs="auto" className="d-flex gap-2">
-          <Button variant="primary">Crear viaje</Button>
+          <Button><Link className='nav-link text-white' to='/admin/viajes'>Crear Viaje</Link></Button>
           <Button variant="outline-secondary" onClick={handleExportCSV}>
             Exportar CSV
           </Button>
