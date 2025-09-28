@@ -15,6 +15,9 @@ import { LicenciaCrud } from './pages/LicenciaCrud.jsx'
 import { CategoriaDenunciaCrud } from './pages/CategoriaDenunciaCrud.jsx'
 import { EnConstruccionCopy } from './pages/EnConstruccion copy.jsx'
 import { EstadoTrenCrud } from './pages/EstadoTrenCrud.jsx'
+import  DashboardTrenes  from './pages/DashboardTrenes.jsx'
+
+
 
 function App () {
   return (
@@ -32,7 +35,7 @@ function App () {
             <Route path='/admin' element={<ProtectedRoute allowedRoles='admin' > </ProtectedRoute>}>
               <Route
                 path='dashboard'
-                element={<EnConstruccionCopy/>}
+                element={<DashboardTrenes/>}
               />
 
               <Route
