@@ -1,39 +1,17 @@
-import { AuthContext } from "../context/AuthContext.jsx"
-import { useState } from "react"
-import { loginService, logoutService, getToken } from "./authService.js"
-import { useEffect } from "react"
-
+import { AuthContext } from '../context/AuthContext.jsx'
+import { useState } from 'react'
+import { useLoginMutation } from '../hooks/useLoginMutation.js'
+import { useLogoutMutation } from '../hooks/useLogoutMutation.js'
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null)
-  
-  useEffect(() => {
-    const token = getToken()
-    if (token) {
-      // Aquí podrías hacer una llamada a la API para obtener los datos del usuario
-      // usando el token, pero por simplicidad, solo lo guardamos en el estado.
-      //setUser({ token }) // Simulando un usuario con el token
-    }
-  }, [] )
 
-    const login = async (email, password) => {
-      try {
-        const userToSet = await loginService(email, password)
-        return userToSet
-      } catch (error) {
-        console.error("Error during login:", error)
-        throw error
-      }}
-    
-    const logout = () => {
-      logoutService()
-      setUser(null)
-    }
+  const { mutateAsync: login, isPending: isLoginPending, isError: isLoginError } = useLoginMutation()
 
-  return(
-    
+  const { mutateAsync: logout, isPending: isLogoutPending, isError: isLogoutError } = useLogoutMutation()
 
-    <AuthContext.Provider value={{login, logout, user, setUser}}>
+  return (
+    <AuthContext.Provider value={{ user, setUser, login, logout, isLoginPending, isLoginError, isLogoutError, isLogoutPending }}>
       {children}
     </AuthContext.Provider>
   )
