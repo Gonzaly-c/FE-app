@@ -124,7 +124,7 @@ export function ConductorValidoViaje() { //Obtiene todos los conductores validos
     queryFn: async () => {
       const res = await axios.get('http://localhost:3000/api/conductor')
       return res.data.items.filter(item => {
-        return item.estado === 'Activo' && item.licencias.some(licencia => new Date(licencia.fechaVencimiento) > new Date()) 
+        return item.licencias.some(licencia => new Date(licencia.fechaVencimiento) > new Date()) // se puede agregar item.estado === 'Activo' && para la validacion (no esta agregado porque se podria haber hecho un viaje con un conductor que actualmente este inactivo)
       })
     }
   })

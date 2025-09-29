@@ -37,8 +37,8 @@ export function ViajeList({ viajes, fetchNextPage, hasNextPage, handleEdit, dele
                     <td>{viaje.conductor.nombre} {viaje.conductor.apellido}</td>
                     <td>{viaje.tren.modelo} (color: {viaje.tren.color})</td>
                     <td>{viaje.recorrido.ciudadSalida}-{viaje.recorrido.ciudadLlegada}</td>
-                    <td>{viaje.fechaIni ? new Date(viaje.fechaIni).toLocaleDateString('es-AR'): 'Sin fecha'}</td>
-                    <td>{viaje.fechaFin ? new Date(viaje.fechaFin).toLocaleDateString('es-AR'): 'Sin fecha'}</td>
+                    <td>{viaje.fechaIni? new Date(new Date(viaje.fechaIni).getTime() + 3 * 60 * 60 * 1000).toLocaleDateString('es-AR'): 'Sin fecha'}</td>
+                    <td>{viaje.fechaFin? new Date(new Date(viaje.fechaFin).getTime() + 3 * 60 * 60 * 1000).toLocaleDateString('es-AR'): 'Sin fecha'}</td>
                     <td>{viaje.estado ? viaje.estado : 'Sin Estado'}</td>
 
 

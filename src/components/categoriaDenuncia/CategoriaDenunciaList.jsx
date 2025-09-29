@@ -35,7 +35,7 @@ export function CategoriaDenunciaList({ categoriaDenuncias, fetchNextPage, hasNe
                     <td>{categoriaDenuncia.titulo}</td>
                     <td>{categoriaDenuncia.descripcion}</td>
                     <td>{categoriaDenuncia.estado ? categoriaDenuncia.estado : 'Sin Estado'}</td>
-                    <td>{categoriaDenuncia.createdAt ? new Date(categoriaDenuncia.createdAt).toLocaleDateString('es-AR'): 'Sin fecha'}</td>
+                    <td>{categoriaDenuncia.createdAt? new Date(new Date(categoriaDenuncia.createdAt).getTime() + 3 * 60 * 60 * 1000).toLocaleDateString('es-AR'): 'Sin fecha'}</td>
                     <td className='text-end'>
                       <button
                         className='btn btn-sm bg-info text-white me-2'

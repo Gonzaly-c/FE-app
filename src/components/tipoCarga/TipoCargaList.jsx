@@ -35,7 +35,7 @@ export function TipoCargaList({ tipoCargas, fetchNextPage, hasNextPage, handleEd
                     <td>{tipoCarga.name}</td>
                     <td>{tipoCarga.desc}</td>
                     <td>{tipoCarga.estado ? tipoCarga.estado : 'Sin Estado'}</td>
-                    <td>{tipoCarga.createdAt ? new Date(tipoCarga.createdAt).toLocaleDateString('es-AR'): 'Sin fecha'}</td>
+                    <td>{tipoCarga.createdAt? new Date(new Date(tipoCarga.createdAt).getTime() + 3 * 60 * 60 * 1000).toLocaleDateString('es-AR'): 'Sin fecha'}</td>
 
 
                     <td className='text-end'>

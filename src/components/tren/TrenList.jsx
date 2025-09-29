@@ -35,7 +35,7 @@ export function TrenList({ trenes, fetchNextPage, hasNextPage, handleEdit, delet
                     <td>{tren.modelo}</td>
                     <td>{tren.color}</td>
                     <td>{tren.estadoActual ? tren.estadoActual.nombre : 'Sin Estado'}</td>
-                    <td>{tren.createdAt ? new Date(tren.createdAt).toLocaleDateString('es-AR'): 'Sin fecha'}</td>
+                    <td>{tren.createdAt? new Date(new Date(tren.createdAt).getTime() + 3 * 60 * 60 * 1000).toLocaleDateString('es-AR'): 'Sin fecha'}</td>
 
 
                     <td className='text-end'>

@@ -35,11 +35,9 @@ export function EstadoTrenList({ estadoTrenes, fetchNextPage, hasNextPage, handl
                     <td className='border-dark' style={{ borderRightWidth: 1 }}>{estadoTren.id}</td>
                     <td>{estadoTren.nombre}</td>
                     <td>{estadoTren.tren ? estadoTren.tren : 'Sin Tren'}</td>
-                    <td>{estadoTren.fechaVigencia? new Date(estadoTren.fechaVigencia).toLocaleDateString('es-AR'): 'Sin fecha'}</td>
+                    <td>{estadoTren.fechaVigencia ? new Date(new Date(estadoTren.fechaVigencia).getTime() + 3 * 60 * 60 * 1000).toLocaleDateString('es-AR'): 'Sin fecha'}</td>
                     <td>{estadoTren.estado ? estadoTren.estado : 'Sin Estado'}</td>
-                    <td>{estadoTren.createdAt ? new Date(estadoTren.createdAt).toLocaleDateString('es-AR'): 'Sin fecha'}</td>
-
-
+                    <td>{estadoTren.createdAt? new Date(new Date(estadoTren.createdAt).getTime() + 3 * 60 * 60 * 1000).toLocaleDateString('es-AR'): 'Sin fecha'}</td>
                     <td className='text-end'>
                       <button
                         className='btn btn-sm bg-info text-white me-2'

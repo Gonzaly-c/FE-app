@@ -34,8 +34,8 @@ export function LicenciaList ({ licencias, fetchNextPage, hasNextPage, handleEdi
                 <tr key={licencia.id}>
                   <td className='border-dark' style={{ borderRightWidth: 1 }}>{licencia.id}</td>
                   <td>{licencia.conductor.nombre} {licencia.conductor.apellido}</td>
-                  <td>{licencia.fechaHecho ? new Date(licencia.fechaHecho).toLocaleDateString('es-AR'): 'Sin fecha'}</td>
-                  <td>{licencia.fechaVencimiento ? new Date(licencia.fechaVencimiento).toLocaleDateString('es-AR'): 'Sin fecha'}</td>
+                  <td>{licencia.fechaHecho? new Date(new Date(licencia.fechaHecho).getTime() + 3 * 60 * 60 * 1000).toLocaleDateString('es-AR'): 'Sin fecha'}</td>
+                  <td>{licencia.fechaVencimiento? new Date(new Date(licencia.fechaVencimiento).getTime() + 3 * 60 * 60 * 1000).toLocaleDateString('es-AR'): 'Sin fecha'}</td>
                   <td>{licencia.estado}</td>
                   <td className='text-end'>
                     <button
