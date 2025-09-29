@@ -36,7 +36,7 @@ export function RecorridoList({ recorridos, fetchNextPage, hasNextPage, handleEd
                     <td>{recorrido.ciudadSalida}</td>
                     <td>{recorrido.ciudadLlegada}</td>
                     <td>{recorrido.totalKm}</td>
-                    <td>{recorrido.createdAt ? recorrido.createdAt.slice(0, 10) : 'Sin fecha'}</td>
+                    <td>{recorrido.createdAt ? new Date(recorrido.createdAt).toLocaleDateString('es-AR'): 'Sin fecha'}</td>
                     <td>{recorrido.estado}</td>
 
                     <td className='text-end'>

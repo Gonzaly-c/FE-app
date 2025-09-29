@@ -1,14 +1,14 @@
 import { useForm } from 'react-hook-form'
 import { useLicenciaPost } from '../../hooks/licencia/useLicenciaPost'
 import { useLicenciaPut } from '../../hooks/licencia/useLicenciasPut'
-import { traerConductoresQuery } from '../../hooks/conductor/traerConductores.js'
+import { ConductorActivos } from '../../hooks/Querys.js'
 
 export function LicenciaForm ({ onSuccess, licenciaToEdit }) {
-  const { data: conductores = [] } = traerConductoresQuery()
-  const { register, formState: { errors }, handleSubmit, isPending: isPendingForm } = useForm({ mode: 'onBlur' })
+  const { data: conductores = [] } = ConductorActivos()
+  const { register, formState: { errors }, handleSubmit, isPending: isPendingForm, watch } = useForm({ mode: 'onBlur' })
   const { mutateAsync: handlePost, isError: isErrorPost } = useLicenciaPost()
   const { mutateAsync: handlePut, isError: isErrorPut } = useLicenciaPut()
-
+  
   const onSubmit = async (formData) => {
     const licencia = {
       estado: formData.estado,
@@ -28,6 +28,7 @@ export function LicenciaForm ({ onSuccess, licenciaToEdit }) {
     await handlePost(licencia)
 
     if (!isErrorPost) onSuccess()
+    return
   }
 
   return (
@@ -68,8 +69,9 @@ export function LicenciaForm ({ onSuccess, licenciaToEdit }) {
       <div className='mb-1'>
         <label className='form-label' htmlFor='fechaHecho'>Fecha Hecho:</label>
         <input
-          id='fechaHecho' type='date' {...register('fechaHecho', { required: 'La fecha de hecho es requerida', value: licenciaToEdit ? licenciaToEdit.fechaHecho : '' })}
+          id='fechaHecho' type='date' {...register('fechaHecho', { required: 'La fecha de hecho es requerida'})}
           className='form-control' placeholder='Fecha de hecho'
+          defaultValue={licenciaToEdit?.fechaHecho ? licenciaToEdit.fechaHecho.slice(0, 10): ''}
         />
         {errors.fechaHecho && <span className='text-danger'>{errors.fechaHecho.message}</span>}
       </div>
@@ -77,8 +79,15 @@ export function LicenciaForm ({ onSuccess, licenciaToEdit }) {
       <div className='mb-1'>
         <label className='form-label' htmlFor='fechaVencimiento'>Fecha de Vencimiento:</label>
         <input
-          id='fechaVencimiento' type='date' {...register('fechaVencimiento', { required: 'La fecha de vencimiento es requerida', value: licenciaToEdit ? licenciaToEdit.fechaVencimiento : '' })}
+          id='fechaVencimiento' type='date' {...register('fechaVencimiento', { required: 'La fecha de vencimiento es requerida', 
+            validate: (value) => {
+                const fechaHecho = new Date(watch('fechaHecho'));
+                const fechaVencimiento = new Date(value);
+                return fechaVencimiento >= fechaHecho || 'La fecha de vencimiento debe ser posterior o igual a la de hecho';
+          }})}
           className='form-control' placeholder='Fecha de vencimiento'
+          defaultValue={licenciaToEdit?.fechaVencimiento ? licenciaToEdit.fechaVencimiento.slice(0, 10): ''}
+
         />
         {errors.fechaVencimiento && <span className='text-danger'>{errors.fechaVencimiento.message}</span>}
       </div>

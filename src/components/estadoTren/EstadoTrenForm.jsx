@@ -1,13 +1,13 @@
 import { useForm } from 'react-hook-form'
 import { useEstadoTrenPost } from '../../hooks/estadoTren/useEstadoTrenPost'
 import { useEstadoTrenPut } from '../../hooks/estadoTren/useEstadoTrenesPut'
-import { traerTrenesQuery } from '../../hooks/tren/useTrenesQuery.js'
+import { TrenFindAll } from '../../hooks/Querys.js'
 
 export function EstadoTrenForm({ onSuccess, estadoTrenToEdit }) {
     const { register, formState: { errors }, handleSubmit, isPending: isPendingForm } = useForm({ mode: 'onBlur' })
     const { mutateAsync: handlePost, isError: isErrorPost } = useEstadoTrenPost()
     const { mutateAsync: handlePut, isError: isErrorPut } = useEstadoTrenPut() 
-    const { data: trenes = [] } = traerTrenesQuery()
+    const { data: trenes = [] } = TrenFindAll()
 
     const onSubmit = async(formData) =>{
         const estadoTren = {
@@ -20,7 +20,6 @@ export function EstadoTrenForm({ onSuccess, estadoTrenToEdit }) {
         if(estadoTrenToEdit){
             estadoTren.id = estadoTrenToEdit.id
             await handlePut(estadoTren)
-            
             if(!isErrorPut) onSuccess()
             return
         }
@@ -40,7 +39,7 @@ export function EstadoTrenForm({ onSuccess, estadoTrenToEdit }) {
                 <select
                 {...register('idTren', { required: 'El Tren es requerido' })}
                 className='form-control'
-                defaultValue={estadoTrenToEdit?.tren?.id || ''}
+                defaultValue={estadoTrenToEdit?.tren || ''}
                 >
                 
                 <option value="">Selecciona un Tren</option>
@@ -83,7 +82,7 @@ export function EstadoTrenForm({ onSuccess, estadoTrenToEdit }) {
                 type='date'
                 className='form-control'
                 {...register('fechaVigencia', { required: 'La fecha de vigencia es requerida' })}
-                defaultValue={estadoTrenToEdit ? estadoTrenToEdit.fechaVigencia : ''}
+                defaultValue={estadoTrenToEdit?.fechaVigencia ? estadoTrenToEdit.fechaVigencia.slice(0, 10): ''}
                 placeholder='Selecciona una fecha'
             />
 

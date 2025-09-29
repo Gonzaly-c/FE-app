@@ -37,7 +37,7 @@ export function ConductorList ({ conductores, fetchNextPage, hasNextPage, handle
                   <td>{conductor.apellido}</td>
                   <td>{conductor.email}</td>
                   <td>{conductor.estado ? conductor.estado : 'Sin Estado'}</td>
-                  <td>{conductor.createdAt ? conductor.createdAt.slice(0, 10) : 'Sin fecha'}</td>
+                  <td>{conductor.createdAt ? new Date(conductor.createdAt).toLocaleDateString('es-AR'): 'Sin fecha'}</td>
                   <td className='text-end'>
                     <button className='btn btn-sm bg-info text-white me-2' onClick={() => handleEdit(conductor)}>
                       Editar

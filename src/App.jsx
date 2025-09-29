@@ -16,7 +16,7 @@ import { CategoriaDenunciaCrud } from './pages/CategoriaDenunciaCrud.jsx'
 import { EnConstruccionCopy } from './pages/EnConstruccion copy.jsx'
 import { EstadoTrenCrud } from './pages/EstadoTrenCrud.jsx'
 import  DashboardTrenes  from './pages/DashboardTrenes.jsx'
-
+import { ViajeCrud } from './pages/ViajeCrud.jsx'
 
 
 function App () {
@@ -41,6 +41,11 @@ function App () {
               <Route
                 path='tipoCargas'
                 element={<TipoCargaCrud />}
+              />
+
+              <Route
+                path='viajes'
+                element={<ViajeCrud />}
               />
 
               <Route
@@ -70,11 +75,6 @@ function App () {
 
               <Route
                 path='observaciones'
-                element={<EnConstruccionCopy/>}
-              />
-
-              <Route
-                path='viajes'
                 element={<EnConstruccionCopy/>}
               />
 

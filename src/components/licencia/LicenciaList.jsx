@@ -20,7 +20,7 @@ export function LicenciaList ({ licencias, fetchNextPage, hasNextPage, handleEdi
               <td style={{ borderRightWidth: 1 }} onClick={handleAscOrder} role='button'>ID <span className='text-info'>{ascOrder ? '⋀' : '⋁'}</span></td>
               <td>Conductor</td>
               <td>Fecha de hecho</td>
-              <td>Fecha de creación</td>
+              <td>Fecha de vencimiento</td>
               <td>Estado</td>
 
               <td className='text-end' style={{ paddingRight: 75 }}>Acción</td>
@@ -34,8 +34,8 @@ export function LicenciaList ({ licencias, fetchNextPage, hasNextPage, handleEdi
                 <tr key={licencia.id}>
                   <td className='border-dark' style={{ borderRightWidth: 1 }}>{licencia.id}</td>
                   <td>{licencia.conductor.nombre} {licencia.conductor.apellido}</td>
-                  <td>{licencia.fechaHecho ? licencia.fechaHecho.slice(0, 10) : 'Sin fecha'}</td>
-                  <td>{licencia.fechaVencimiento ? licencia.fechaVencimiento.slice(0, 10) : 'Sin fecha'}</td>
+                  <td>{licencia.fechaHecho ? new Date(licencia.fechaHecho).toLocaleDateString('es-AR'): 'Sin fecha'}</td>
+                  <td>{licencia.fechaVencimiento ? new Date(licencia.fechaVencimiento).toLocaleDateString('es-AR'): 'Sin fecha'}</td>
                   <td>{licencia.estado}</td>
                   <td className='text-end'>
                     <button

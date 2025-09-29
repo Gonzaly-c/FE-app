@@ -1,8 +1,7 @@
 import { useState, useEffect, useRef } from "react"
 import { useTrenesDelete } from "./useTrenesDelete.js"
 import { useTrenesInfinite } from "./useTrenInfinite.js"
-import { useTrenQuery } from "./useTrenQuery.js"
-
+import { TrenGetOne } from "../Querys.js"
 
 export function useTrenCrud() {
   const [trenes, setTrenes] = useState([])
@@ -11,7 +10,7 @@ export function useTrenCrud() {
   const { mutateAsync: deleteMutation } = useTrenesDelete()
   const { data, fetchNextPage, hasNextPage, isLoading, isError, error } = useTrenesInfinite()
   const [ascOrder, setAscOrder] = useState(false);
-  const { mutateAsync: findOneMutation} = useTrenQuery() // find one 
+  const { mutateAsync: findOneMutation} = TrenGetOne() // find one 
   
   useEffect(() => {
     const trenes = data?.pages.flatMap(page => page.items) ?? []
