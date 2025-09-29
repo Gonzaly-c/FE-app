@@ -39,13 +39,13 @@ export function EstadoTrenList({ estadoTrenes, fetchNextPage, hasNextPage, handl
                     <td className='text-center'>{estadoTren.estado ? estadoTren.estado : 'Sin Estado'}</td>
                     <td className='text-center'>{estadoTren.createdAt? new Date(new Date(estadoTren.createdAt).getTime() + 3 * 60 * 60 * 1000).toLocaleDateString('es-AR'): 'Sin fecha'}</td>
                     <td className='text-end'>
-                      <button
+                      <button style={{ marginTop: '-10px'}}
                         className='btn btn-sm bg-info text-white me-2'
                         onClick={handleEdit.bind(this, estadoTren)}
                       >
                         Editar
                       </button>
-                      <button className='btn btn-sm bg-danger text-white' onClick={async () => deleteMutation(estadoTren.id)}>
+                      <button style={{ marginTop: '-10px'}} className='btn btn-sm bg-danger text-white' onClick={async () => deleteMutation(estadoTren.id)}>
                         Eliminar
                       </button>
                     </td>

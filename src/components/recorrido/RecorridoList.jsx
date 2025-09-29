@@ -40,13 +40,13 @@ export function RecorridoList({ recorridos, fetchNextPage, hasNextPage, handleEd
                     <td className='text-center'>{recorrido.estado}</td>
 
                     <td className='text-end'>
-                      <button
+                      <button style={{ marginTop: '-10px'}}
                         className='btn btn-sm bg-info text-white me-2'
                         onClick={handleEdit.bind(this, recorrido)}
                       >
                         Editar
                       </button>
-                      <button className='btn btn-sm bg-danger text-white' onClick={async () => deleteMutation(recorrido.id)}>
+                      <button style={{ marginTop: '-10px'}} className='btn btn-sm bg-danger text-white' onClick={async () => deleteMutation(recorrido.id)}>
                         Eliminar
                       </button>
                     </td>

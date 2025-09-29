@@ -39,13 +39,13 @@ export function CategoriaDenunciaList({ categoriaDenuncias, fetchNextPage, hasNe
                     <td className='text-center'>{categoriaDenuncia.estado ? categoriaDenuncia.estado : 'Sin Estado'}</td>
                     
                     <td className='text-end'>
-                      <button
+                      <button style={{ marginTop: '-10px'}}
                         className='btn btn-sm bg-info text-white me-2'
                         onClick={handleEdit.bind(this, categoriaDenuncia)}
                       >
                         Editar
                       </button>
-                      <button className='btn btn-sm bg-danger text-white' onClick={async () => deleteMutation(categoriaDenuncia.id)}>
+                      <button style={{ marginTop: '-10px'}} className='btn btn-sm bg-danger text-white' onClick={async () => deleteMutation(categoriaDenuncia.id)}>
                         Eliminar
                       </button>
                     </td>

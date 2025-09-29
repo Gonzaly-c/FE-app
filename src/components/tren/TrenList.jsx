@@ -38,13 +38,13 @@ export function TrenList({ trenes, fetchNextPage, hasNextPage, handleEdit, delet
                     <td className='text-center'>{tren.estadoActual ? tren.estadoActual.nombre : 'Sin Estado'}</td>
 
                     <td className='text-end'>
-                      <button
+                      <button style={{ marginTop: '-10px'}}
                         className='btn btn-sm bg-info text-white me-2'
                         onClick={handleEdit.bind(this, tren)}
                       >
                         Editar
                       </button>
-                      <button className='btn btn-sm bg-danger text-white' onClick={async () => deleteMutation(tren.id)}>
+                      <button style={{ marginTop: '-10px'}} className='btn btn-sm bg-danger text-white' onClick={async () => deleteMutation(tren.id)}>
                         Eliminar
                       </button>
                     </td>

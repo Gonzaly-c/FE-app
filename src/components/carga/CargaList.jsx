@@ -39,13 +39,13 @@ export function CargaList({ cargas, fetchNextPage, hasNextPage, handleEdit, dele
                     <td className='text-center'>{carga.createdAt? new Date(new Date(carga.createdAt).getTime() + 3 * 60 * 60 * 1000).toLocaleDateString('es-AR'): 'Sin fecha'}</td>
                     <td className='text-center'>{carga.estado}</td>   
                     <td className='text-end'>
-                      <button
+                      <button style={{ marginTop: '-10px'}}
                         className='btn btn-sm bg-info text-white me-2'
                         onClick={handleEdit.bind(this, carga)}
                       >
                         Editar
                       </button>
-                      <button className='btn btn-sm bg-danger text-white' onClick={async () => deleteMutation(carga.id)}>
+                      <button style={{ marginTop: '-10px'}} className='btn btn-sm bg-danger text-white' onClick={async () => deleteMutation(carga.id)}>
                         Eliminar
                       </button>
                     </td>

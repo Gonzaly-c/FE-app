@@ -41,10 +41,10 @@ export function ConductorList ({ conductores, fetchNextPage, hasNextPage, handle
                   <td className='text-center'>{conductor.createdAt? new Date(new Date(conductor.createdAt).getTime() + 3 * 60 * 60 * 1000).toLocaleDateString('es-AR'): 'Sin fecha'}</td>
                   <td className='text-center'>{conductor.estado ? conductor.estado : 'Sin Estado'}</td>
                   <td className='text-end'>
-                    <button className='btn btn-sm bg-info text-white me-2' onClick={() => handleEdit(conductor)}>
+                    <button style={{ marginTop: '-10px'}} className='btn btn-sm bg-info text-white me-2' onClick={() => handleEdit(conductor)}>
                       Editar
                     </button>
-                    <button className='btn btn-sm bg-danger text-white' onClick={async () => deleteMutation(conductor.id)}>
+                    <button style={{ marginTop: '-10px'}} className='btn btn-sm bg-danger text-white' onClick={async () => deleteMutation(conductor.id)}>
                       Eliminar
                     </button>
                   </td>

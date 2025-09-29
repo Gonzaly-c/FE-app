@@ -38,13 +38,13 @@ export function LicenciaList ({ licencias, fetchNextPage, hasNextPage, handleEdi
                   <td className='text-center'>{licencia.fechaVencimiento? new Date(new Date(licencia.fechaVencimiento).getTime() + 3 * 60 * 60 * 1000).toLocaleDateString('es-AR'): 'Sin fecha'}</td>
                   <td className='text-center'>{licencia.estado}</td>
                   <td className='text-end'>
-                    <button
+                    <button style={{ marginTop: '-10px'}}
                       className='btn btn-sm bg-info text-white me-2'
                       onClick={handleEdit.bind(this, licencia)}
                     >
                       Editar
                     </button>
-                    <button className='btn btn-sm bg-danger text-white' onClick={async () => deleteMutation(licencia.id)}>
+                    <button style={{ marginTop: '-10px'}} className='btn btn-sm bg-danger text-white' onClick={async () => deleteMutation(licencia.id)}>
                       Eliminar
                     </button>
                   </td>
