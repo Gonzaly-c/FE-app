@@ -1,14 +1,14 @@
 import { useForm } from 'react-hook-form'
 import { useViajePost } from '../../hooks/viaje/useViajePost'
 import { useViajePut } from '../../hooks/viaje/useViajesPut'
-import { RecorridoActivos, TrenActivos, ConductorValidoViaje} from '../../hooks/Querys.js'
+import { RecorridoActivos, TrenActivos, ConductorFindAll} from '../../hooks/Querys.js'
 
 export function ViajeForm({ onSuccess, viajeToEdit }) {
     const { register, formState: { errors }, handleSubmit, isPending: isPendingForm, watch } = useForm({ mode: 'onBlur' })
     const { mutateAsync: handlePost, isError: isErrorPost } = useViajePost()
     const { mutateAsync: handlePut, isError: isErrorPut } = useViajePut() 
     const { data: recorridos = [] } = RecorridoActivos()
-    const { data: conductores = [] } = ConductorValidoViaje()    
+    const { data: conductores = [] } = ConductorFindAll()    
     const { data: trenes = [] } = TrenActivos()
     
     const onSubmit = async(formData) =>{
@@ -43,6 +43,17 @@ export function ViajeForm({ onSuccess, viajeToEdit }) {
 
         if (tieneViajeEnRango) {
         alert('El conductor ya tiene un viaje en ese rango de fechas');
+        return;
+        }
+
+        const tieneLicenciaQueCubreRango = conductor.licencias.some(l => {
+        const inicioLicencia = new Date(l.fechaHecho);
+        const finLicencia = new Date(l.fechaVencimiento);
+        return inicioLicencia <= fechaIni && finLicencia >= fechaFin;
+        });
+
+        if (!tieneLicenciaQueCubreRango) {
+        alert('El conductor no tiene una licencia que cubra el rango de fechas del viaje');
         return;
         }
 
