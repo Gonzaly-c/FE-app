@@ -31,14 +31,14 @@ export function TipoCargaCrud() {
 
   return (
     <div>
-      <h1 className='h1 mt-2 text-center'>Lista de TipoCargas</h1>
+      <h1 className='h1 mt-2 text-center'>Lista de Tipos de Cargas</h1>
 
       <div className='d-flex justify-content-between mb-4'>
         <button
           className='btn btn-info'
           onClick={handleCreate}
         >
-          Crear un tipoCarga
+          Crear un tipo de Carga
         </button>
 
         <div className='input-group w-auto'>

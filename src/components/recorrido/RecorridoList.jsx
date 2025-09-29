@@ -18,11 +18,11 @@ export function RecorridoList({ recorridos, fetchNextPage, hasNextPage, handleEd
           <thead className='border-info fw-bold'>
             <tr>
               <td style={{ borderRightWidth: 1 }} onClick={handleAscOrder} role="button">ID <span className="text-info">{ascOrder ? "⋀" : "⋁"}</span></td>
-              <td>Ciudad Salida</td>
-              <td>Ciudad Llegada</td>
-              <td>Total de Km</td>
-              <td>Fecha de creación</td>
-              <td>Estado</td>
+              <td className='text-center'>Ciudad Salida</td>
+              <td className='text-center'>Ciudad Llegada</td>
+              <td className='text-center'>Total de Km</td>
+              <td className='text-center'>Fecha de creación</td>
+              <td className='text-center'>Estado</td>
               <td className='text-end' style={{ paddingRight: 75 }}>Acción</td>
             </tr>
           </thead>
@@ -33,11 +33,11 @@ export function RecorridoList({ recorridos, fetchNextPage, hasNextPage, handleEd
                 return (
                   <tr key={recorrido.id}>
                     <td className='border-dark' style={{ borderRightWidth: 1 }}>{recorrido.id}</td>
-                    <td>{recorrido.ciudadSalida}</td>
-                    <td>{recorrido.ciudadLlegada}</td>
-                    <td>{recorrido.totalKm}</td>
-                    <td>{recorrido.createdAt? new Date(new Date(recorrido.createdAt).getTime() + 3 * 60 * 60 * 1000).toLocaleDateString('es-AR'): 'Sin fecha'}</td>
-                    <td>{recorrido.estado}</td>
+                    <td className='text-center'>{recorrido.ciudadSalida}</td>
+                    <td className='text-center'>{recorrido.ciudadLlegada}</td>
+                    <td className='text-center'>{recorrido.totalKm}</td>
+                    <td className='text-center'>{recorrido.createdAt? new Date(new Date(recorrido.createdAt).getTime() + 3 * 60 * 60 * 1000).toLocaleDateString('es-AR'): 'Sin fecha'}</td>
+                    <td className='text-center'>{recorrido.estado}</td>
 
                     <td className='text-end'>
                       <button

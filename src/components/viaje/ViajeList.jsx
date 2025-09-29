@@ -22,12 +22,12 @@ export function ViajeList({ viajes, fetchNextPage, hasNextPage, handleEdit, dele
           <thead className='border-info fw-bold'>
             <tr>
               <td style={{ borderRightWidth: 1 }} onClick={handleAscOrder} role="button">ID <span className="text-info">{ascOrder ? "⋀" : "⋁"}</span></td>
-              <td>Conductor</td>
-              <td>Tren</td>
-              <td>Recorrido</td>
-              <td>Inicio</td>
-              <td>Fin</td>
-              <td>Estado</td>
+              <td className='text-center'>Conductor</td>
+              <td className='text-center'>Tren</td>
+              <td className='text-center'>Recorrido</td>
+              <td className='text-center'>Inicio</td>
+              <td className='text-center'>Fin</td>
+              <td className='text-center'>Estado</td>
               <td className='text-center' style={{ paddingRight: 75} }>Acción</td>
             </tr>
           </thead>
@@ -37,14 +37,14 @@ export function ViajeList({ viajes, fetchNextPage, hasNextPage, handleEdit, dele
               {viajes.map((viaje) => {
                 return (
                   <tr key={viaje.id}>
-                    <td className='border-dark' style={{ borderRightWidth: 1 }}>{viaje.id}</td>
-                    <td>{viaje.conductor.nombre} {viaje.conductor.apellido}</td>
-                    <td>{viaje.tren.modelo} (color: {viaje.tren.color})</td>
-                    <td>{viaje.recorrido.ciudadSalida}-{viaje.recorrido.ciudadLlegada}</td>
-                    <td>{viaje.fechaIni? new Date(new Date(viaje.fechaIni).getTime() + 3 * 60 * 60 * 1000).toLocaleDateString('es-AR'): 'Sin fecha'}</td>
-                    <td>{viaje.fechaFin? new Date(new Date(viaje.fechaFin).getTime() + 3 * 60 * 60 * 1000).toLocaleDateString('es-AR'): 'Sin fecha'}</td>
+                    <td className='border-dark-center' style={{ borderRightWidth: 1 }}>{viaje.id}</td>
+                    <td className='text-center'>{viaje.conductor.nombre} {viaje.conductor.apellido}</td>
+                    <td className='text-center'>{viaje.tren.modelo} (color: {viaje.tren.color})</td>
+                    <td className='text-center'>{viaje.recorrido.ciudadSalida}-{viaje.recorrido.ciudadLlegada}</td>
+                    <td className='text-center'>{viaje.fechaIni? new Date(new Date(viaje.fechaIni).getTime() + 3 * 60 * 60 * 1000).toLocaleDateString('es-AR'): 'Sin fecha'}</td>
+                    <td className='text-center'>{viaje.fechaFin? new Date(new Date(viaje.fechaFin).getTime() + 3 * 60 * 60 * 1000).toLocaleDateString('es-AR'): 'Sin fecha'}</td>
                     
-                    <td>
+                    <td className='text-center'>
                       {viaje.estado === 'Inactivo'
                         ? 'Cancelado/Suspendido'
                         : (() => {

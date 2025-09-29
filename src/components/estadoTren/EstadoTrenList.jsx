@@ -8,8 +8,8 @@ export function EstadoTrenList({ estadoTrenes, fetchNextPage, hasNextPage, handl
       dataLength={estadoTrenes.length}
       next={fetchNextPage}
       hasMore={hasNextPage}
-      loader={<h4 className='text-center'>Cargando más estadoTrenes...</h4>}
-      endMessage={<p className='text-center'>No hay más estadoTrenes</p>}
+      loader={<h4 className='text-center'>Cargando más estados de trenes...</h4>}
+      endMessage={<p className='text-center'>No hay más estados de trenes</p>}
       scrollThreshold={1}
       scrollableTarget='scrollableDiv'
     >
@@ -18,11 +18,11 @@ export function EstadoTrenList({ estadoTrenes, fetchNextPage, hasNextPage, handl
           <thead className='border-info fw-bold'>
             <tr>
               <td style={{ borderRightWidth: 1 }} onClick={handleAscOrder} role="button">ID <span className="text-info">{ascOrder ? "⋀" : "⋁"}</span></td>
-              <td>Nombre</td>
-              <td>Tren</td>
-              <td>Vigente desde</td>
-              <td>Estado</td>
-              <td>Fecha de creación</td>
+              <td className='text-center'>Nombre</td>
+              <td className='text-center'>Tren</td>
+              <td className='text-center'>Vigente desde</td>
+              <td className='text-center'>Estado</td>
+              <td className='text-center'>Fecha de creación</td>
               <td className='text-end' style={{ paddingRight: 75 }}>Acción</td>
             </tr>
           </thead>
@@ -33,11 +33,11 @@ export function EstadoTrenList({ estadoTrenes, fetchNextPage, hasNextPage, handl
                 return (
                   <tr key={estadoTren.id}>
                     <td className='border-dark' style={{ borderRightWidth: 1 }}>{estadoTren.id}</td>
-                    <td>{estadoTren.nombre}</td>
-                    <td>{estadoTren.tren ? estadoTren.tren : 'Sin Tren'}</td>
-                    <td>{estadoTren.fechaVigencia ? new Date(new Date(estadoTren.fechaVigencia).getTime() + 3 * 60 * 60 * 1000).toLocaleDateString('es-AR'): 'Sin fecha'}</td>
-                    <td>{estadoTren.estado ? estadoTren.estado : 'Sin Estado'}</td>
-                    <td>{estadoTren.createdAt? new Date(new Date(estadoTren.createdAt).getTime() + 3 * 60 * 60 * 1000).toLocaleDateString('es-AR'): 'Sin fecha'}</td>
+                    <td className='text-center'>{estadoTren.nombre}</td>
+                    <td className='text-center'>{estadoTren.tren ? estadoTren.tren : 'Sin Tren'}</td>
+                    <td className='text-center'>{estadoTren.fechaVigencia ? new Date(new Date(estadoTren.fechaVigencia).getTime() + 3 * 60 * 60 * 1000).toLocaleDateString('es-AR'): 'Sin fecha'}</td>
+                    <td className='text-center'>{estadoTren.estado ? estadoTren.estado : 'Sin Estado'}</td>
+                    <td className='text-center'>{estadoTren.createdAt? new Date(new Date(estadoTren.createdAt).getTime() + 3 * 60 * 60 * 1000).toLocaleDateString('es-AR'): 'Sin fecha'}</td>
                     <td className='text-end'>
                       <button
                         className='btn btn-sm bg-info text-white me-2'

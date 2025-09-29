@@ -18,12 +18,11 @@ export function CargaList({ cargas, fetchNextPage, hasNextPage, handleEdit, dele
           <thead className='border-info fw-bold'>
             <tr>
               <td style={{ borderRightWidth: 1 }} onClick={handleAscOrder} role="button">ID <span className="text-info">{ascOrder ? "⋀" : "⋁"}</span></td>
-              <td>Nombre</td>
-              <td>Precio</td>
-              <td>Estado</td>
-              <td>Tipo de carga</td>
-              <td>Fecha de creación</td>
-
+              <td className='text-center'>Nombre</td>
+              <td className='text-center'>Precio</td>
+              <td className='text-center'>Tipo de carga</td>
+              <td className='text-center'>Fecha de creación</td>
+              <td className='text-center'>Estado</td>
               <td className='text-end' style={{ paddingRight: 75 }}>Acción</td>
             </tr>
           </thead>
@@ -34,12 +33,11 @@ export function CargaList({ cargas, fetchNextPage, hasNextPage, handleEdit, dele
                 return (
                   <tr key={carga.id}>
                     <td className='border-dark' style={{ borderRightWidth: 1 }}>{carga.id}</td>
-                    <td>{carga.name}</td>
-                    <td>{carga.precio}</td>
-                    <td>{carga.estado}</td>                  
-                    <td>{carga.tipoCarga && carga.tipoCarga.estado === 'Activo' ? carga.tipoCarga.name : 'Sin tipo de carga'}</td>
-                    <td>{carga.createdAt? new Date(new Date(carga.createdAt).getTime() + 3 * 60 * 60 * 1000).toLocaleDateString('es-AR'): 'Sin fecha'}</td>
-
+                    <td className='text-center'>{carga.name}</td>
+                    <td className='text-center'>{carga.precio}</td>                                  
+                    <td className='text-center'>{carga.tipoCarga && carga.tipoCarga.estado === 'Activo' ? carga.tipoCarga.name : 'Sin tipo de carga'}</td>
+                    <td className='text-center'>{carga.createdAt? new Date(new Date(carga.createdAt).getTime() + 3 * 60 * 60 * 1000).toLocaleDateString('es-AR'): 'Sin fecha'}</td>
+                    <td className='text-center'>{carga.estado}</td>   
                     <td className='text-end'>
                       <button
                         className='btn btn-sm bg-info text-white me-2'

@@ -18,11 +18,12 @@ export function ConductorList ({ conductores, fetchNextPage, hasNextPage, handle
               <td style={{ borderRightWidth: 1 }} onClick={handleAscOrder} role='button'>
                 ID <span className='text-info'>{ascOrder ? '⋀' : '⋁'}</span>
               </td>
-              <td>Nombre</td>
-              <td>Apellido</td>
-              <td>Email</td>
-              <td>Estado</td>
-              <td>Fecha de creación</td>
+              <td className='text-center'>Nombre</td>
+              <td className='text-center'>Apellido</td>
+              <td className='text-center'>Email</td>
+              
+              <td className='text-center'>Fecha de creación</td>
+              <td className='text-center'>Estado</td>
               <td className='text-end' style={{ paddingRight: 75 }}>Acción</td>
             </tr>
           </thead>
@@ -33,11 +34,12 @@ export function ConductorList ({ conductores, fetchNextPage, hasNextPage, handle
               .map(conductor => (
                 <tr key={conductor.id}>
                   <td className='border-dark' style={{ borderRightWidth: 1 }}>{conductor.id}</td>
-                  <td>{conductor.nombre}</td>
-                  <td>{conductor.apellido}</td>
-                  <td>{conductor.email}</td>
-                  <td>{conductor.estado ? conductor.estado : 'Sin Estado'}</td>
-                  <td>{conductor.createdAt? new Date(new Date(conductor.createdAt).getTime() + 3 * 60 * 60 * 1000).toLocaleDateString('es-AR'): 'Sin fecha'}</td>
+                  <td className='text-center'>{conductor.nombre}</td>
+                  <td className='text-center'>{conductor.apellido}</td>
+                  <td className='text-center'>{conductor.email}</td>
+                  
+                  <td className='text-center'>{conductor.createdAt? new Date(new Date(conductor.createdAt).getTime() + 3 * 60 * 60 * 1000).toLocaleDateString('es-AR'): 'Sin fecha'}</td>
+                  <td className='text-center'>{conductor.estado ? conductor.estado : 'Sin Estado'}</td>
                   <td className='text-end'>
                     <button className='btn btn-sm bg-info text-white me-2' onClick={() => handleEdit(conductor)}>
                       Editar

@@ -31,14 +31,14 @@ export function EstadoTrenCrud() {
 
   return (
     <div>
-      <h1 className='h1 mt-2 text-center'>Lista de EstadoTrenes</h1>
+      <h1 className='h1 mt-2 text-center'>Lista de Estados de trenes</h1>
 
       <div className='d-flex justify-content-between mb-4'>
         <button
           className='btn btn-info'
           onClick={handleCreate}
         >
-          Crear un estadoTren
+          Crear un estado de Tren
         </button>
 
         <div className='input-group w-auto'>

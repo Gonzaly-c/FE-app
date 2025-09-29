@@ -18,10 +18,10 @@ export function LicenciaList ({ licencias, fetchNextPage, hasNextPage, handleEdi
           <thead className='border-info fw-bold'>
             <tr>
               <td style={{ borderRightWidth: 1 }} onClick={handleAscOrder} role='button'>ID <span className='text-info'>{ascOrder ? '⋀' : '⋁'}</span></td>
-              <td>Conductor</td>
-              <td>Fecha de hecho</td>
-              <td>Fecha de vencimiento</td>
-              <td>Estado</td>
+              <td className='text-center'>Conductor</td>
+              <td className='text-center'>Fecha de hecho</td>
+              <td className='text-center'>Fecha de vencimiento</td>
+              <td className='text-center'>Estado</td>
 
               <td className='text-end' style={{ paddingRight: 75 }}>Acción</td>
             </tr>
@@ -33,10 +33,10 @@ export function LicenciaList ({ licencias, fetchNextPage, hasNextPage, handleEdi
               return (
                 <tr key={licencia.id}>
                   <td className='border-dark' style={{ borderRightWidth: 1 }}>{licencia.id}</td>
-                  <td>{licencia.conductor.nombre} {licencia.conductor.apellido}</td>
-                  <td>{licencia.fechaHecho? new Date(new Date(licencia.fechaHecho).getTime() + 3 * 60 * 60 * 1000).toLocaleDateString('es-AR'): 'Sin fecha'}</td>
-                  <td>{licencia.fechaVencimiento? new Date(new Date(licencia.fechaVencimiento).getTime() + 3 * 60 * 60 * 1000).toLocaleDateString('es-AR'): 'Sin fecha'}</td>
-                  <td>{licencia.estado}</td>
+                  <td className='text-center'>{licencia.conductor.nombre} {licencia.conductor.apellido}</td>
+                  <td className='text-center'>{licencia.fechaHecho? new Date(new Date(licencia.fechaHecho).getTime() + 3 * 60 * 60 * 1000).toLocaleDateString('es-AR'): 'Sin fecha'}</td>
+                  <td className='text-center'>{licencia.fechaVencimiento? new Date(new Date(licencia.fechaVencimiento).getTime() + 3 * 60 * 60 * 1000).toLocaleDateString('es-AR'): 'Sin fecha'}</td>
+                  <td className='text-center'>{licencia.estado}</td>
                   <td className='text-end'>
                     <button
                       className='btn btn-sm bg-info text-white me-2'

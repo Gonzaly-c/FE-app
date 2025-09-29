@@ -8,8 +8,8 @@ export function TipoCargaList({ tipoCargas, fetchNextPage, hasNextPage, handleEd
       dataLength={tipoCargas.length}
       next={fetchNextPage}
       hasMore={hasNextPage}
-      loader={<h4 className='text-center'>Cargando más tipoCargas...</h4>}
-      endMessage={<p className='text-center'>No hay más tipoCargas</p>}
+      loader={<h4 className='text-center'>Cargando más tipos de cargas...</h4>}
+      endMessage={<p className='text-center'>No hay más tipos de cargas</p>}
       scrollThreshold={1}
       scrollableTarget='scrollableDiv'
     >
@@ -18,10 +18,11 @@ export function TipoCargaList({ tipoCargas, fetchNextPage, hasNextPage, handleEd
           <thead className='border-info fw-bold'>
             <tr>
               <td style={{ borderRightWidth: 1 }} onClick={handleAscOrder} role="button">ID <span className="text-info">{ascOrder ? "⋀" : "⋁"}</span></td>
-              <td>Nombre</td>
-              <td>Descripcion</td>
-              <td>Estado</td>
-              <td>Fecha de creación</td>
+              <td className='text-center'>Nombre</td>
+              <td className='text-center'>Descripcion</td>
+              <td className='text-center'>Fecha de creación</td>
+              <td className='text-center'>Estado</td>
+              
               <td className='text-end' style={{ paddingRight: 75 }}>Acción</td>
             </tr>
           </thead>
@@ -32,10 +33,10 @@ export function TipoCargaList({ tipoCargas, fetchNextPage, hasNextPage, handleEd
                 return (
                   <tr key={tipoCarga.id}>
                     <td className='border-dark' style={{ borderRightWidth: 1 }}>{tipoCarga.id}</td>
-                    <td>{tipoCarga.name}</td>
-                    <td>{tipoCarga.desc}</td>
-                    <td>{tipoCarga.estado ? tipoCarga.estado : 'Sin Estado'}</td>
-                    <td>{tipoCarga.createdAt? new Date(new Date(tipoCarga.createdAt).getTime() + 3 * 60 * 60 * 1000).toLocaleDateString('es-AR'): 'Sin fecha'}</td>
+                    <td className='text-center'>{tipoCarga.name}</td>
+                    <td className='text-center'>{tipoCarga.desc}</td>
+                    <td className='text-center'>{tipoCarga.createdAt? new Date(new Date(tipoCarga.createdAt).getTime() + 3 * 60 * 60 * 1000).toLocaleDateString('es-AR'): 'Sin fecha'}</td>
+                    <td className='text-center'>{tipoCarga.estado ? tipoCarga.estado : 'Sin Estado'}</td>
 
 
                     <td className='text-end'>

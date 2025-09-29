@@ -18,10 +18,10 @@ export function TrenList({ trenes, fetchNextPage, hasNextPage, handleEdit, delet
           <thead className='border-info fw-bold'>
             <tr>
               <td style={{ borderRightWidth: 1 }} onClick={handleAscOrder} role="button">ID <span className="text-info">{ascOrder ? "⋀" : "⋁"}</span></td>
-              <td>Modelo</td>
-              <td>Color</td>
-              <td>Estado Actual</td>
-              <td>Fecha de creación</td>
+              <td className='text-center'>Modelo</td>
+              <td className='text-center'>Color</td>
+              <td className='text-center'>Fecha de creación</td>
+              <td className='text-center'>Estado Actual</td>             
               <td className='text-end' style={{ paddingRight: 75 }}>Acción</td>
             </tr>
           </thead>
@@ -32,11 +32,10 @@ export function TrenList({ trenes, fetchNextPage, hasNextPage, handleEdit, delet
                 return (
                   <tr key={tren.id}>
                     <td className='border-dark' style={{ borderRightWidth: 1 }}>{tren.id}</td>
-                    <td>{tren.modelo}</td>
-                    <td>{tren.color}</td>
-                    <td>{tren.estadoActual ? tren.estadoActual.nombre : 'Sin Estado'}</td>
-                    <td>{tren.createdAt? new Date(new Date(tren.createdAt).getTime() + 3 * 60 * 60 * 1000).toLocaleDateString('es-AR'): 'Sin fecha'}</td>
-
+                    <td className='text-center'>{tren.modelo}</td>
+                    <td className='text-center'>{tren.color}</td>
+                    <td className='text-center'>{tren.createdAt? new Date(new Date(tren.createdAt).getTime() + 3 * 60 * 60 * 1000).toLocaleDateString('es-AR'): 'Sin fecha'}</td>
+                    <td className='text-center'>{tren.estadoActual ? tren.estadoActual.nombre : 'Sin Estado'}</td>
 
                     <td className='text-end'>
                       <button
