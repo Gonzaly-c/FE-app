@@ -36,8 +36,8 @@ export function CargaList({ cargas, fetchNextPage, hasNextPage, handleEdit, dele
                     <td className='border-dark' style={{ borderRightWidth: 1 }}>{carga.id}</td>
                     <td>{carga.name}</td>
                     <td>{carga.precio}</td>
-                    <td>{carga.estado}</td>
-                    <td>{carga.tipoCarga ? carga.tipoCarga.name : 'Sin tipo de carga'}</td>
+                    <td>{carga.estado}</td>                  
+                    <td>{carga.tipoCarga && carga.tipoCarga.estado === 'Activo' ? carga.tipoCarga.name : 'Sin tipo de carga'}</td>
                     <td>{carga.createdAt ? new Date(carga.createdAt).toLocaleDateString('es-AR'): 'Sin fecha'}</td>
 
                     <td className='text-end'>

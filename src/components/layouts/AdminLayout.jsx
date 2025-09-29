@@ -40,14 +40,16 @@ export default function AdminLayout () {
                 {isGestionOpen && (
                   <ul className='list-unstyled ms-3 w-100 h5'>
                     <li><Link className='nav-link text-white mt-2' to='/admin/trenes'>🚂Trenes</Link></li>
-                    <li><Link className='nav-link text-white mt-2' to='/admin/recorridos'>🗺️Recorridos</Link></li>
+                    <li><Link className="nav-link text-white mt-2" to="/admin/estadoTrenes">🛤️Estado Trenes</Link></li>
                     <li><Link className='nav-link text-white mt-2' to='/admin/conductores'>👨‍✈️Conductores</Link></li>
+                    <li><Link className='nav-link text-white mt-2' to='/admin/licencias'>📃Licencias</Link></li>
+                    <li><Link className="nav-link text-white mt-2" to="/admin/observaciones">🕵Observaciones</Link></li>
+                    <li><Link className="nav-link text-white mt-2" to="/admin/categoriaDenuncias">⚖Categoria de Denuncias</Link></li>                    
                     <li><Link className='nav-link text-white mt-2' to='/admin/cargas'>🔋Cargas</Link></li>
                     <li><Link className='nav-link text-white mt-2' to='/admin/tipoCargas'>💙Tipo Cargas</Link></li>
-                    <li><Link className='nav-link text-white mt-2' to='/admin/licencias'>📃Licencias</Link></li>
-                    <li><Link className="nav-link text-white mt-2" to="/admin/categoriaDenuncias">⚖Categoria de Denuncias</Link></li>
-                    <li><Link className="nav-link text-white mt-2" to="/admin/observaciones">🕵Observaciones</Link></li>
-                    <li><Link className="nav-link text-white mt-2" to="/admin/estadoTrenes">🛤️Estado Trenes</Link></li>
+                    <li><Link className='nav-link text-white mt-2' to='/admin/recorridos'>🗺️Recorridos</Link></li>
+                    
+                    
                   </ul>
                 )}
               </li>
