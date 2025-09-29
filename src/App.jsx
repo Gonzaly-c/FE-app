@@ -44,6 +44,11 @@ function App () {
               />
 
               <Route
+                path='lineaCargas'
+                element={<EnConstruccionCopy />}
+              />
+
+              <Route
                 path='viajes'
                 element={<ViajeCrud />}
               />

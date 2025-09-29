@@ -1,6 +1,10 @@
 import InfiniteScroll from "react-infinite-scroll-component"
+import { useNavigate } from 'react-router-dom';
+
 
 export function ViajeList({ viajes, fetchNextPage, hasNextPage, handleEdit, deleteMutation, handleAscOrder, ascOrder }) { 
+  
+  const navigate = useNavigate();
 
   return(
 
@@ -24,7 +28,7 @@ export function ViajeList({ viajes, fetchNextPage, hasNextPage, handleEdit, dele
               <td>Inicio</td>
               <td>Fin</td>
               <td>Estado</td>
-              <td className='text-end' style={{ paddingRight: 75 }}>Acción</td>
+              <td className='text-center' style={{ paddingRight: 75} }>Acción</td>
             </tr>
           </thead>
 
@@ -39,18 +43,52 @@ export function ViajeList({ viajes, fetchNextPage, hasNextPage, handleEdit, dele
                     <td>{viaje.recorrido.ciudadSalida}-{viaje.recorrido.ciudadLlegada}</td>
                     <td>{viaje.fechaIni? new Date(new Date(viaje.fechaIni).getTime() + 3 * 60 * 60 * 1000).toLocaleDateString('es-AR'): 'Sin fecha'}</td>
                     <td>{viaje.fechaFin? new Date(new Date(viaje.fechaFin).getTime() + 3 * 60 * 60 * 1000).toLocaleDateString('es-AR'): 'Sin fecha'}</td>
-                    <td>{viaje.estado ? viaje.estado : 'Sin Estado'}</td>
+                    
+                    <td>
+                      {viaje.estado === 'Inactivo'
+                        ? 'Cancelado/Suspendido'
+                        : (() => {
+                            const hoy = new Date();
+                            const fechaIni = new Date(viaje.fechaIni);
+                            const fechaFin = new Date(viaje.fechaFin);
+
+                            if (fechaFin < hoy) return 'Finalizado';
+                            if (fechaIni > hoy) return 'Programado';
+                            if (fechaIni <= hoy && fechaFin >= hoy) return 'En curso';
+                            return 'Sin Estado';
+                          })()}
+                    </td>
 
 
+                    <td className='text-center'>
+                      
 
-                    <td className='text-end'>
+                    <button
+                      className='btn btn-sm text-white me-2'
+                      style={{ backgroundColor: '#009e00ff', color: '#fff', marginTop: '-5px'}}
+                      onClick={() => navigate(`/admin/lineaCargas?viajeId=${viaje.id}`)}
+                    >
+                      Ver Cargas
+                    </button>
+                    <button
+                      className='btn btn-sm text-white me-2'
+                      style={{ backgroundColor: '#009e00ff', color: '#fff', marginTop: '-5px' }}
+                      onClick={() => navigate(`/admin/observaciones?viajeId=${viaje.id}`)}
+                    >
+                      Ver Observaciones
+                    </button>
+
+
                       <button
-                        className='btn btn-sm bg-info text-white me-2'
+                        className='btn btn-sm bg-info text-white me-2' 
+                        style={{ marginTop: '-5px'}}
                         onClick={handleEdit.bind(this, viaje)}
+                        
                       >
                         Editar
                       </button>
-                      <button className='btn btn-sm bg-danger text-white' onClick={async () => deleteMutation(viaje.id)}>
+                      <button className='btn btn-sm bg-danger text-white' onClick={async () => deleteMutation(viaje.id)}
+                        style={{ marginTop: '-5px'}}>
                         Eliminar
                       </button>
                     </td>
