@@ -26,7 +26,7 @@ body,
   justify-content: space-between;
   padding: 1rem;
   box-sizing: border-box;
-  background: #343a40;
+  background: #1f1f1f;
   color: white;
   z-index: 1050;
   transform: translateX(0);

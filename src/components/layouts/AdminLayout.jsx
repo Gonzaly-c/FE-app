@@ -20,7 +20,7 @@ export default function AdminLayout () {
       {/* SIDEBAR */}
       <aside className={`sidebar ${showSidebar ? 'open' : 'closed'}`}>
         <div className='sidebar-top'>
-          <h1 className='brand'>RailTracker</h1>
+          <h1 className='mb-4 text-center text-white'>Mi ferrocarril</h1>
 
           <div className='sidebar-scroll'>
             <ul className='nav flex-column'>
@@ -39,15 +39,15 @@ export default function AdminLayout () {
 
                 {isGestionOpen && (
                   <ul className='list-unstyled ms-3 w-100 h5'>
-                    <li><Link className='nav-link text-white mt-2' to='/admin/trenes'>🚂Trenes</Link></li>
-                    <li><Link className="nav-link text-white mt-2" to="/admin/estadoTrenes">🛤️Estado Trenes</Link></li>
-                    <li><Link className='nav-link text-white mt-2' to='/admin/conductores'>👨‍✈️Conductores</Link></li>
-                    <li><Link className='nav-link text-white mt-2' to='/admin/licencias'>📃Licencias</Link></li>
-                    <li><Link className="nav-link text-white mt-2" to="/admin/observaciones">🕵Observaciones</Link></li>
-                    <li><Link className="nav-link text-white mt-2" to="/admin/categoriaDenuncias">⚖Categoria de Denuncias</Link></li>                    
-                    <li><Link className='nav-link text-white mt-2' to='/admin/cargas'>🔋Cargas</Link></li>
-                    <li><Link className='nav-link text-white mt-2' to='/admin/tipoCargas'>💙Tipo Cargas</Link></li>
-                    <li><Link className='nav-link text-white mt-2' to='/admin/recorridos'>🗺️Recorridos</Link></li>
+                    <li><Link className='nav-link text-white mt-2 text-center' to='/admin/trenes'>🚂Trenes</Link></li>
+                    <li><Link className="nav-link text-white mt-2 text-center" to="/admin/estadoTrenes">🛤️Estado Trenes</Link></li>
+                    <li><Link className='nav-link text-white mt-2 text-center' to='/admin/conductores'>👨‍✈️Conductores</Link></li>
+                    <li><Link className='nav-link text-white mt-2 text-center' to='/admin/licencias'>📃Licencias</Link></li>
+                    <li><Link className="nav-link text-white mt-2 text-center" to="/admin/observaciones">🕵Observaciones</Link></li>
+                    <li><Link className="nav-link text-white mt-2 text-center" to="/admin/categoriaDenuncias">⚖Categoria de Denuncias</Link></li>                    
+                    <li><Link className='nav-link text-white mt-2 text-center' to='/admin/cargas'>🔋Cargas</Link></li>
+                    <li><Link className='nav-link text-white mt-2 text-center' to='/admin/tipoCargas'>💙Tipo Cargas</Link></li>
+                    <li><Link className='nav-link text-white mt-2 text-center' to='/admin/recorridos'>🗺️Recorridos</Link></li>
                     
                     
                   </ul>
