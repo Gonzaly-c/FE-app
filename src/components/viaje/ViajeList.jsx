@@ -5,6 +5,43 @@ import { useNavigate } from 'react-router-dom';
 export function ViajeList({ viajes, fetchNextPage, hasNextPage, handleEdit, deleteMutation, handleAscOrder, ascOrder }) { 
   
   const navigate = useNavigate();
+  const EstadoBadge = ({ viaje }) => {
+    const hoy = new Date();
+    const fechaIni = new Date(viaje.fechaIni);
+    const fechaFin = new Date(viaje.fechaFin);
+
+    let estadoTexto = 'Sin Estado';
+
+    if (viaje.estado === 'Inactivo') {
+      estadoTexto = 'Cancelado/Suspendido';
+    } else {
+      if (fechaFin < hoy) estadoTexto = 'Finalizado';
+      else if (fechaIni > hoy) estadoTexto = 'Programado';
+      else if (fechaIni <= hoy && fechaFin >= hoy) estadoTexto = 'En curso';
+    }
+
+    const map = {
+      'Finalizado': 'success',
+      'En curso': 'warning',
+      'Cancelado/Suspendido': 'danger',
+      'Programado': 'info',
+      'Sin Estado': 'secondary',
+    };
+
+    const variant = map[estadoTexto];
+
+    return (
+      <span className={`btn btn-sm bg-${variant} text-white me-2`} style={{ pointerEvents: 'none', marginTop: '-10px',
+        minWidth: '180px',
+        textAlign: 'center',
+        fontWeight: '500',
+        lineHeight: '2.5',
+        
+ }}>
+        {estadoTexto}
+      </span>
+    );
+  };
 
   return(
 
@@ -44,20 +81,10 @@ export function ViajeList({ viajes, fetchNextPage, hasNextPage, handleEdit, dele
                     <td className='text-center'>{viaje.fechaIni? new Date(new Date(viaje.fechaIni).getTime() + 3 * 60 * 60 * 1000).toLocaleDateString('es-AR'): 'Sin fecha'}</td>
                     <td className='text-center'>{viaje.fechaFin? new Date(new Date(viaje.fechaFin).getTime() + 3 * 60 * 60 * 1000).toLocaleDateString('es-AR'): 'Sin fecha'}</td>
                     
-                    <td className='text-center'>
-                      {viaje.estado === 'Inactivo'
-                        ? 'Cancelado/Suspendido'
-                        : (() => {
-                            const hoy = new Date();
-                            const fechaIni = new Date(viaje.fechaIni);
-                            const fechaFin = new Date(viaje.fechaFin);
-
-                            if (fechaFin < hoy) return 'Finalizado';
-                            if (fechaIni > hoy) return 'Programado';
-                            if (fechaIni <= hoy && fechaFin >= hoy) return 'En curso';
-                            return 'Sin Estado';
-                          })()}
+                    <td className="text-center">
+                      <EstadoBadge viaje={viaje} />
                     </td>
+
 
 
                     <td className='text-center'>
@@ -65,14 +92,14 @@ export function ViajeList({ viajes, fetchNextPage, hasNextPage, handleEdit, dele
 
                     <button
                       className='btn btn-sm text-white me-2'
-                      style={{ backgroundColor: '#009e00ff', color: '#fff', marginTop: '-5px'}}
+                      style={{ backgroundColor: '#009e00ff', color: '#fff', marginTop: '-10px'}}
                       onClick={() => navigate(`/admin/lineaCargas?viajeId=${viaje.id}`)}
                     >
                       Ver Cargas
                     </button>
                     <button
                       className='btn btn-sm text-white me-2'
-                      style={{ backgroundColor: '#009e00ff', color: '#fff', marginTop: '-5px' }}
+                      style={{ backgroundColor: '#009e00ff', color: '#fff', marginTop: '-10px' }}
                       onClick={() => navigate(`/admin/observaciones?viajeId=${viaje.id}`)}
                     >
                       Ver Observaciones
@@ -81,14 +108,14 @@ export function ViajeList({ viajes, fetchNextPage, hasNextPage, handleEdit, dele
 
                       <button
                         className='btn btn-sm bg-info text-white me-2' 
-                        style={{ marginTop: '-5px'}}
+                        style={{ marginTop: '-10px'}}
                         onClick={handleEdit.bind(this, viaje)}
                         
                       >
                         Editar
                       </button>
                       <button className='btn btn-sm bg-danger text-white' onClick={async () => deleteMutation(viaje.id)}
-                        style={{ marginTop: '-5px'}}>
+                        style={{ marginTop: '-10px'}}>
                         Eliminar
                       </button>
                     </td>
