@@ -1,7 +1,35 @@
 import InfiniteScroll from "react-infinite-scroll-component"
 
 export function TipoCargaList({ tipoCargas, fetchNextPage, hasNextPage, handleEdit, deleteMutation, handleAscOrder, ascOrder }) { 
+  const EstadoBadge = ({ estado }) => {
+    let estadoTexto = 'Sin estado';
 
+    if (estado === 'Activo') {
+      estadoTexto = 'Activo';
+    } else if (estado === 'Inactivo') {
+      estadoTexto = 'Inactivo';
+    }
+
+    const map = {
+      'Activo': 'success',
+      'Inactivo': 'danger',
+      'Sin estado': 'secondary',
+    };
+
+    const variant = map[estadoTexto];
+
+    return (
+      <span className={`btn btn-sm bg-${variant} text-white me-2`} style={{ pointerEvents: 'none', marginTop: '-10px',
+        minWidth: '180px',
+        textAlign: 'center',
+        fontWeight: '500',
+        lineHeight: '2.5',
+        
+ }}>
+        {estadoTexto}
+      </span>
+    );
+  };
   return(
 
     <InfiniteScroll
@@ -33,11 +61,12 @@ export function TipoCargaList({ tipoCargas, fetchNextPage, hasNextPage, handleEd
                 return (
                   <tr key={tipoCarga.id}>
                     <td className='border-dark' style={{ borderRightWidth: 1 }}>{tipoCarga.id}</td>
-                    <td className='text-center'>{tipoCarga.name}</td>
-                    <td className='text-center'>{tipoCarga.desc}</td>
+                    <td className='text-center'>{tipoCarga.name?tipoCarga.name:'Sin nombre'}</td>
+                    <td className='text-center'>{tipoCarga.desc?tipoCarga.desc:'Sin descripcion'}</td>
                     <td className='text-center'>{tipoCarga.createdAt? new Date(new Date(tipoCarga.createdAt).getTime() + 3 * 60 * 60 * 1000).toLocaleDateString('es-AR'): 'Sin fecha'}</td>
-                    <td className='text-center'>{tipoCarga.estado ? tipoCarga.estado : 'Sin Estado'}</td>
-
+                    <td className='text-center'>
+                      <EstadoBadge estado={tipoCarga.estado} />
+                    </td>
 
                     <td className='text-end'>
                       <button style={{ marginTop: '-10px'}}

@@ -1,6 +1,36 @@
 import InfiniteScroll from "react-infinite-scroll-component"
 
 export function RecorridoList({ recorridos, fetchNextPage, hasNextPage, handleEdit, deleteMutation, handleAscOrder, ascOrder }) { 
+  
+  const EstadoBadge = ({ estado }) => {
+    let estadoTexto = 'Sin estado';
+
+    if (estado === 'Activo') {
+      estadoTexto = 'Activo';
+    } else if (estado === 'Inactivo') {
+      estadoTexto = 'Inactivo';
+    }
+
+    const map = {
+      'Activo': 'success',
+      'Inactivo': 'danger',
+      'Sin estado': 'secondary',
+    };
+
+    const variant = map[estadoTexto];
+
+    return (
+      <span className={`btn btn-sm bg-${variant} text-white me-2`} style={{ pointerEvents: 'none', marginTop: '-10px',
+        minWidth: '180px',
+        textAlign: 'center',
+        fontWeight: '500',
+        lineHeight: '2.5',
+        
+ }}>
+        {estadoTexto}
+      </span>
+    );
+  };
 
   return(
 
@@ -33,12 +63,13 @@ export function RecorridoList({ recorridos, fetchNextPage, hasNextPage, handleEd
                 return (
                   <tr key={recorrido.id}>
                     <td className='border-dark' style={{ borderRightWidth: 1 }}>{recorrido.id}</td>
-                    <td className='text-center'>{recorrido.ciudadSalida}</td>
-                    <td className='text-center'>{recorrido.ciudadLlegada}</td>
-                    <td className='text-center'>{recorrido.totalKm}</td>
+                    <td className='text-center'>{recorrido.ciudadSalida?recorrido.ciudadSalida:'Sin ciudad de salida'}</td>
+                    <td className='text-center'>{recorrido.ciudadLlegada?recorrido.ciudadLlegada:'Sin ciudad de llegada'}</td>
+                    <td className='text-center'>{recorrido.totalKm?recorrido.totalKm:'Sin total de km'}</td>
                     <td className='text-center'>{recorrido.createdAt? new Date(new Date(recorrido.createdAt).getTime() + 3 * 60 * 60 * 1000).toLocaleDateString('es-AR'): 'Sin fecha'}</td>
-                    <td className='text-center'>{recorrido.estado}</td>
-
+                    <td className='text-center'>
+                      <EstadoBadge estado={recorrido.estado} />
+                    </td>
                     <td className='text-end'>
                       <button style={{ marginTop: '-10px'}}
                         className='btn btn-sm bg-info text-white me-2'

@@ -1,7 +1,35 @@
 import InfiniteScroll from "react-infinite-scroll-component"
 
 export function CargaList({ cargas, fetchNextPage, hasNextPage, handleEdit, deleteMutation, handleAscOrder, ascOrder }) { 
+  const EstadoBadge = ({ estado }) => {
+    let estadoTexto = 'Sin estado';
 
+    if (estado === 'Activo') {
+      estadoTexto = 'Activo';
+    } else if (estado === 'Inactivo') {
+      estadoTexto = 'Inactivo';
+    }
+
+    const map = {
+      'Activo': 'success',
+      'Inactivo': 'danger',
+      'Sin estado': 'secondary',
+    };
+
+    const variant = map[estadoTexto];
+
+    return (
+      <span className={`btn btn-sm bg-${variant} text-white me-2`} style={{ pointerEvents: 'none', marginTop: '-10px',
+        minWidth: '180px',
+        textAlign: 'center',
+        fontWeight: '500',
+        lineHeight: '2.5',
+        
+ }}>
+        {estadoTexto}
+      </span>
+    );
+  };
   return(
 
     <InfiniteScroll
@@ -33,11 +61,13 @@ export function CargaList({ cargas, fetchNextPage, hasNextPage, handleEdit, dele
                 return (
                   <tr key={carga.id}>
                     <td className='border-dark' style={{ borderRightWidth: 1 }}>{carga.id}</td>
-                    <td className='text-center'>{carga.name}</td>
-                    <td className='text-center'>{carga.precio}</td>                                  
+                    <td className='text-center'>{carga.name ? carga.name : 'Sin nombre'}</td>
+                    <td className='text-center'>{carga.precio ? carga.precio : 'Sin precio'}</td>                                  
                     <td className='text-center'>{carga.tipoCarga && carga.tipoCarga.estado === 'Activo' ? carga.tipoCarga.name : 'Sin tipo de carga'}</td>
                     <td className='text-center'>{carga.createdAt? new Date(new Date(carga.createdAt).getTime() + 3 * 60 * 60 * 1000).toLocaleDateString('es-AR'): 'Sin fecha'}</td>
-                    <td className='text-center'>{carga.estado}</td>   
+                    <td className='text-center'>
+                      <EstadoBadge estado={carga.estado} />
+                    </td>
                     <td className='text-end'>
                       <button style={{ marginTop: '-10px'}}
                         className='btn btn-sm bg-info text-white me-2'

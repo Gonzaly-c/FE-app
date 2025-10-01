@@ -75,9 +75,9 @@ export function ViajeList({ viajes, fetchNextPage, hasNextPage, handleEdit, dele
                 return (
                   <tr key={viaje.id}>
                     <td className='border-dark-center' style={{ borderRightWidth: 1 }}>{viaje.id}</td>
-                    <td className='text-center'>{viaje.conductor.nombre} {viaje.conductor.apellido}</td>
-                    <td className='text-center'>{viaje.tren.modelo} (color: {viaje.tren.color})</td>
-                    <td className='text-center'>{viaje.recorrido.ciudadSalida}-{viaje.recorrido.ciudadLlegada}</td>
+                    <td className='text-center'>{viaje.conductor.nombre?viaje.conductor.nombre:'Sin Conductor'} {viaje.conductor.apellido?viaje.conductor.apellido:''}</td>
+                    <td className='text-center'>{viaje.tren.modelo?viaje.tren.modelo:'Sin modelo'} (color: {viaje.tren.color?viaje.tren.color:'Sin color'})</td>
+                    <td className='text-center'>{viaje.recorrido.ciudadSalida?viaje.recorrido.ciudadSalida:'Sin ciudad de salida'}-{viaje.recorrido.ciudadLlegada?viaje.recorrido.ciudadLlegada:'Sin ciudad de llegada'}</td>
                     <td className='text-center'>{viaje.fechaIni? new Date(new Date(viaje.fechaIni).getTime() + 3 * 60 * 60 * 1000).toLocaleDateString('es-AR'): 'Sin fecha'}</td>
                     <td className='text-center'>{viaje.fechaFin? new Date(new Date(viaje.fechaFin).getTime() + 3 * 60 * 60 * 1000).toLocaleDateString('es-AR'): 'Sin fecha'}</td>
                     

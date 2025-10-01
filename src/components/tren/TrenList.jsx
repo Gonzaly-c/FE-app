@@ -2,6 +2,43 @@ import InfiniteScroll from "react-infinite-scroll-component"
 
 export function TrenList({ trenes, fetchNextPage, hasNextPage, handleEdit, deleteMutation, handleAscOrder, ascOrder }) { 
 
+  const EstadoBadgeTren = ({ estado }) => {
+    let estadoTexto = 'Sin estado';
+
+    if (estado === 'Disponible') {
+      estadoTexto = 'Disponible';
+    } else if (estado === 'Obsoleto') {
+      estadoTexto = 'Obsoleto';
+    } else if (estado === 'En reparacion') {
+      estadoTexto = 'En reparación';
+    }
+
+    const map = {
+      'Disponible': 'success',
+      'Obsoleto': 'danger',
+      'En reparación': 'warning',
+      'Sin estado': 'dark',
+    };
+
+    const variant = map[estadoTexto];
+
+    return (
+      <span
+        className={`btn btn-sm bg-${variant} text-white me-2`}
+        style={{
+          pointerEvents: 'none',
+          marginTop: '-10px',
+          minWidth: '180px',
+          textAlign: 'center',
+          fontWeight: '500',
+          lineHeight: '2.5',
+        }}
+      >
+        {estadoTexto}
+      </span>
+    );
+  };
+
   return(
 
     <InfiniteScroll
@@ -32,10 +69,17 @@ export function TrenList({ trenes, fetchNextPage, hasNextPage, handleEdit, delet
                 return (
                   <tr key={tren.id}>
                     <td className='border-dark' style={{ borderRightWidth: 1 }}>{tren.id}</td>
-                    <td className='text-center'>{tren.modelo}</td>
-                    <td className='text-center'>{tren.color}</td>
+                    <td className='text-center'>{tren.modelo?tren.modelo:'Sin modelo'}</td>
+                    <td className='text-center'>{tren.color?tren.color:'Sin color'}</td>
                     <td className='text-center'>{tren.createdAt? new Date(new Date(tren.createdAt).getTime() + 3 * 60 * 60 * 1000).toLocaleDateString('es-AR'): 'Sin fecha'}</td>
-                    <td className='text-center'>{tren.estadoActual ? tren.estadoActual.nombre : 'Sin Estado'}</td>
+                    
+
+                    <td className='text-center'>
+                      <EstadoBadgeTren estado={tren.estadoActual?.nombre ?? 'Sin estado'} />
+                    </td>
+
+
+
 
                     <td className='text-end'>
                       <button style={{ marginTop: '-10px'}}

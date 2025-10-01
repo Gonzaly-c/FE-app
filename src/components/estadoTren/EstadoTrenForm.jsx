@@ -66,7 +66,6 @@ export function EstadoTrenForm({ onSuccess, estadoTrenToEdit }) {
                 <option value='En reparacion'>En reparación</option>
                 <option value='Obsoleto'>Obsoleto</option>
                 <option value='Disponible'>Disponible</option>
-                <option value='Ocupado'>Ocupado</option>
             </select>
 
             {errors.nombre && <span className='text-danger'>{errors.nombre.message}</span>}

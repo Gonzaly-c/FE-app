@@ -1,7 +1,35 @@
 import InfiniteScroll from "react-infinite-scroll-component"
 
 export function CategoriaDenunciaList({ categoriaDenuncias, fetchNextPage, hasNextPage, handleEdit, deleteMutation, handleAscOrder, ascOrder }) { 
+  const EstadoBadge = ({ estado }) => {
+    let estadoTexto = 'Sin estado';
 
+    if (estado === 'Activo') {
+      estadoTexto = 'Activo';
+    } else if (estado === 'Inactivo') {
+      estadoTexto = 'Inactivo';
+    }
+
+    const map = {
+      'Activo': 'success',
+      'Inactivo': 'danger',
+      'Sin estado': 'secondary',
+    };
+
+    const variant = map[estadoTexto];
+
+    return (
+      <span className={`btn btn-sm bg-${variant} text-white me-2`} style={{ pointerEvents: 'none', marginTop: '-10px',
+        minWidth: '180px',
+        textAlign: 'center',
+        fontWeight: '500',
+        lineHeight: '2.5',
+        
+ }}>
+        {estadoTexto}
+      </span>
+    );
+  };
   return(
 
     <InfiniteScroll
@@ -33,10 +61,12 @@ export function CategoriaDenunciaList({ categoriaDenuncias, fetchNextPage, hasNe
                 return (
                   <tr key={categoriaDenuncia.id}>
                     <td className='border-dark' style={{ borderRightWidth: 1 }}>{categoriaDenuncia.id}</td>
-                    <td className='text-center'>{categoriaDenuncia.titulo}</td>
-                    <td className='text-center'>{categoriaDenuncia.descripcion}</td>
+                    <td className='text-center'>{categoriaDenuncia.titulo ? categoriaDenuncia.titulo : 'Sin titulo'}</td>
+                    <td className='text-center'>{categoriaDenuncia.descripcion? categoriaDenuncia.descripcion : 'Sin descripcion'}</td>
                     <td className='text-center'>{categoriaDenuncia.createdAt? new Date(new Date(categoriaDenuncia.createdAt).getTime() + 3 * 60 * 60 * 1000).toLocaleDateString('es-AR'): 'Sin fecha'}</td>
-                    <td className='text-center'>{categoriaDenuncia.estado ? categoriaDenuncia.estado : 'Sin Estado'}</td>
+                    <td className='text-center'>
+                      <EstadoBadge estado={categoriaDenuncia.estado} />
+                    </td>
                     
                     <td className='text-end'>
                       <button style={{ marginTop: '-10px'}}

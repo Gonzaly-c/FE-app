@@ -1,6 +1,44 @@
 import InfiniteScroll from 'react-infinite-scroll-component'
 
 export function ConductorList ({ conductores, fetchNextPage, hasNextPage, handleEdit, deleteMutation, handleAscOrder, ascOrder }) {
+  
+  const EstadoBadgeConductor = ({ estado }) => {
+    let estadoTexto = 'Sin estado';
+
+    if (estado === 'Activo') {
+      estadoTexto = 'Activo';
+    } else if (estado === 'Inactivo') {
+      estadoTexto = 'Inactivo';
+    } else if (estado === 'Pendiente') {
+      estadoTexto = 'Pendiente';
+    }
+
+    const map = {
+      'Activo': 'success',
+      'Inactivo': 'danger',
+      'Pendiente': 'warning',
+      'Sin estado': 'secondary',
+    };
+
+    const variant = map[estadoTexto];
+
+    return (
+      <span
+        className={`btn btn-sm bg-${variant} text-white me-2`}
+        style={{
+          pointerEvents: 'none',
+          marginTop: '-10px',
+          minWidth: '180px',
+          textAlign: 'center',
+          fontWeight: '500',
+          lineHeight: '2.5',
+        }}
+      >
+        {estadoTexto}
+      </span>
+    );
+  };
+
   return (
     <InfiniteScroll
       dataLength={conductores.length}
@@ -34,12 +72,16 @@ export function ConductorList ({ conductores, fetchNextPage, hasNextPage, handle
               .map(conductor => (
                 <tr key={conductor.id}>
                   <td className='border-dark' style={{ borderRightWidth: 1 }}>{conductor.id}</td>
-                  <td className='text-center'>{conductor.nombre}</td>
-                  <td className='text-center'>{conductor.apellido}</td>
-                  <td className='text-center'>{conductor.email}</td>
+                  <td className='text-center'>{conductor.nombre? conductor.nombre : 'Sin nombre'}</td>
+                  <td className='text-center'>{conductor.apellido? conductor.apellido : 'Sin apellido'}</td>
+                  <td className='text-center'>{conductor.email? conductor.email : 'Sin email'}</td>
                   
                   <td className='text-center'>{conductor.createdAt? new Date(new Date(conductor.createdAt).getTime() + 3 * 60 * 60 * 1000).toLocaleDateString('es-AR'): 'Sin fecha'}</td>
-                  <td className='text-center'>{conductor.estado ? conductor.estado : 'Sin Estado'}</td>
+                  
+                  <td className='text-center'>
+                    <EstadoBadgeConductor estado={conductor.estado} />
+                  </td>
+
                   <td className='text-end'>
                     <button style={{ marginTop: '-10px'}} className='btn btn-sm bg-info text-white me-2' onClick={() => handleEdit(conductor)}>
                       Editar

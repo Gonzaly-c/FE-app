@@ -17,7 +17,7 @@ import { EnConstruccionCopy } from './pages/EnConstruccion copy.jsx'
 import { EstadoTrenCrud } from './pages/EstadoTrenCrud.jsx'
 import  DashboardTrenes  from './pages/DashboardTrenes.jsx'
 import { ViajeCrud } from './pages/ViajeCrud.jsx'
-
+import { ObservacionCrud } from './pages/ObservacionCrud.jsx'
 
 function App () {
   return (
@@ -80,7 +80,7 @@ function App () {
 
               <Route
                 path='observaciones'
-                element={<EnConstruccionCopy/>}
+                element={<ObservacionCrud/>}
               />
 
               <Route
