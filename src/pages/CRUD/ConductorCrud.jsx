@@ -1,7 +1,7 @@
-import { Modal } from '../components/Modal.jsx'
-import { ConductorForm } from '../components/conductor/ConductorForm.jsx'
-import { ConductorList } from '../components/conductor/ConductorList.jsx'
-import { useConductorCrud } from '../hooks/conductor/useConductorCrud.js'
+import { Modal } from '../../components/Modal.jsx'
+import { ConductorForm } from '../../components/conductor/ConductorForm.jsx'
+import { ConductorList } from '../../components/conductor/ConductorList.jsx'
+import { useConductorCrud } from '../../hooks/conductor/useConductorCrud.js'
 import { useQueryClient } from '@tanstack/react-query'
 
 export function ConductorCrud () {

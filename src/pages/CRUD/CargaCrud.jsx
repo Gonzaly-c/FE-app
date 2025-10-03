@@ -1,7 +1,7 @@
-import { Modal } from '../components/Modal.jsx'
-import { CargaForm } from '../components/carga/CargaForm.jsx'
-import { CargaList } from '../components/carga/CargaList.jsx'
-import { useCargaCrud } from '../hooks/carga/useCargasCrud.js'
+import { Modal } from '../../components/Modal.jsx'
+import { CargaForm } from '../../components/carga/CargaForm.jsx'
+import { CargaList } from '../../components/carga/CargaList.jsx'
+import { useCargaCrud } from '../../hooks/carga/useCargasCrud.js'
 import { useQueryClient } from '@tanstack/react-query'
 
 export function CargaCrud() {

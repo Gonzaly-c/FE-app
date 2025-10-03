@@ -1,7 +1,7 @@
-import { Modal } from '../components/Modal.jsx'
-import { CategoriaDenunciaForm } from '../components/categoriaDenuncia/CategoriaDenunciaForm.jsx'
-import { CategoriaDenunciaList } from '../components/categoriaDenuncia/CategoriaDenunciaList.jsx'
-import { useCategoriaDenunciaCrud } from '../hooks/categoriaDenuncia/useCategoriaDenunciaCrud.js'
+import { Modal } from '../../components/Modal.jsx'
+import { CategoriaDenunciaForm } from '../../components/categoriaDenuncia/CategoriaDenunciaForm.jsx'
+import { CategoriaDenunciaList } from '../../components/categoriaDenuncia/CategoriaDenunciaList.jsx'
+import { useCategoriaDenunciaCrud } from '../../hooks/categoriaDenuncia/useCategoriaDenunciaCrud.js'
 import { useQueryClient } from '@tanstack/react-query'
 
 export function CategoriaDenunciaCrud() {

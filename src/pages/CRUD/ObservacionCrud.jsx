@@ -1,7 +1,7 @@
-import { Modal } from '../components/Modal.jsx'
-import { ObservacionForm } from '../components/observacion/ObservacionForm.jsx'
-import { ObservacionList } from '../components/observacion/ObservacionList.jsx'
-import { useObservacionCrud } from '../hooks/observacion/useObservacionCrud.js'
+import { Modal } from '../../components/Modal.jsx'
+import { ObservacionForm } from '../../components/observacion/ObservacionForm.jsx'
+import { ObservacionList } from '../../components/observacion/ObservacionList.jsx'
+import { useObservacionCrud } from '../../hooks/observacion/useObservacionCrud.js'
 import { useQueryClient } from '@tanstack/react-query'
 
 export function ObservacionCrud() {

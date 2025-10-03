@@ -1,7 +1,7 @@
-import { Modal } from '../components/Modal.jsx'
-import { TipoCargaForm } from '../components/tipoCarga/TipoCargaForm.jsx'
-import { TipoCargaList } from '../components/tipoCarga/TipoCargaList.jsx'
-import { useTipoCargaCrud } from '../hooks/tipoCarga/useTipoCargaCrud.js'
+import { Modal } from '../../components/Modal.jsx'
+import { TipoCargaForm } from '../../components/tipoCarga/TipoCargaForm.jsx'
+import { TipoCargaList } from '../../components/tipoCarga/TipoCargaList.jsx'
+import { useTipoCargaCrud } from '../../hooks/tipoCarga/useTipoCargaCrud.js'
 import { useQueryClient } from '@tanstack/react-query'
 
 export function TipoCargaCrud() {

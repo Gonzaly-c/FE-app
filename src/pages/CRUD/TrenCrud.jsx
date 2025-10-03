@@ -1,7 +1,7 @@
-import { Modal } from '../components/Modal.jsx'
-import { TrenForm } from '../components/tren/TrenForm.jsx'
-import { TrenList } from '../components/tren/TrenList.jsx'
-import { useTrenCrud } from '../hooks/tren/useTrenCrud.js'
+import { Modal } from '../../components/Modal.jsx'
+import { TrenForm } from '../../components/tren/TrenForm.jsx'
+import { TrenList } from '../../components/tren/TrenList.jsx'
+import { useTrenCrud } from '../../hooks/tren/useTrenCrud.js'
 import { useQueryClient } from '@tanstack/react-query'
 
 export function TrenCrud() {

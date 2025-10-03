@@ -1,7 +1,7 @@
-import { Modal } from '../components/Modal'
-import { LicenciaForm } from '../components/licencia/LicenciaForm.jsx'
-import { LicenciaList } from '../components/licencia/LicenciaList.jsx'
-import { useLicenciaCrud } from '../hooks/licencia/useLicenciaCrud.js'
+import { Modal } from '../../components/Modal.jsx'
+import { LicenciaForm } from '../../components/licencia/LicenciaForm.jsx'
+import { LicenciaList } from '../../components/licencia/LicenciaList.jsx'
+import { useLicenciaCrud } from '../../hooks/licencia/useLicenciaCrud.js'
 import { useQueryClient } from '@tanstack/react-query'
 
 export function LicenciaCrud() {

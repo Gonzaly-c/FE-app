@@ -1,7 +1,7 @@
-import { Modal } from '../components/Modal.jsx'
-import { EstadoTrenForm } from '../components/estadoTren/EstadoTrenForm.jsx'
-import { EstadoTrenList } from '../components/estadoTren/EstadoTrenList.jsx'
-import { useEstadoTrenCrud } from '../hooks/estadoTren/useEstadoTrenCrud.js'
+import { Modal } from '../../components/Modal.jsx'
+import { EstadoTrenForm } from '../../components/estadoTren/EstadoTrenForm.jsx'
+import { EstadoTrenList } from '../../components/estadoTren/EstadoTrenList.jsx'
+import { useEstadoTrenCrud } from '../../hooks/estadoTren/useEstadoTrenCrud.js'
 import { useQueryClient } from '@tanstack/react-query'
 
 export function EstadoTrenCrud() {

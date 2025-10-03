@@ -6,18 +6,19 @@ import { EnConstruccion } from './pages/EnConstruccion.jsx'
 import { ProtectedRoute } from './components/ProtectedRoute.jsx'
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 import Page404 from './pages/404.jsx'
-import { TrenCrud } from './pages/TrenCrud.jsx'
-import { RecorridoCrud } from './pages/RecorridoCrud.jsx'
-import { CargaCrud } from './pages/CargaCrud.jsx'
-import { ConductorCrud } from './pages/ConductorCrud.jsx'
-import { TipoCargaCrud } from './pages/TipoCargaCrud.jsx'
-import { LicenciaCrud } from './pages/LicenciaCrud.jsx'
-import { CategoriaDenunciaCrud } from './pages/CategoriaDenunciaCrud.jsx'
+import { TrenCrud } from './pages/CRUD/TrenCrud.jsx'
+import { RecorridoCrud } from './pages/CRUD/RecorridoCrud.jsx'
+import { CargaCrud } from './pages/CRUD/CargaCrud.jsx'
+import { ConductorCrud } from './pages/CRUD/ConductorCrud.jsx'
+import { TipoCargaCrud } from './pages/CRUD/TipoCargaCrud.jsx'
+import { LicenciaCrud } from './pages/CRUD/LicenciaCrud.jsx'
+import { CategoriaDenunciaCrud } from './pages/CRUD/CategoriaDenunciaCrud.jsx'
 import { EnConstruccionCopy } from './pages/EnConstruccion copy.jsx'
-import { EstadoTrenCrud } from './pages/EstadoTrenCrud.jsx'
+import { EstadoTrenCrud } from './pages/CRUD/EstadoTrenCrud.jsx'
 import  DashboardTrenes  from './pages/DashboardTrenes.jsx'
-import { ViajeCrud } from './pages/ViajeCrud.jsx'
-import { ObservacionCrud } from './pages/ObservacionCrud.jsx'
+import { ViajeCrud } from './pages/CRUD/ViajeCrud.jsx'
+import { ObservacionCrud } from './pages/CRUD/ObservacionCrud.jsx'
+import { LineaCargaCrud } from './pages/CRUD/LineaCargaCrud.jsx'
 
 function App () {
   return (
@@ -45,7 +46,7 @@ function App () {
 
               <Route
                 path='lineaCargas'
-                element={<EnConstruccionCopy />}
+                element={<LineaCargaCrud />}
               />
 
               <Route

@@ -1,7 +1,7 @@
-import { Modal } from '../components/Modal.jsx'
-import { RecorridoForm } from '../components/recorrido/RecorridoForm.jsx'
-import { RecorridoList } from '../components/recorrido/RecorridoList.jsx'
-import { useRecorridoCrud } from '../hooks/recorrido/useRecorridoCrud.js'
+import { Modal } from '../../components/Modal.jsx'
+import { RecorridoForm } from '../../components/recorrido/RecorridoForm.jsx'
+import { RecorridoList } from '../../components/recorrido/RecorridoList.jsx'
+import { useRecorridoCrud } from '../../hooks/recorrido/useRecorridoCrud.js'
 import { useQueryClient } from '@tanstack/react-query'
 
 export function RecorridoCrud() {

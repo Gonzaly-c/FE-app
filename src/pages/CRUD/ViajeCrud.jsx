@@ -1,7 +1,7 @@
-import { Modal } from '../components/Modal.jsx'
-import { ViajeForm } from '../components/viaje/ViajeForm.jsx'
-import { ViajeList } from '../components/viaje/ViajeList.jsx'
-import { useViajeCrud } from '../hooks/viaje/useViajeCrud.js'
+import { Modal } from '../../components/Modal.jsx'
+import { ViajeForm } from '../../components/viaje/ViajeForm.jsx'
+import { ViajeList } from '../../components/viaje/ViajeList.jsx'
+import { useViajeCrud } from '../../hooks/viaje/useViajeCrud.js'
 import { useQueryClient } from '@tanstack/react-query'
 
 export function ViajeCrud() {
