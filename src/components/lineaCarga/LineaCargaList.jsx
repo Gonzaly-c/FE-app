@@ -36,8 +36,8 @@ export function LineaCargaList ({ lineaCargas, fetchNextPage, hasNextPage, handl
       dataLength={lineaCargas.length}
       next={fetchNextPage}
       hasMore={hasNextPage}
-      loader={<h4 className='text-center'>Cargando más lineaCargas...</h4>}
-      endMessage={<p className='text-center'>No hay más lineaCargas</p>}
+      loader={<h4 className='text-center'>Cargando más linea de cargas...</h4>}
+      endMessage={<p className='text-center'>No hay más linea de cargas</p>}
       scrollThreshold={1}
       scrollableTarget='scrollableDiv'
     >
@@ -47,8 +47,8 @@ export function LineaCargaList ({ lineaCargas, fetchNextPage, hasNextPage, handl
             <tr>
               <td style={{ borderRightWidth: 1 }} onClick={handleAscOrder} role='button'>ID <span className='text-info'>{ascOrder ? '⋀' : '⋁'}</span></td>
               <td className='text-center'>Viaje</td>
-              <td className='text-center'>Categoria</td>
-              <td className='text-center'>LineaCargas</td>
+              <td className='text-center'>Carga</td>
+              <td className='text-center'>Cantidad de vagones</td>
               <td className='text-center'>Estado</td>
 
               <td className='text-end' style={{ paddingRight: 75 }}>Acción</td>
@@ -57,13 +57,17 @@ export function LineaCargaList ({ lineaCargas, fetchNextPage, hasNextPage, handl
 
           <tbody>
             {console.log(lineaCargas)}
-            {lineaCargas.map((lineaCarga) => {
-              return (
-                <tr key={lineaCarga.id}>
+            
+            {Array.isArray(lineaCargas) && lineaCargas
+              .filter(item => item !== undefined && item !== null)
+              .map((lineaCarga, index) => {
+                return (
+
+                <tr key={index}>
                   <td className='border-dark' style={{ borderRightWidth: 1 }}>{lineaCarga.id}</td>
                   <td className='text-center'>{lineaCarga.viaje.id?lineaCarga.viaje.id:'Sin id'}-{lineaCarga.viaje.recorrido.ciudadSalida?lineaCarga.viaje.recorrido.ciudadSalida:'Sin ciudad de salida'}/{lineaCarga.viaje.recorrido.ciudadLlegada?lineaCarga.viaje.recorrido.ciudadLlegada:'Sin ciudad de llegada'} ({lineaCarga.viaje.fechaIni? new Date(new Date(lineaCarga.viaje.fechaIni).getTime() + 3 * 60 * 60 * 1000).toLocaleDateString('es-AR'): 'Sin fecha'})</td>
-                  <td className='text-center'>{lineaCarga.categoriaDenuncia.titulo && lineaCarga.categoriaDenuncia.estado=='Activo'?lineaCarga.categoriaDenuncia.titulo:'Sin categoria'}</td>
-                  <td className='text-center'>{lineaCarga.lineaCargas?lineaCarga.lineaCargas:'Sin lineaCargas'}</td>
+                  <td className='text-center'>{lineaCarga.carga.name && lineaCarga.carga.estado=='Activo'?lineaCarga.carga.name:'Sin carga'}</td>
+                  <td className='text-center'>{lineaCarga.cantidadVagon?lineaCarga.cantidadVagon:'Sin cantidad de vagones'}</td>
                     <td className='text-center'>
                       <EstadoBadge estado={lineaCarga.estado} />
                     </td>

@@ -30,14 +30,14 @@ export function LineaCargaCrud() {
 
   return (
     <div>
-      <h1 className='h1 mt-2 text-center'>Lista de LineaCargas</h1>
+      <h1 className='h1 mt-2 text-center'>Lista de Lineas de Cargas</h1>
 
       <div className='d-flex justify-content-between mb-4'>
         <button
           className='btn btn-info'
           onClick={handleCreate}
         >
-          Crear una LineaCarga
+          Crear una Linea de Carga
         </button>
 
         <div className='input-group w-auto'>

@@ -1,20 +1,21 @@
 import { useForm } from 'react-hook-form'
 import { useLineaCargaPost } from '../../hooks/lineaCarga/useLineaCargaPost.js'
 import { useLineaCargaPut } from '../../hooks/lineaCarga/useLineaCargasPut.js'
-import { CategoriaDenunciaActivas } from '../../hooks/categoriaDenuncia/useCategoriaDenunciaQuery.js'
 import { ViajeFindAll } from '../../hooks/viaje/useViajeQuery.js'
+import { CargaActivos } from '../../hooks/carga/useCargaQuery.js'
+import { LineaCargaFindAll } from '../../hooks/lineaCarga/useLineaCargaQuery.js'
 
 export function LineaCargaForm ({ onSuccess, lineaCargaToEdit }) {
-  const { data: categoriaDenuncias = [] } = CategoriaDenunciaActivas()
+  const { data: cargas = [] } = CargaActivos()
 
   const { register, formState: { errors }, handleSubmit, isPending: isPendingForm } = useForm({
     mode: 'onBlur',
     defaultValues: lineaCargaToEdit
       ? {
-          lineaCargas: lineaCargaToEdit.lineaCargas,
           estado: lineaCargaToEdit.estado,
           idViaje: lineaCargaToEdit.viaje?.id,
-          idCategoria: lineaCargaToEdit.categoriaDenuncia?.id,
+          idCarga: lineaCargaToEdit.carga?.id,
+          cantidadVagon: lineaCargaToEdit.cantidadVagon,
         }
       : {},
   });
@@ -22,14 +23,24 @@ export function LineaCargaForm ({ onSuccess, lineaCargaToEdit }) {
   const { mutateAsync: handlePost, isError: isErrorPost } = useLineaCargaPost()
   const { mutateAsync: handlePut, isError: isErrorPut } = useLineaCargaPut()
   const { data: viajes = [] } = ViajeFindAll()
-  
+  const { data: todasLasLineas = [] } = LineaCargaFindAll()
+
   const onSubmit = async (formData) => {
     const lineaCarga = {
-      lineaCargas: formData.lineaCargas,      
-      estado: formData.estado,
-      idViaje: Number(formData.idViaje),
-      idCategoria: Number(formData.idCategoria)
-    }
+          estado: formData.estado,
+          idViaje: Number(formData.idViaje),
+          idCarga: Number(formData.idCarga),
+          cantidadVagon: Number(formData.cantidadVagon),
+        }
+        
+    const yaExiste = todasLasLineas.some(
+        (lc) => lc.viaje?.id === lineaCarga.idViaje && lc.carga?.id === lineaCarga.idCarga
+      )
+
+      if (!lineaCargaToEdit && yaExiste) {
+        alert('Ya existe una línea de carga con ese viaje y carga.')
+        return
+      }
 
     if (lineaCargaToEdit) {
       lineaCarga.id = lineaCargaToEdit.id
@@ -67,37 +78,41 @@ export function LineaCargaForm ({ onSuccess, lineaCargaToEdit }) {
       </div>
 
       <div className='mb-3'>
-        <label className='form-label'>Categoria</label>
+        <label className='form-label'>Carga</label>
         <select
-          {...register('idCategoria', { required: 'La categoria es requerida' })}
+          {...register('idCarga', { required: 'La carga es requerida' })}
           className='form-control'
-          defaultValue={lineaCargaToEdit?.categoria?.id || ''}
+          defaultValue={lineaCargaToEdit?.carga?.id || ''}
         >
-          <option value=''>Selecciona una categoria</option>
-          {categoriaDenuncias.map(c => (
+          <option value=''>Selecciona una carga</option>
+          {cargas.map(c => (
             <option key={c.id} value={c.id}>
-              {c.id}-{c.titulo} {/* el usuario ve nombre completo */}
+              {c.id}-{c.name} {/* el usuario ve nombre completo */}
             </option>
           ))}
         </select>
-        {errors.idCategoria && <span className='text-danger'>{errors.idCategoria.message}</span>}
+        {errors.idCarga && <span className='text-danger'>{errors.idCarga.message}</span>}
       </div>
 
 
-      <div className='mb-3'>
-        <label className='form-label' htmlFor='lineaCargas'>LineaCargas:</label>
-        <textarea
-          id='lineaCargas'
-          {...register('lineaCargas', {
-            required: 'La Observación es requerida',
-            value: lineaCargaToEdit ? lineaCargaToEdit.lineaCargas : ''
-          })}
-          className='form-control'
-          placeholder='Observación del viaje'
-          rows={6}
-          style={{ resize: 'vertical' }}
-        />
-        {errors.lineaCargas && <span className='text-danger'>{errors.lineaCargas.message}</span>}
+       <div className='mb-1'>
+      <label className="form-label" htmlFor='cantidadVagon'>Cantidad de vagones:</label>
+      <input
+        
+      {...register('cantidadVagon', {
+          required: 'Este campo es obligatorio',
+          pattern: {
+            value: /^[1-9][0-9]*$/, // solo enteros positivos
+            message: 'Debe ser un número entero mayor a 0',
+          },
+        })}
+
+        className="form-control"
+        placeholder="La cantidad de vagones de la carga"
+      />
+      {errors.cantidadVagon && (
+        <span className="text-danger">{errors.cantidadVagon.message}</span>
+      )}
       </div>
 
 
