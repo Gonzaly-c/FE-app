@@ -6,7 +6,7 @@ export function LineaCargaFindAll () {
     queryKey: ['lineaCargaFindAll'],
     queryFn: async () => {
       const res = await api.get('/lineaCarga', { withCredentials: true })
-      return res.data.data
+      return res.data.items
     }
   }))
 }
@@ -17,7 +17,7 @@ export function LineaCargaGetOne () {
     mutationFn: async (lineaCargaId) => {
       console.log(`/lineaCarga/${lineaCargaId}`)
       const lineaCarga = await api.get(`/lineaCarga/${lineaCargaId}`, { withCredentials: true })
-      return lineaCarga.data.data
+      return lineaCarga.data.items
     }
   })
 }
