@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from "react"
 import { useCargasDelete } from "./useCargasDelete.js"
 import { useCargasInfinite } from "./useCargaInfinite.js"
-import { useCargaQuery } from "./useCargaQuery.js"
+import { CargaGetOne } from "./useCargaQuery.js"
 
 export function useCargaCrud() {
   const [cargas, setCargas] = useState([])
@@ -10,7 +10,7 @@ export function useCargaCrud() {
   const { mutateAsync: deleteMutation } = useCargasDelete()
   const { data, fetchNextPage, hasNextPage, isLoading, isError, error } = useCargasInfinite()
   const [ascOrder, setAscOrder] = useState(false);
-  const { mutateAsync: findOneMutation} = useCargaQuery() // find one 
+  const { mutateAsync: findOneMutation} = CargaGetOne() // find one 
   
   useEffect(() => {
     const cargas = data?.pages.flatMap(page => page.items) ?? []

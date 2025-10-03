@@ -48,17 +48,12 @@ export default function AdminLayout () {
                     <li><Link className='nav-link text-white mt-2 text-center' to='/admin/cargas'>🔋Cargas</Link></li>
                     <li><Link className='nav-link text-white mt-2 text-center' to='/admin/tipoCargas'>💙Tipo Cargas</Link></li>
                     <li><Link className='nav-link text-white mt-2 text-center' to='/admin/recorridos'>🗺️Recorridos</Link></li>
-                    
-                    
+                    <li><Link className='nav-link text-white mt-2 text-center' to='/admin/lineaCargas'>📍Líneas de cargas</Link></li>
                   </ul>
                 )}
               </li>
-
               <li className='nav-item my-4 h4'>
                 <Link className='nav-link text-white' to='/admin/viajes'>🚆 Viajes</Link>
-              </li>
-              <li className='nav-item mb-4 h4'>
-                <Link className='nav-link text-white' to='/admin/perfil'>👤 Perfil</Link>
               </li>
             </ul>
           </div>

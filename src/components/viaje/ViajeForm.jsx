@@ -1,7 +1,9 @@
 import { useForm } from 'react-hook-form'
 import { useViajePost } from '../../hooks/viaje/useViajePost'
 import { useViajePut } from '../../hooks/viaje/useViajesPut'
-import { RecorridoActivos, TrenActivos, ConductorFindAll} from '../../hooks/Querys.js'
+import { RecorridoActivos } from '../../hooks/recorrido/useRecorridoQuery.js'
+import { TrenActivos } from '../../hooks/tren/useTrenQuery.js'
+import { ConductorFindAll } from '../../hooks/conductor/useConductorQuery.js'
 
 export function ViajeForm({ onSuccess, viajeToEdit }) {
     const { register, formState: { errors }, handleSubmit, isPending: isPendingForm, watch } = useForm({ mode: 'onBlur' })
@@ -226,6 +228,7 @@ export function ViajeForm({ onSuccess, viajeToEdit }) {
                 >
                 <option value=''>Seleccione un estado</option>
                 <option value='Activo'>Activo</option>
+                <option value='Pendiente'>Pendiente</option>
                 <option value='Inactivo'>Inactivo</option>
                 </select>
                 {errors.estado && <span className='text-danger'>{errors.estado.message}</span>}

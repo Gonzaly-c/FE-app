@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from "react"
 import { useTrenesDelete } from "./useTrenesDelete.js"
 import { useTrenesInfinite } from "./useTrenInfinite.js"
-import { TrenGetOne } from "../Querys.js"
+import { TrenGetOne } from "./useTrenQuery.js"
 
 export function useTrenCrud() {
   const [trenes, setTrenes] = useState([])

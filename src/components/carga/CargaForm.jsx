@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { useCargaPost } from '../../hooks/carga/useCargaPost';
 import { useCargaPut } from '../../hooks/carga/useCargasPut';
-import { TipoCargaActivos } from '../../hooks/Querys.js';
+import { TipoCargaActivos } from '../../hooks/tipoCarga/useTipoCargaQuery.js';
 
 export function CargaForm({ onSuccess, cargaToEdit }) {
     const { data: tipoCargas = [] } = TipoCargaActivos()

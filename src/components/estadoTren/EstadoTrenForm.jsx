@@ -1,7 +1,7 @@
 import { useForm } from 'react-hook-form'
 import { useEstadoTrenPost } from '../../hooks/estadoTren/useEstadoTrenPost'
 import { useEstadoTrenPut } from '../../hooks/estadoTren/useEstadoTrenesPut'
-import { TrenFindAll } from '../../hooks/Querys.js'
+import { TrenFindAll } from '../../hooks/tren/useTrenQuery.js'
 
 export function EstadoTrenForm({ onSuccess, estadoTrenToEdit }) {
     const { register, formState: { errors }, handleSubmit, isPending: isPendingForm } = useForm({ mode: 'onBlur' })

@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from "react"
 import { useTipoCargasDelete } from "./useTipoCargasDelete.js"
 import { useTipoCargasInfinite } from "./useTipoCargaInfinite.js"
-import { useTipoCargaQuery } from "./useTipoCargaQuery.js"
+import { TipoCargaGetOne } from "./useTipoCargaQuery.js"
 
 export function useTipoCargaCrud() {
   const [tipoCargas, setTipoCargas] = useState([])
@@ -10,7 +10,7 @@ export function useTipoCargaCrud() {
   const { mutateAsync: deleteMutation } = useTipoCargasDelete()
   const { data, fetchNextPage, hasNextPage, isLoading, isError, error } = useTipoCargasInfinite()
   const [ascOrder, setAscOrder] = useState(false);
-  const { mutateAsync: findOneMutation} = useTipoCargaQuery() // find one 
+  const { mutateAsync: findOneMutation} = TipoCargaGetOne() // find one 
   
   useEffect(() => {
     const tipoCargas = data?.pages.flatMap(page => page.items) ?? []

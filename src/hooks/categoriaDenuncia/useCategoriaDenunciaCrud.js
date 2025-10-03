@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from "react"
 import { useCategoriaDenunciasDelete } from "./useCategoriaDenunciasDelete.js"
 import { useCategoriaDenunciasInfinite } from "./useCategoriaDenunciaInfinite.js"
-import { useCategoriaDenunciaQuery } from "./useCategoriaDenunciaQuery.js"
+import { CategoriaDenunciaGetOne } from "./useCategoriaDenunciaQuery.js"
 
 export function useCategoriaDenunciaCrud() {
   const [categoriaDenuncias, setCategoriaDenuncias] = useState([])
@@ -10,7 +10,7 @@ export function useCategoriaDenunciaCrud() {
   const { mutateAsync: deleteMutation } = useCategoriaDenunciasDelete()
   const { data, fetchNextPage, hasNextPage, isLoading, isError, error } = useCategoriaDenunciasInfinite()
   const [ascOrder, setAscOrder] = useState(false);
-  const { mutateAsync: findOneMutation} = useCategoriaDenunciaQuery() // find one 
+  const { mutateAsync: findOneMutation} = CategoriaDenunciaGetOne() // find one 
   
   useEffect(() => {
     const categoriaDenuncias = data?.pages.flatMap(page => page.items) ?? []

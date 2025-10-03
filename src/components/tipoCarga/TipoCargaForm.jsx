@@ -2,7 +2,6 @@ import { useForm } from 'react-hook-form'
 import { useTipoCargaPost } from '../../hooks/tipoCarga/useTipoCargaPost'
 import { useTipoCargaPut } from '../../hooks/tipoCarga/useTipoCargasPut'
 
-
 export function TipoCargaForm({ onSuccess, tipoCargaToEdit }) {
     const { register, formState: { errors }, handleSubmit, isPending: isPendingForm } = useForm({ mode: 'onBlur' })
     const { mutateAsync: handlePost, isError: isErrorPost } = useTipoCargaPost()

@@ -1,7 +1,8 @@
 import { useForm } from 'react-hook-form'
 import { useObservacionPost } from '../../hooks/observacion/useObservacionPost.js'
 import { useObservacionPut } from '../../hooks/observacion/useObservacionesPut.js'
-import { CategoriaDenunciaActivas, ViajeFindAll } from '../../hooks/Querys.js'
+import { CategoriaDenunciaActivas } from '../../hooks/categoriaDenuncia/useCategoriaDenunciaQuery.js'
+import { ViajeFindAll } from '../../hooks/viaje/useViajeQuery.js'
 
 export function ObservacionForm ({ onSuccess, observacionToEdit }) {
   const { data: categoriaDenuncias = [] } = CategoriaDenunciaActivas()

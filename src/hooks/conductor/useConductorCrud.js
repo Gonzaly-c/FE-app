@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from 'react'
 import { useConductoresDelete } from './useConductorDelete.js'
 import { useConductoresInfinite } from './useConductorInfinite.js'
-import { useConductorQuery } from './useConductorQuery.js'
+import { ConductorGetOne } from './useConductorQuery.js'
 
 export function useConductorCrud () {
   const [conductores, setConductores] = useState([])
@@ -10,7 +10,7 @@ export function useConductorCrud () {
   const { mutateAsync: deleteMutation } = useConductoresDelete()
   const { data, fetchNextPage, hasNextPage, isLoading, isError, error } = useConductoresInfinite()
   const [ascOrder, setAscOrder] = useState(false)
-  const { mutateAsync: findOneMutation } = useConductorQuery() // find one conductor
+  const { mutateAsync: findOneMutation } = ConductorGetOne() // find one conductor
 
   useEffect(() => {
     const conductores = data?.pages.flatMap(page => page.items) ?? []

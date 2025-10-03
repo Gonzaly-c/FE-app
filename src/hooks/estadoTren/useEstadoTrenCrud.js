@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from "react"
 import { useEstadoTrenesDelete } from "./useEstadoTrenesDelete.js"
 import { useEstadoTrenesInfinite } from "./useEstadoTrenInfinite.js"
-import { useEstadoTrenQuery } from "./useEstadoTrenQuery.js"
+import { EstadoTrenGetOne } from "./useEstadoTrenQuery.js"
 
 export function useEstadoTrenCrud() {
   const [estadoTrenes, setEstadoTrenes] = useState([])
@@ -10,7 +10,7 @@ export function useEstadoTrenCrud() {
   const { mutateAsync: deleteMutation } = useEstadoTrenesDelete()
   const { data, fetchNextPage, hasNextPage, isLoading, isError, error } = useEstadoTrenesInfinite()
   const [ascOrder, setAscOrder] = useState(false);
-  const { mutateAsync: findOneMutation} = useEstadoTrenQuery() // find one 
+  const { mutateAsync: findOneMutation} = EstadoTrenGetOne() // find one 
   
   useEffect(() => {
     const estadoTrenes = data?.pages.flatMap(page => page.items) ?? []

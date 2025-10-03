@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from "react"
 import { useViajesDelete } from "./useViajesDelete.js"
 import { useViajesInfinite } from "./useViajeInfinite.js"
-import { ViajeFindAll } from "../Querys.js"
+import { ViajeFindAll } from "./useViajeQuery.js"
 
 export function useViajeCrud() {
   const [viajes, setViajes] = useState([])

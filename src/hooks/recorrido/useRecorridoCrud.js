@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from "react"
 import { useRecorridosDelete } from "./useRecorridosDelete.js"
 import { useRecorridosInfinite } from "./useRecorridoInfinite.js"
-import { useRecorridoQuery } from "./useRecorridoQuery.js"
+import { RecorridoGetOne } from "./useRecorridoQuery.js"
 
 
 export function useRecorridoCrud() {
@@ -11,7 +11,7 @@ export function useRecorridoCrud() {
   const { mutateAsync: deleteMutation } = useRecorridosDelete()
   const { data, fetchNextPage, hasNextPage, isLoading, isError, error } = useRecorridosInfinite()
   const [ascOrder, setAscOrder] = useState(false);
-  const { mutateAsync: findOneMutation} = useRecorridoQuery() // find one 
+  const { mutateAsync: findOneMutation} = RecorridoGetOne() // find one 
   
   useEffect(() => {
     const recorridos = data?.pages.flatMap(page => page.items) ?? []

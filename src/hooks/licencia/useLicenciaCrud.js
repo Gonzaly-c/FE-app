@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from 'react'
 import { useLicenciasDelete } from './useLicenciasDelete.js'
 import { useLicenciasInfinite } from './useLicenciaInfinite.js'
-import { useLicenciaQuery } from './useLicenciaQuery.js'
+import { LicenciaGetOne } from './useLicenciaQuery.js'
 
 export function useLicenciaCrud () {
   const [licencias, setLicencias] = useState([])
@@ -10,7 +10,7 @@ export function useLicenciaCrud () {
   const { mutateAsync: deleteMutation } = useLicenciasDelete()
   const { data, fetchNextPage, hasNextPage, isLoading, isError, error } = useLicenciasInfinite()
   const [ascOrder, setAscOrder] = useState(false)
-  const { mutateAsync: findOneMutation } = useLicenciaQuery() // find one
+  const { mutateAsync: findOneMutation } = LicenciaGetOne() // find one
 
   useEffect(() => {
     const licencias = data?.pages.flatMap(page => page.items) ?? []
