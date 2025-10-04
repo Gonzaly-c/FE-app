@@ -58,7 +58,6 @@ export function RecorridoList({ recorridos, fetchNextPage, hasNextPage, handleEd
           </thead>
 
           <tbody>
-              {console.log(recorridos)}
               {recorridos.map((recorrido) => {
                 return (
                   <tr key={recorrido.id}>

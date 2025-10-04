@@ -30,7 +30,7 @@ export function ConductorCrud () {
 
   return (
     <div>
-      <h1 className='h1 mt-2 text-center'>Lista de Conductors</h1>
+      <h1 className='h1 mt-2 text-center'>Lista de Conductores</h1>
 
       <div className='d-flex justify-content-between mb-4'>
         <button

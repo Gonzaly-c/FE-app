@@ -32,7 +32,7 @@ export function TrenForm({ onSuccess, trenToEdit }) {
             <div className='mb-1'>
                 <label className='form-label' htmlFor='modelo'>Modelo:</label>
                 <input
-                id='modelo' type='text' {...register('modelo', { required: 'El modelo es requerido'
+                id='modelo' type='text' {...register('modelo', { required: 'El "Modelo" es requerido'
                 , value: trenToEdit ? trenToEdit.modelo : ''})}
                 className='form-control' placeholder='Modelo del tren'
                 />
@@ -42,7 +42,7 @@ export function TrenForm({ onSuccess, trenToEdit }) {
             <div className='mb-1'>
                 <label className='form-label' htmlFor='color'>Color:</label>
                 <input
-                id='color' type='text' {...register('color', { required: 'El color es requerido'
+                id='color' type='text' {...register('color', { required: 'El "Color" es requerido'
                 , value: trenToEdit ? trenToEdit.color : ''})}
                 className='form-control' placeholder='Color del tren'
                 />

@@ -35,7 +35,7 @@ export function ConductorForm ({ onSuccess, conductorToEdit }) {
         <label className='form-label' htmlFor='nombre'>Nombre:</label>
         <input
           id='nombre' type='text' {...register('nombre', {
-            required: 'El nombre es requerido',
+            required: 'El "Nombre" es requerido',
             value: conductorToEdit ? conductorToEdit.nombre : ''
           })}
           className='form-control' placeholder='Nombre del conductor'
@@ -47,7 +47,7 @@ export function ConductorForm ({ onSuccess, conductorToEdit }) {
         <label className='form-label' htmlFor='apellido'>Apellido:</label>
         <input
           id='apellido' type='text' {...register('apellido', {
-            required: 'El apellido es requerido',
+            required: 'El "Apellido" es requerido',
             value: conductorToEdit ? conductorToEdit.apellido : ''
           })}
           className='form-control' placeholder='Apellido del conductor'
@@ -59,10 +59,10 @@ export function ConductorForm ({ onSuccess, conductorToEdit }) {
         <label className='form-label' htmlFor='email'>Email:</label>
         <input
           id='email' type='email' {...register('email', {
-            required: 'El email es requerido',
+            required: 'El "Email" es requerido',
             pattern: {
               value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
-              message: 'El formato del email es incorrecto'
+              message: 'El formato del "Email" es incorrecto'
             },
             value: conductorToEdit ? conductorToEdit.email : ''
           })}
@@ -72,14 +72,14 @@ export function ConductorForm ({ onSuccess, conductorToEdit }) {
       </div>
 
       <div className='mb-1'>
-        <label className='form-label' htmlFor='password'>Password:</label>
+        <label className='form-label' htmlFor='password'>Contraseña:</label>
         <input
           id='password' type='password' {...register('password', {
-            required: 'El password es requerido',
+            required: 'La "Contraseña" es requerida',
             // minLength: { value: 8, message: 'El password debe tener al menos 8 caracteres' },
             value: conductorToEdit ? conductorToEdit.password : ''
           })}
-          className='form-control' placeholder='Password del conductor'
+          className='form-control' placeholder='Contraseña del conductor'
         />
         {errors.password && <span className='text-danger'>{errors.password.message}</span>}
       </div>
@@ -88,7 +88,7 @@ export function ConductorForm ({ onSuccess, conductorToEdit }) {
         <label className='form-label' htmlFor='estado'>Estado:</label>
         <select
           id='estado' {...register('estado', {
-            required: 'El estado es requerido',
+            required: 'El "Estado" es requerido',
             value: conductorToEdit ? conductorToEdit.estado : ''
           })}
           className='form-select'

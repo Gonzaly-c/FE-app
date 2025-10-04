@@ -103,9 +103,9 @@ export function ViajeForm({ onSuccess, viajeToEdit }) {
     return(
         <form onSubmit={handleSubmit(onSubmit)}>
             <div className='mb-3'>
-                <label className='form-label'>Conductor</label>
+                <label className='form-label'>Conductor:</label>
                 <select
-                {...register('idConductor', { required: 'El conductor es requerido' })}
+                {...register('idConductor', { required: 'El "Conductor" es requerido' })}
                 className='form-control'
                 defaultValue={viajeToEdit?.conductor?.id || ''}
                 >
@@ -120,14 +120,14 @@ export function ViajeForm({ onSuccess, viajeToEdit }) {
             </div>
 
             <div className='mb-3'>
-                <label className='form-label'>Trenes</label>
+                <label className='form-label'>Tren:</label>
                 <select
-                {...register('idTren', { required: 'El Tren es requerido' })}
+                {...register('idTren', { required: 'El "Tren" es requerido' })}
                 className='form-control'
                 defaultValue={viajeToEdit?.tren?.id || ''}
                 >
                 
-                <option value="">Selecciona un Tren</option>
+                <option value="">Selecciona un tren</option>
                 {trenes.map((c) => (
                     <option key={c.id} value={c.id}>
                         {c.id}-{c.modelo} (color: {c.color})
@@ -139,14 +139,14 @@ export function ViajeForm({ onSuccess, viajeToEdit }) {
             </div>
 
             <div className='mb-3'>
-                <label className='form-label'>Recorridos</label>
+                <label className='form-label'>Recorrido:</label>
                 <select
-                {...register('idRecorrido', { required: 'El Recorrido es requerido' })}
+                {...register('idRecorrido', { required: 'El "Recorrido" es requerido' })}
                 className='form-control'
                 defaultValue={viajeToEdit?.recorrido?.id || ''}
                 >
                 
-                <option value="">Selecciona un Recorrido</option>
+                <option value="">Selecciona un recorrido</option>
                 {recorridos.map((c) => (
                     <option key={c.id} value={c.id}>
                         {c.id}-(Salida: {c.ciudadSalida}) (Llegada: {c.ciudadLlegada})
@@ -158,26 +158,26 @@ export function ViajeForm({ onSuccess, viajeToEdit }) {
             </div>
 
             <div className='mb-1'>
-                <label className='form-label' htmlFor='fechaIni'>Fecha Inicio:</label>
+                <label className='form-label' htmlFor='fechaIni'>Fecha de inicio:</label>
                 <input
-                id='fechaIni' type='date' {...register('fechaIni', { required: 'La fecha de inicio es requerida'}
+                id='fechaIni' type='date' {...register('fechaIni', { required: 'La "Fecha de inicio" es requerida'}
                     )}
-                className='form-control' placeholder='Fecha de inicio'
+                className='form-control' placeholder='Fecha de inicio del viaje'
                 defaultValue={viajeToEdit?.fechaIni ? viajeToEdit.fechaIni.slice(0, 10): ''}
                 />
                 {errors.fechaIni && <span className='text-danger'>{errors.fechaIni.message}</span>}
             </div>
 
             <div className='mb-1'>
-                <label className='form-label' htmlFor='fechaFin'>Fecha de Llegada:</label>
+                <label className='form-label' htmlFor='fechaFin'>Fecha de llegada:</label>
                 <input
-                id='fechaFin' type='date' {...register('fechaFin', { required: 'La fecha de llegada es requerida', 
+                id='fechaFin' type='date' {...register('fechaFin', { required: 'La "Fecha de llegada" es requerida', 
                     validate: (value) => {
                         const fechaIni = new Date(watch('fechaIni'));
                         const fechaFin = new Date(value);
                         return fechaFin >= fechaIni || 'La fecha de llegada debe ser posterior o igual a la de inicio';
                 }})}
-                className='form-control' placeholder='Fecha de llegada'
+                className='form-control' placeholder='Fecha de llegada del viaje'
                 defaultValue={viajeToEdit?.fechaFin ? viajeToEdit.fechaFin.slice(0, 10): ''}
 
                 />
@@ -221,7 +221,7 @@ export function ViajeForm({ onSuccess, viajeToEdit }) {
                 <label className='form-label' htmlFor='estado'>Estado:</label>
                 <select
                 id='estado' {...register('estado', {
-                    required: 'El estado es requerido',
+                    required: 'El "Estado" es requerido',
                     value: viajeToEdit ? viajeToEdit.estado : ''
                 })}
                 className='form-select'

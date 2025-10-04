@@ -34,9 +34,9 @@ export function LicenciaForm ({ onSuccess, licenciaToEdit }) {
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <div className='mb-3'>
-        <label className='form-label'>Conductor</label>
+        <label className='form-label'>Conductor:</label>
         <select
-          {...register('idConductor', { required: 'El conductor es requerido' })}
+          {...register('idConductor', { required: 'El "Conductor" es requerido' })}
           className='form-control'
           defaultValue={licenciaToEdit?.conductor?.id || ''}
         >
@@ -51,10 +51,36 @@ export function LicenciaForm ({ onSuccess, licenciaToEdit }) {
       </div>
 
       <div className='mb-1'>
+        <label className='form-label' htmlFor='fechaHecho'>Fecha de hecho:</label>
+        <input
+          id='fechaHecho' type='date' {...register('fechaHecho', { required: 'La "Fecha de hecho" es requerida'})}
+          className='form-control' placeholder='Fecha de hecho de la licencia'
+          defaultValue={licenciaToEdit?.fechaHecho ? licenciaToEdit.fechaHecho.slice(0, 10): ''}
+        />
+        {errors.fechaHecho && <span className='text-danger'>{errors.fechaHecho.message}</span>}
+      </div>
+
+      <div className='mb-1'>
+        <label className='form-label' htmlFor='fechaVencimiento'>Fecha de vencimiento:</label>
+        <input
+          id='fechaVencimiento' type='date' {...register('fechaVencimiento', { required: 'La "Fecha de vencimiento" es requerida', 
+            validate: (value) => {
+                const fechaHecho = new Date(watch('fechaHecho'));
+                const fechaVencimiento = new Date(value);
+                return fechaVencimiento >= fechaHecho || 'La "Fecha de vencimiento" debe ser posterior o igual a la de hecho';
+          }})}
+          className='form-control' placeholder='Fecha de vencimiento de la licencia'
+          defaultValue={licenciaToEdit?.fechaVencimiento ? licenciaToEdit.fechaVencimiento.slice(0, 10): ''}
+
+        />
+        {errors.fechaVencimiento && <span className='text-danger'>{errors.fechaVencimiento.message}</span>}
+      </div>
+
+      <div className='mb-1'>
                 <label className='form-label' htmlFor='estado'>Estado:</label>
                 <select
                 id='estado' {...register('estado', {
-                    required: 'El estado es requerido',
+                    required: 'El "Estado" es requerido',
                     value: licenciaToEdit ? licenciaToEdit.estado : ''
                 })}
                 className='form-select'
@@ -65,37 +91,11 @@ export function LicenciaForm ({ onSuccess, licenciaToEdit }) {
                 </select>
                 {errors.estado && <span className='text-danger'>{errors.estado.message}</span>}
             </div>
-
-      <div className='mb-1'>
-        <label className='form-label' htmlFor='fechaHecho'>Fecha Hecho:</label>
-        <input
-          id='fechaHecho' type='date' {...register('fechaHecho', { required: 'La fecha de hecho es requerida'})}
-          className='form-control' placeholder='Fecha de hecho'
-          defaultValue={licenciaToEdit?.fechaHecho ? licenciaToEdit.fechaHecho.slice(0, 10): ''}
-        />
-        {errors.fechaHecho && <span className='text-danger'>{errors.fechaHecho.message}</span>}
-      </div>
-
-      <div className='mb-1'>
-        <label className='form-label' htmlFor='fechaVencimiento'>Fecha de Vencimiento:</label>
-        <input
-          id='fechaVencimiento' type='date' {...register('fechaVencimiento', { required: 'La fecha de vencimiento es requerida', 
-            validate: (value) => {
-                const fechaHecho = new Date(watch('fechaHecho'));
-                const fechaVencimiento = new Date(value);
-                return fechaVencimiento >= fechaHecho || 'La fecha de vencimiento debe ser posterior o igual a la de hecho';
-          }})}
-          className='form-control' placeholder='Fecha de vencimiento'
-          defaultValue={licenciaToEdit?.fechaVencimiento ? licenciaToEdit.fechaVencimiento.slice(0, 10): ''}
-
-        />
-        {errors.fechaVencimiento && <span className='text-danger'>{errors.fechaVencimiento.message}</span>}
-      </div>
-
       <div className='d-flex justify-content-between'>
-        <button type='button' className='btn btn-secondary' onClick={onSuccess}>
-          Volver
-        </button>
+
+      <button type='button' className='btn btn-secondary' onClick={onSuccess}>
+        Volver
+      </button>
 
         <button type='submit' className='btn btn-success d-block mt-2' style={{ backgroundColor: '#002050ff', color: '#fff' }}>
           {isPendingForm ? 'Enviando...' : 'Enviar'}

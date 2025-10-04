@@ -35,14 +35,14 @@ export function EstadoTrenForm({ onSuccess, estadoTrenToEdit }) {
 
             {/* Trenes */}
             <div className='mb-3'>
-                <label className='form-label'>Trenes</label>
+                <label className='form-label'>Trenes:</label>
                 <select
-                {...register('idTren', { required: 'El Tren es requerido' })}
+                {...register('idTren', { required: 'El tren es requerido' })}
                 className='form-control'
                 defaultValue={estadoTrenToEdit?.tren || ''}
                 >
                 
-                <option value="">Selecciona un Tren</option>
+                <option value="">Selecciona un tren</option>
                 {trenes.map((c) => (
                     <option key={c.id} value={c.id}>
                         {c.id}-{c.modelo} (color: {c.color})
@@ -59,7 +59,7 @@ export function EstadoTrenForm({ onSuccess, estadoTrenToEdit }) {
             <select
                 id='nombre'
                 className='form-select'
-                {...register('nombre', { required: 'Debe seleccionar un estado' })}
+                {...register('nombre', { required: 'El estado del tren es requerido' })}
                 defaultValue={estadoTrenToEdit ? estadoTrenToEdit.nombre : ''}
             >
                 <option value=''>Selecciona un estado…</option>
@@ -74,7 +74,7 @@ export function EstadoTrenForm({ onSuccess, estadoTrenToEdit }) {
 
             
             <div className='mb-1'>
-            <label className='form-label' htmlFor='fechaVigencia'>Fecha de Vigencia:</label>
+            <label className='form-label' htmlFor='fechaVigencia'>Fecha de vigencia:</label>
 
             <input
                 id='fechaVigencia'
@@ -116,8 +116,8 @@ export function EstadoTrenForm({ onSuccess, estadoTrenToEdit }) {
                 </button>
             </div>
 
-            {isErrorPost && <span className='text-danger'>Error al crear el estadoTren</span>}
-            {isErrorPut && <span className='text-danger'>Error al actualizar el estadoTren</span>}       
+            {isErrorPost && <span className='text-danger'>Error al crear el estado del tren</span>}
+            {isErrorPut && <span className='text-danger'>Error al actualizar el estado del tren</span>}       
         </form>
     )
 }

@@ -56,7 +56,6 @@ export function CargaList({ cargas, fetchNextPage, hasNextPage, handleEdit, dele
           </thead>
 
           <tbody>
-              {console.log(cargas)}
               {cargas.map((carga) => {
                 return (
                   <tr key={carga.id}>

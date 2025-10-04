@@ -55,9 +55,7 @@ export function LineaCargaList ({ lineaCargas, fetchNextPage, hasNextPage, handl
             </tr>
           </thead>
 
-          <tbody>
-            {console.log(lineaCargas)}
-            
+          <tbody>            
             {Array.isArray(lineaCargas) && lineaCargas
               .filter(item => item !== undefined && item !== null)
               .map((lineaCarga, index) => {

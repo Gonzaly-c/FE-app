@@ -56,7 +56,6 @@ export function TipoCargaList({ tipoCargas, fetchNextPage, hasNextPage, handleEd
           </thead>
 
           <tbody>
-              {console.log(tipoCargas)}
               {tipoCargas.map((tipoCarga) => {
                 return (
                   <tr key={tipoCarga.id}>

@@ -34,7 +34,7 @@ export function RecorridoForm({ onSuccess, recorridoToEdit }) {
             <div className='mb-1'>
                 <label className='form-label' htmlFor='ciudadSalida'>Ciudad Salida:</label>
                 <input
-                id='ciudadSalida' type='text' {...register('ciudadSalida', { required: 'La ciudad de salida es requerida'
+                id='ciudadSalida' type='text' {...register('ciudadSalida', { required: 'La "Ciudad de salida" es requerida'
                 , value: recorridoToEdit ? recorridoToEdit.ciudadSalida : ''})}
                 className='form-control' placeholder='Ciudad de salida del recorrido'
                 />
@@ -44,7 +44,7 @@ export function RecorridoForm({ onSuccess, recorridoToEdit }) {
             <div className='mb-1'>
                 <label className='form-label' htmlFor='ciudadLlegada'>Ciudad Llegada:</label>
                 <input
-                id='ciudadLlegada' type='text' {...register('ciudadLlegada', { required: 'La ciudad de llegada es requerida'
+                id='ciudadLlegada' type='text' {...register('ciudadLlegada', { required: 'La "Ciudad de llegada" es requerida'
                 , value: recorridoToEdit ? recorridoToEdit.ciudadLlegada : ''})}
                 className='form-control' placeholder='Ciudad de llegada del recorrido'
                 />
@@ -77,7 +77,7 @@ export function RecorridoForm({ onSuccess, recorridoToEdit }) {
                 <label className='form-label' htmlFor='estado'>Estado:</label>
                 <select
                 id='estado' {...register('estado', {
-                    required: 'El estado es requerido',
+                    required: 'El "Estado" es requerido',
                     value: recorridoToEdit ? recorridoToEdit.estado : '',
                 })}
                 className='form-select'

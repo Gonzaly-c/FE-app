@@ -56,7 +56,6 @@ export function EstadoTrenList({ estadoTrenes, fetchNextPage, hasNextPage, handl
           </thead>
 
           <tbody>
-              {console.log(estadoTrenes)}
               {estadoTrenes.map((estadoTren) => {
                 return (
                   <tr key={estadoTren.id}>

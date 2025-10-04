@@ -33,9 +33,9 @@ export function CategoriaDenunciaForm({ onSuccess, categoriaDenunciaToEdit }) {
             <div className='mb-1'>
                 <label className='form-label' htmlFor='titulo'>Titulo:</label>
                 <input
-                id='titulo' type='text' {...register('titulo', { required: 'El Titulo es requerido'
+                id='titulo' type='text' {...register('titulo', { required: 'El "Titulo" es requerido'
                 , value: categoriaDenunciaToEdit ? categoriaDenunciaToEdit.titulo : ''})}
-                className='form-control' placeholder='Titulo de la Categoria Denuncia'
+                className='form-control' placeholder='Titulo de la categoria denuncia'
                 />
                 {errors.titulo && <span className='text-danger'>{errors.titulo.message}</span>}
             </div>
@@ -43,9 +43,9 @@ export function CategoriaDenunciaForm({ onSuccess, categoriaDenunciaToEdit }) {
             <div className='mb-1'>
                 <label className='form-label' htmlFor='descripcion'>Descripcion:</label>
                 <input
-                id='descripcion' type='text' {...register('descripcion', { required: 'La Descripcion es requerida'
+                id='descripcion' type='text' {...register('descripcion', { required: 'La "Descripcion" es requerida'
                 , value: categoriaDenunciaToEdit ? categoriaDenunciaToEdit.descripcion : ''})}
-                className='form-control' placeholder='Descripcion de la Categoria Denuncia'
+                className='form-control' placeholder='Descripcion de la categoria denuncia'
                 />
                 {errors.descripcion && <span className='text-danger'>{errors.descripcion.message}</span>}
             </div>
@@ -54,7 +54,7 @@ export function CategoriaDenunciaForm({ onSuccess, categoriaDenunciaToEdit }) {
                 <label className='form-label' htmlFor='estado'>Estado:</label>
                 <select
                 id='estado' {...register('estado', {
-                    required: 'El estado es requerido',
+                    required: 'El "Estado" es requerido',
                     value: categoriaDenunciaToEdit ? categoriaDenunciaToEdit.estado : ''
                 })}
                 className='form-select'

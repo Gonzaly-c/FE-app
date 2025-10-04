@@ -53,14 +53,14 @@ export function CargaForm({ onSuccess, cargaToEdit }) {
     <form onSubmit={handleSubmit(onSubmit)} noValidate>
       {/* Tipo de Carga */}
       <div className='mb-3'>
-        <label className='form-label'>Tipo de Carga</label>
+        <label className='form-label'>Tipo de Carga:</label>
         <select
-          {...register('idTipoCarga', { required: 'El Tipo de Carga es requerido' })}
+          {...register('idTipoCarga', { required: 'El "Tipo de Carga" es requerido' })}
           className='form-control'
           defaultValue={cargaToEdit?.tipoCarga?.id || ''}
         >
           
-        <option value="">Selecciona un Tipo de Carga</option>
+        <option value="">Selecciona un tipo de carga</option>
           {tipoCargas.map((c) => (
             <option key={c.id} value={c.id}>
               {c.id}-{c.name}
@@ -74,7 +74,7 @@ export function CargaForm({ onSuccess, cargaToEdit }) {
       <div className='mb-1'>
                 <label className='form-label' htmlFor='name'>Nombre:</label>
                 <input
-                id='name' type='text' {...register('name', { required: 'El nombre es requerido'
+                id='name' type='text' {...register('name', { required: 'El "Nombre" es requerido'
                 , value: cargaToEdit ? cargaToEdit.name : ''})}
                 className='form-control' placeholder='Nombre de la carga'
                 />
@@ -86,7 +86,7 @@ export function CargaForm({ onSuccess, cargaToEdit }) {
       <label className="form-label" htmlFor='precio'>Precio:</label>
       <input
         {...register('precio', {
-          required: 'El precio es obligatorio',
+          required: 'El "Precio" es obligatorio',
           validate: (value) => {
             // Reemplazamos coma por punto para validar decimales
             const normalized = value.replace(',', '.');

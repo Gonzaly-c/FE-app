@@ -61,9 +61,9 @@ export function LineaCargaForm ({ onSuccess, lineaCargaToEdit }) {
     <form onSubmit={handleSubmit(onSubmit)}>
 
       <div className='mb-3'>
-        <label className='form-label'>Viaje</label>
+        <label className='form-label'>Viaje:</label>
         <select
-          {...register('idViaje', { required: 'El viaje es requerido' })}
+          {...register('idViaje', { required: 'El "Viaje" es requerido' })}
           className='form-control'
           defaultValue={lineaCargaToEdit?.viaje?.id || ''}
         >
@@ -78,9 +78,9 @@ export function LineaCargaForm ({ onSuccess, lineaCargaToEdit }) {
       </div>
 
       <div className='mb-3'>
-        <label className='form-label'>Carga</label>
+        <label className='form-label'>Carga:</label>
         <select
-          {...register('idCarga', { required: 'La carga es requerida' })}
+          {...register('idCarga', { required: 'La "Carga" es requerida' })}
           className='form-control'
           defaultValue={lineaCargaToEdit?.carga?.id || ''}
         >
@@ -100,10 +100,10 @@ export function LineaCargaForm ({ onSuccess, lineaCargaToEdit }) {
       <input
         
       {...register('cantidadVagon', {
-          required: 'Este campo es obligatorio',
+          required: 'La "Cantidad de vagones" es obligatorio',
           pattern: {
             value: /^[1-9][0-9]*$/, // solo enteros positivos
-            message: 'Debe ser un número entero mayor a 0',
+            message: 'La "Cantidad de vagones" debe ser un número entero mayor a 0',
           },
         })}
 
@@ -120,7 +120,7 @@ export function LineaCargaForm ({ onSuccess, lineaCargaToEdit }) {
                 <label className='form-label' htmlFor='estado'>Estado:</label>
                 <select
                 id='estado' {...register('estado', {
-                    required: 'El estado es requerido',
+                    required: 'El "Estado" es requerido',
                     value: lineaCargaToEdit ? lineaCargaToEdit.estado : ''
                 })}
                 className='form-select'
@@ -142,8 +142,8 @@ export function LineaCargaForm ({ onSuccess, lineaCargaToEdit }) {
         </button>
       </div>
 
-      {isErrorPost && <span className='text-danger'>Error al crear la lineaCarga</span>}
-      {isErrorPut && <span className='text-danger'>Error al actualizar la lineaCarga</span>}
+      {isErrorPost && <span className='text-danger'>Error al crear la linea de carga</span>}
+      {isErrorPut && <span className='text-danger'>Error al actualizar la linea de carga</span>}
     </form>
   )
 }

@@ -56,7 +56,6 @@ export function CategoriaDenunciaList({ categoriaDenuncias, fetchNextPage, hasNe
           </thead>
 
           <tbody>
-              {console.log(categoriaDenuncias)}
               {categoriaDenuncias.map((categoriaDenuncia) => {
                 return (
                   <tr key={categoriaDenuncia.id}>

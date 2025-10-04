@@ -50,9 +50,9 @@ export function ObservacionForm ({ onSuccess, observacionToEdit }) {
     <form onSubmit={handleSubmit(onSubmit)}>
 
       <div className='mb-3'>
-        <label className='form-label'>Viaje</label>
+        <label className='form-label'>Viaje:</label>
         <select
-          {...register('idViaje', { required: 'El viaje es requerido' })}
+          {...register('idViaje', { required: 'El "Viaje" es requerido' })}
           className='form-control'
           defaultValue={observacionToEdit?.viaje?.id || ''}
         >
@@ -67,9 +67,9 @@ export function ObservacionForm ({ onSuccess, observacionToEdit }) {
       </div>
 
       <div className='mb-3'>
-        <label className='form-label'>Categoria</label>
+        <label className='form-label'>Categoria:</label>
         <select
-          {...register('idCategoria', { required: 'La categoria es requerida' })}
+          {...register('idCategoria', { required: 'La "Categoria" es requerida' })}
           className='form-control'
           defaultValue={observacionToEdit?.categoria?.id || ''}
         >
@@ -89,7 +89,7 @@ export function ObservacionForm ({ onSuccess, observacionToEdit }) {
         <textarea
           id='observaciones'
           {...register('observaciones', {
-            required: 'La Observación es requerida',
+            required: 'La "Observación" es requerida',
             value: observacionToEdit ? observacionToEdit.observaciones : ''
           })}
           className='form-control'
@@ -105,7 +105,7 @@ export function ObservacionForm ({ onSuccess, observacionToEdit }) {
                 <label className='form-label' htmlFor='estado'>Estado:</label>
                 <select
                 id='estado' {...register('estado', {
-                    required: 'El estado es requerido',
+                    required: 'El "Estado" es requerido',
                     value: observacionToEdit ? observacionToEdit.estado : ''
                 })}
                 className='form-select'

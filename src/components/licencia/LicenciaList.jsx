@@ -56,7 +56,6 @@ export function LicenciaList ({ licencias, fetchNextPage, hasNextPage, handleEdi
           </thead>
 
           <tbody>
-            {console.log(licencias)}
             {licencias.map((licencia) => {
               return (
                 <tr key={licencia.id}>

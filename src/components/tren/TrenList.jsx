@@ -64,7 +64,6 @@ export function TrenList({ trenes, fetchNextPage, hasNextPage, handleEdit, delet
           </thead>
 
           <tbody>
-              {console.log(trenes)}
               {trenes.map((tren) => {
                 return (
                   <tr key={tren.id}>

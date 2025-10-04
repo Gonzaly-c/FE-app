@@ -33,9 +33,9 @@ export function TipoCargaForm({ onSuccess, tipoCargaToEdit }) {
             <div className='mb-1'>
                 <label className='form-label' htmlFor='name'>Nombre:</label>
                 <input
-                id='name' type='text' {...register('name', { required: 'El nombre es requerido'
+                id='name' type='text' {...register('name', { required: 'El "Nombre" es requerido'
                 , value: tipoCargaToEdit ? tipoCargaToEdit.name : ''})}
-                className='form-control' placeholder='Nombre del tipoCarga'
+                className='form-control' placeholder='Nombre del tipo de carga'
                 />
                 {errors.name && <span className='text-danger'>{errors.name.message}</span>}
             </div>
@@ -43,9 +43,9 @@ export function TipoCargaForm({ onSuccess, tipoCargaToEdit }) {
             <div className='mb-1'>
                 <label className='form-label' htmlFor='desc'>Descripcion:</label>
                 <input
-                id='desc' type='text' {...register('desc', { required: 'La descripcion es requerida'
+                id='desc' type='text' {...register('desc', { required: 'La "Descripcion" es requerida'
                 , value: tipoCargaToEdit ? tipoCargaToEdit.desc : ''})}
-                className='form-control' placeholder='Descripcion del tipoCarga'
+                className='form-control' placeholder='Descripcion del tipo de carga'
                 />
                 {errors.desc && <span className='text-danger'>{errors.desc.message}</span>}
             </div>
@@ -54,7 +54,7 @@ export function TipoCargaForm({ onSuccess, tipoCargaToEdit }) {
                 <label className='form-label' htmlFor='estado'>Estado:</label>
                 <select
                 id='estado' {...register('estado', {
-                    required: 'El estado es requerido',
+                    required: 'El "Estado" es requerido',
                     value: tipoCargaToEdit ? tipoCargaToEdit.estado : ''
                 })}
                 className='form-select'
@@ -76,8 +76,8 @@ export function TipoCargaForm({ onSuccess, tipoCargaToEdit }) {
                 </button>
             </div>
 
-            {isErrorPost && <span className='text-danger'>Error al crear el tipoCarga</span>}
-            {isErrorPut && <span className='text-danger'>Error al actualizar el tipoCarga</span>}       
+            {isErrorPost && <span className='text-danger'>Error al crear el tipo de carga</span>}
+            {isErrorPut && <span className='text-danger'>Error al actualizar el tipo de carga</span>}       
         </form>
     )
 }

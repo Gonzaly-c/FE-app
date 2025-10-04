@@ -56,7 +56,6 @@ export function ObservacionList ({ observaciones, fetchNextPage, hasNextPage, ha
           </thead>
 
           <tbody>
-            {console.log(observaciones)}
             {observaciones.map((observacion) => {
               return (
                 <tr key={observacion.id}>
