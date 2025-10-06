@@ -12,7 +12,9 @@ export function ViajeList({ viajes, fetchNextPage, hasNextPage, handleEdit, dele
     if (viaje.estado === 'Inactivo') {
       return 'Cancelado/Suspendido';
     }
-
+    if (viaje.estado === 'Rechazado') {
+      return 'Rechazado';
+    }
     if (viaje.estado === 'Pendiente') {
       return fechaIni > hoy ? 'Pendiente' : 'Viaje no aceptado';
     }
@@ -30,11 +32,28 @@ export function ViajeList({ viajes, fetchNextPage, hasNextPage, handleEdit, dele
     return acc;
   }, {});
 
-  const [estadoSeleccionado, setEstadoSeleccionado] = useState('');
+  const [filtros, setFiltros] = useState({
+    id: '',
+    conductor: '',
+    tren: '',
+    recorrido: '',
+    fechaIni: '',
+    fechaFin: '',
+    estado: '',
+  });
 
-  const viajesFiltrados = estadoSeleccionado
-    ? viajes.filter(viaje => getEstadoTexto(viaje) === estadoSeleccionado)
-    : viajes;
+  const viajesFiltrados = viajes.filter((viaje) => {
+    const estadoTexto = getEstadoTexto(viaje);
+    return (
+      (!filtros.id || viaje.id.toString().includes(filtros.id)) &&
+      (!filtros.conductor || `${viaje.conductor.nombre} ${viaje.conductor.apellido}`.toLowerCase().includes(filtros.conductor.toLowerCase())) &&
+      (!filtros.tren || `${viaje.tren.modelo} ${viaje.tren.color}`.toLowerCase().includes(filtros.tren.toLowerCase())) &&
+      (!filtros.recorrido || `${viaje.recorrido.ciudadSalida} ${viaje.recorrido.ciudadLlegada}`.toLowerCase().includes(filtros.recorrido.toLowerCase())) &&
+      (!filtros.fechaIni || viaje.fechaIni?.startsWith(filtros.fechaIni)) &&
+      (!filtros.fechaFin || viaje.fechaFin?.startsWith(filtros.fechaFin)) &&
+      (!filtros.estado || estadoTexto === filtros.estado)
+    );
+  });
 
   const navigate = useNavigate();
 
@@ -48,6 +67,7 @@ export function ViajeList({ viajes, fetchNextPage, hasNextPage, handleEdit, dele
       'Programado': 'info',
       'Pendiente': 'dark',
       'Viaje no aceptado': 'danger',
+      'Rechazado': 'danger',
       'Sin Estado': 'secondary',
     };
 
@@ -80,20 +100,25 @@ export function ViajeList({ viajes, fetchNextPage, hasNextPage, handleEdit, dele
       scrollThreshold={1}
       scrollableTarget='scrollableDiv'
     >
-      <div className="mb-3 d-flex align-items-center">
-        <label className="me-2">Filtrar por estado:</label>
-        <select
-          className="form-select w-auto"
-          value={estadoSeleccionado}
-          onChange={e => setEstadoSeleccionado(e.target.value)}
-        >
-          <option value="">Todos</option>
-          {Object.entries(estadosContados).map(([estado, cantidad]) => (
-            <option key={estado} value={estado}>
-              {estado} ({cantidad})
-            </option>
-          ))}
-        </select>
+      
+      <div className="mb-3">
+        <h5>Filtrar viajes</h5>
+        <div className="row g-2">
+          <div className="col"><input className="form-control" placeholder="ID" onChange={(e) => setFiltros({ ...filtros, id: e.target.value })} /></div>
+          <div className="col"><input className="form-control" placeholder="Conductor" onChange={(e) => setFiltros({ ...filtros, conductor: e.target.value })} /></div>
+          <div className="col"><input className="form-control" placeholder="Tren" onChange={(e) => setFiltros({ ...filtros, tren: e.target.value })} /></div>
+          <div className="col"><input className="form-control" placeholder="Recorrido" onChange={(e) => setFiltros({ ...filtros, recorrido: e.target.value })} /></div>
+          <div className="col"><input type="date" className="form-control" onChange={(e) => setFiltros({ ...filtros, fechaIni: e.target.value })} /></div>
+          <div className="col"><input type="date" className="form-control" onChange={(e) => setFiltros({ ...filtros, fechaFin: e.target.value })} /></div>
+          <div className="col">
+            <select className="form-select" onChange={(e) => setFiltros({ ...filtros, estado: e.target.value })}>
+              <option value="">Estado ({viajes.length})</option>
+              {Object.entries(estadosContados).map(([estado, cantidad]) => (
+                <option key={estado} value={estado}>{estado} ({cantidad})</option>
+              ))}
+            </select>
+          </div>
+        </div>
       </div>
 
       <div className='table-responsive'>

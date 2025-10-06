@@ -39,19 +39,6 @@ export function ViajeCrud() {
         >
           Crear un viaje
         </button>
-
-        <div className='input-group w-auto'>
-          <p role='button' onClick={async () => {document.getElementById("findOneInput").value = ''; await queryClient.invalidateQueries({queryKey: ['viajesInfinite']})}}>X</p>
-          <input
-            type='number'
-            className='form-control'
-            placeholder='Buscar por id'
-            id='findOneInput'
-          />
-          <span role='button' className='input-group-text' onClick={() => handleFilter(document.getElementById("findOneInput").value)}>
-            🔍
-          </span>
-        </div>
       </div>
       {/* Logica pensada para ordenar los viajes segun el atributo que apreta el usuario, todavian no hecha */ }
       <ViajeList viajes={viajes} handleAscOrder={handleAscOrder} ascOrder={ascOrder} fetchNextPage={fetchNextPage} hasNextPage={hasNextPage} handleEdit={handleEdit} deleteMutation={deleteMutation}/>
