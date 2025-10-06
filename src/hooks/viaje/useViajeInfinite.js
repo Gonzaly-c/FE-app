@@ -1,5 +1,5 @@
-import { useInfiniteQuery } from "@tanstack/react-query"
-import { api } from "../../services/api.js"
+import { useInfiniteQuery } from "@tanstack/react-query";
+import { api } from "../../services/api.js";
 
 export function useViajesInfinite() {
   return useInfiniteQuery({
@@ -8,12 +8,11 @@ export function useViajesInfinite() {
       const res = await api.get("/viaje", {
         params: { limit: 10, cursor: pageParam },
         withCredentials: true,
-      })
-      return res.data
+      });
+      return res.data;
     },
     getNextPageParam: (lastPage) => {
-      return lastPage.hasNextPage ? lastPage.nextCursor : undefined
-    }
-  })
+      return lastPage.hasNextPage ? lastPage.nextCursor : undefined;
+    },
+  });
 }
-
