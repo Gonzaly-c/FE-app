@@ -3,6 +3,7 @@ import globals from 'globals'
 import reactHooks from 'eslint-plugin-react-hooks'
 import reactRefresh from 'eslint-plugin-react-refresh'
 import { defineConfig, globalIgnores } from 'eslint/config'
+import pluginQuery from '@tanstack/eslint-plugin-query'
 
 export default defineConfig([
   globalIgnores(['dist']),
@@ -11,7 +12,7 @@ export default defineConfig([
     extends: [
       js.configs.recommended,
       reactHooks.configs['recommended-latest'],
-      reactRefresh.configs.vite,
+      reactRefresh.configs.vite
     ],
     languageOptions: {
       ecmaVersion: 2020,
@@ -19,11 +20,12 @@ export default defineConfig([
       parserOptions: {
         ecmaVersion: 'latest',
         ecmaFeatures: { jsx: true },
-        sourceType: 'module',
-      },
+        sourceType: 'module'
+      }
     },
     rules: {
-      'no-unused-vars': ['error', { varsIgnorePattern: '^[A-Z_]' }],
-    },
-  },
+      'no-unused-vars': ['error', { varsIgnorePattern: '^[A-Z_]' }]
+    }
+  }
+  // ...pluginQuery.configs('flat/recommended') Por algun motivo desactiva las demas configuraciones del eslint
 ])
