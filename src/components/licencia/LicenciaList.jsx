@@ -20,7 +20,7 @@ export function LicenciaList ({ licencias, fetchNextPage, hasNextPage, handleEdi
   const licenciasFiltrados = licencias.filter((c) => {
     return (
       (!filtros.id || c.id.toString().includes(filtros.id)) &&
-      (!filtros.conductor || c.conductor?.toLowerCase().includes(filtros.conductor.toLowerCase())) &&
+      (!filtros.conductor || `${c.conductor?.nombre ?? ''} ${c.conductor?.apellido ?? ''}`.toLowerCase().includes(filtros.conductor.toLowerCase())) &&
       (!filtros.fechaHecho || c.fechaHecho?.startsWith(filtros.fechaHecho)) &&
       (!filtros.fechaVencimiento || c.fechaVencimiento?.startsWith(filtros.fechaVencimiento)) &&
       (!filtros.estado || c.estado === filtros.estado)
@@ -57,7 +57,6 @@ export function LicenciaList ({ licencias, fetchNextPage, hasNextPage, handleEdi
     );
   };
   return (
-
     <InfiniteScroll
       dataLength={licencias.length}
       next={fetchNextPage}
