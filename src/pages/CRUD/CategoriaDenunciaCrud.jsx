@@ -2,10 +2,9 @@ import { Modal } from '../../components/Modal.jsx'
 import { CategoriaDenunciaForm } from '../../components/categoriaDenuncia/CategoriaDenunciaForm.jsx'
 import { CategoriaDenunciaList } from '../../components/categoriaDenuncia/CategoriaDenunciaList.jsx'
 import { useCategoriaDenunciaCrud } from '../../hooks/categoriaDenuncia/useCategoriaDenunciaCrud.js'
-import { useQueryClient } from '@tanstack/react-query'
 
 export function CategoriaDenunciaCrud() {
-  const queryClient = useQueryClient()
+
   const {
     categoriaDenuncias,
     showModal,
@@ -18,7 +17,6 @@ export function CategoriaDenunciaCrud() {
     isError,
     error,
     ascOrder,
-    handleFilter,
     handleEdit,
     handleCreate,
     handleAscOrder
@@ -41,18 +39,6 @@ export function CategoriaDenunciaCrud() {
           Crear una Categoria de Denuncia
         </button>
 
-        <div className='input-group w-auto'>
-          <p role='button' onClick={async () => {document.getElementById("findOneInput").value = ''; await queryClient.invalidateQueries({queryKey: ['categoriaDenunciasInfinite']})}}>X</p>
-          <input
-            type='number'
-            className='form-control'
-            placeholder='Buscar por id'
-            id='findOneInput'
-          />
-          <span role='button' className='input-group-text' onClick={() => handleFilter(document.getElementById("findOneInput").value)}>
-            🔍
-          </span>
-        </div>
       </div>
       {/* Logica pensada para ordenar los categoriaDenuncias segun el atributo que apreta el usuario, todavian no hecha */ }
       <CategoriaDenunciaList categoriaDenuncias={categoriaDenuncias} handleAscOrder={handleAscOrder} ascOrder={ascOrder} fetchNextPage={fetchNextPage} hasNextPage={hasNextPage} handleEdit={handleEdit} deleteMutation={deleteMutation}/>

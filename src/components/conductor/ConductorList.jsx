@@ -1,7 +1,35 @@
 import InfiniteScroll from 'react-infinite-scroll-component'
+import { useState } from 'react'
 
 export function ConductorList ({ conductores, fetchNextPage, hasNextPage, handleEdit, deleteMutation, handleAscOrder, ascOrder }) {
   
+  const [filtros, setFiltros] = useState({
+    id: '',
+    nombre: '',
+    apellido: '',
+    email: '',
+    fecha: '',
+    estado: '',
+  })
+
+  // Contar estados fuera del componente EstadoBadgeConductor
+  const estadosContados = conductores.reduce((acc, conductor) => {
+    const estado = conductor.estado ?? 'Sin estado'
+    acc[estado] = (acc[estado] || 0) + 1
+    return acc
+  }, {})
+
+  const conductoresFiltrados = conductores.filter((c) => {
+    return (
+      (!filtros.id || c.id.toString().includes(filtros.id)) &&
+      (!filtros.nombre || c.nombre?.toLowerCase().includes(filtros.nombre.toLowerCase())) &&
+      (!filtros.apellido || c.apellido?.toLowerCase().includes(filtros.apellido.toLowerCase())) &&
+      (!filtros.email || c.email?.toLowerCase().includes(filtros.email.toLowerCase())) &&
+      (!filtros.fecha || c.createdAt?.startsWith(filtros.fecha)) &&
+      (!filtros.estado || c.estado === filtros.estado)
+    )
+  })
+
   const EstadoBadgeConductor = ({ estado }) => {
     let estadoTexto = 'Sin estado';
 
@@ -49,6 +77,26 @@ export function ConductorList ({ conductores, fetchNextPage, hasNextPage, handle
       scrollThreshold={1}
       scrollableTarget='scrollableDiv'
     >
+      
+  <div className="mb-3">
+          <h5>Filtrar conductores</h5>
+          <div className="row g-2">
+            <div className="col"><input className="form-control" placeholder="ID" onChange={(e) => setFiltros({ ...filtros, id: e.target.value })} /></div>
+            <div className="col"><input className="form-control" placeholder="Nombre" onChange={(e) => setFiltros({ ...filtros, nombre: e.target.value })} /></div>
+            <div className="col"><input className="form-control" placeholder="Apellido" onChange={(e) => setFiltros({ ...filtros, apellido: e.target.value })} /></div>
+            <div className="col"><input className="form-control" placeholder="Email" onChange={(e) => setFiltros({ ...filtros, email: e.target.value })} /></div>
+            <div className="col"><input type="date" className="form-control" onChange={(e) => setFiltros({ ...filtros, fecha: e.target.value })} /></div>
+            <div className="col">
+              <select className="form-select" onChange={(e) => setFiltros({ ...filtros, estado: e.target.value })}>
+                <option value="">Estado ({conductores.length})</option>
+                {Object.entries(estadosContados).map(([estado, cantidad]) => (
+                  <option key={estado} value={estado}>{estado} ({cantidad})</option>
+                ))}
+              </select>
+            </div>
+          </div>
+        </div>
+
       <div className='table-responsive'>
         <table className='table'>
           <thead className='border-info fw-bold'>
@@ -67,7 +115,7 @@ export function ConductorList ({ conductores, fetchNextPage, hasNextPage, handle
           </thead>
 
           <tbody>
-            {conductores
+            {conductoresFiltrados
               .filter(conductor => conductor) // <-- elimina undefined
               .map(conductor => (
                 <tr key={conductor.id}>

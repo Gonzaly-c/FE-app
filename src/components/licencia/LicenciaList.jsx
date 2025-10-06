@@ -1,7 +1,33 @@
 import InfiniteScroll from 'react-infinite-scroll-component'
+import { useState } from 'react'
 
 export function LicenciaList ({ licencias, fetchNextPage, hasNextPage, handleEdit, deleteMutation, handleAscOrder, ascOrder }) {
-    const EstadoBadge = ({ estado }) => {
+  const [filtros, setFiltros] = useState({
+  id: '',
+  conductor: '',
+  fechaHecho: '',
+  fechaVencimiento: '',
+  estado: '',
+})  
+
+  // Contar estados fuera del componente EstadoBadgeConductor
+  const estadosContados = licencias.reduce((acc, conductor) => {
+    const estado = conductor.estado ?? 'Sin estado'
+    acc[estado] = (acc[estado] || 0) + 1
+    return acc
+  }, {})
+
+  const licenciasFiltrados = licencias.filter((c) => {
+    return (
+      (!filtros.id || c.id.toString().includes(filtros.id)) &&
+      (!filtros.conductor || c.conductor?.toLowerCase().includes(filtros.conductor.toLowerCase())) &&
+      (!filtros.fechaHecho || c.fechaHecho?.startsWith(filtros.fechaHecho)) &&
+      (!filtros.fechaVencimiento || c.fechaVencimiento?.startsWith(filtros.fechaVencimiento)) &&
+      (!filtros.estado || c.estado === filtros.estado)
+    )
+  })
+
+  const EstadoBadge = ({ estado }) => {
     let estadoTexto = 'Sin estado';
 
     if (estado === 'Activo') {
@@ -41,6 +67,23 @@ export function LicenciaList ({ licencias, fetchNextPage, hasNextPage, handleEdi
       scrollThreshold={1}
       scrollableTarget='scrollableDiv'
     >
+  <div className="mb-3">
+          <h5>Filtrar licencias</h5>
+          <div className="row g-2">
+            <div className="col"><input className="form-control" placeholder="ID" onChange={(e) => setFiltros({ ...filtros, id: e.target.value })} /></div>
+            <div className="col"><input className="form-control" placeholder="Conductor" onChange={(e) => setFiltros({ ...filtros, conductor: e.target.value })} /></div>
+            <div className="col"><input type="date" className="form-control" onChange={(e) => setFiltros({ ...filtros, fechaHecho: e.target.value })} /></div>
+            <div className="col"><input type="date" className="form-control" onChange={(e) => setFiltros({ ...filtros, fechaVencimiento: e.target.value })} /></div>
+            <div className="col">
+              <select className="form-select" onChange={(e) => setFiltros({ ...filtros, estado: e.target.value })}>
+                <option value="">Estado ({licencias.length})</option>
+                {Object.entries(estadosContados).map(([estado, cantidad]) => (
+                  <option key={estado} value={estado}>{estado} ({cantidad})</option>
+                ))}
+              </select>
+            </div>
+          </div>
+    </div>
       <div className='table-responsive'>
         <table className='table'>
           <thead className='border-info fw-bold'>
@@ -56,7 +99,9 @@ export function LicenciaList ({ licencias, fetchNextPage, hasNextPage, handleEdi
           </thead>
 
           <tbody>
-            {licencias.map((licencia) => {
+            {licenciasFiltrados
+            .filter(licencia => licencia) // <-- elimina undefined
+            .map((licencia) => {
               return (
                 <tr key={licencia.id}>
                   <td className='border-dark' style={{ borderRightWidth: 1 }}>{licencia.id}</td>

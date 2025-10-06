@@ -2,10 +2,8 @@ import { Modal } from '../../components/Modal.jsx'
 import { TrenForm } from '../../components/tren/TrenForm.jsx'
 import { TrenList } from '../../components/tren/TrenList.jsx'
 import { useTrenCrud } from '../../hooks/tren/useTrenCrud.js'
-import { useQueryClient } from '@tanstack/react-query'
 
 export function TrenCrud() {
-  const queryClient = useQueryClient()
   const {
     trenes,
     showModal,
@@ -18,7 +16,6 @@ export function TrenCrud() {
     isError,
     error,
     ascOrder,
-    handleFilter,
     handleEdit,
     handleCreate,
     handleAscOrder
@@ -40,19 +37,6 @@ export function TrenCrud() {
         >
           Crear un tren
         </button>
-
-        <div className='input-group w-auto'>
-          <p role='button' onClick={async () => {document.getElementById("findOneInput").value = ''; await queryClient.invalidateQueries({queryKey: ['trenesInfinite']})}}>X</p>
-          <input
-            type='number'
-            className='form-control'
-            placeholder='Buscar por id'
-            id='findOneInput'
-          />
-          <span role='button' className='input-group-text' onClick={() => handleFilter(document.getElementById("findOneInput").value)}>
-            🔍
-          </span>
-        </div>
       </div>
       {/* Logica pensada para ordenar los trenes segun el atributo que apreta el usuario, todavian no hecha */ }
       <TrenList trenes={trenes} handleAscOrder={handleAscOrder} ascOrder={ascOrder} fetchNextPage={fetchNextPage} hasNextPage={hasNextPage} handleEdit={handleEdit} deleteMutation={deleteMutation}/>

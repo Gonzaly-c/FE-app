@@ -2,10 +2,8 @@ import { Modal } from '../../components/Modal.jsx'
 import { CargaForm } from '../../components/carga/CargaForm.jsx'
 import { CargaList } from '../../components/carga/CargaList.jsx'
 import { useCargaCrud } from '../../hooks/carga/useCargasCrud.js'
-import { useQueryClient } from '@tanstack/react-query'
 
 export function CargaCrud() {
-  const queryClient = useQueryClient()
   const {
     cargas,
     showModal,
@@ -18,7 +16,6 @@ export function CargaCrud() {
     isError,
     error,
     ascOrder,
-    handleFilter,
     handleEdit,
     handleCreate,
     handleAscOrder
@@ -39,19 +36,6 @@ export function CargaCrud() {
         >
           Crear una carga
         </button>
-
-        <div className='input-group w-auto'>
-          <p role='button' onClick={async () => {document.getElementById("findOneInput").value = ''; await queryClient.invalidateQueries({queryKey: ['cargasInfinite']})}}>X</p>
-          <input
-            type='number'
-            className='form-control'
-            placeholder='Buscar por id'
-            id='findOneInput'
-          />
-          <span role='button' className='input-group-text' onClick={() => handleFilter(document.getElementById("findOneInput").value)}>
-            🔍
-          </span>
-        </div>
       </div>
       {/* Logica pensada para ordenar los cargas segun el atributo que apreta el usuario, todavian no hecha */ }
       <CargaList cargas={cargas} handleAscOrder={handleAscOrder} ascOrder={ascOrder} fetchNextPage={fetchNextPage} hasNextPage={hasNextPage} handleEdit={handleEdit} deleteMutation={deleteMutation}/>

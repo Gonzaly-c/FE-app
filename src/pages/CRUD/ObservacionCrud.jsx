@@ -2,10 +2,8 @@ import { Modal } from '../../components/Modal.jsx'
 import { ObservacionForm } from '../../components/observacion/ObservacionForm.jsx'
 import { ObservacionList } from '../../components/observacion/ObservacionList.jsx'
 import { useObservacionCrud } from '../../hooks/observacion/useObservacionCrud.js'
-import { useQueryClient } from '@tanstack/react-query'
 
 export function ObservacionCrud() {
-  const queryClient = useQueryClient()
   const {
     observaciones,
     showModal,
@@ -18,7 +16,6 @@ export function ObservacionCrud() {
     isError,
     error,
     ascOrder,
-    handleFilter,
     handleEdit,
     handleCreate,
     handleAscOrder
@@ -39,19 +36,6 @@ export function ObservacionCrud() {
         >
           Crear una Observacion
         </button>
-
-        <div className='input-group w-auto'>
-          <p role='button' onClick={async () => { document.getElementById('findOneInput').value = ''; await queryClient.invalidateQueries({ queryKey: ['observacionesInfinite'] }) }}>X</p>
-          <input
-            type='number'
-            className='form-control'
-            placeholder='Buscar por id'
-            id='findOneInput'
-          />
-          <span role='button' className='input-group-text' onClick={() => handleFilter(document.getElementById('findOneInput').value)}>
-            🔍
-          </span>
-        </div>
       </div>
       {/* Logica pensada para ordenar los Observaciones segun el atributo que apreta el usuario, todavia no hecha */}
       <ObservacionList observaciones={observaciones} handleAscOrder={handleAscOrder} ascOrder={ascOrder} fetchNextPage={fetchNextPage} hasNextPage={hasNextPage} handleEdit={handleEdit} deleteMutation={deleteMutation} />

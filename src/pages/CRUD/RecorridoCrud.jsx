@@ -2,10 +2,8 @@ import { Modal } from '../../components/Modal.jsx'
 import { RecorridoForm } from '../../components/recorrido/RecorridoForm.jsx'
 import { RecorridoList } from '../../components/recorrido/RecorridoList.jsx'
 import { useRecorridoCrud } from '../../hooks/recorrido/useRecorridoCrud.js'
-import { useQueryClient } from '@tanstack/react-query'
 
 export function RecorridoCrud() {
-  const queryClient = useQueryClient()
   const {
     recorridos,
     showModal,
@@ -18,7 +16,6 @@ export function RecorridoCrud() {
     isError,
     error,
     ascOrder,
-    handleFilter,
     handleEdit,
     handleCreate,
     handleAscOrder
@@ -40,19 +37,6 @@ export function RecorridoCrud() {
         >
           Crear un recorrido
         </button>
-
-        <div className='input-group w-auto'>
-          <p role='button' onClick={async () => {document.getElementById("findOneInput").value = ''; await queryClient.invalidateQueries({queryKey: ['recorridosInfinite']})}}>X</p>
-          <input
-            type='number'
-            className='form-control'
-            placeholder='Buscar por id'
-            id='findOneInput'
-          />
-          <span role='button' className='input-group-text' onClick={() => handleFilter(document.getElementById("findOneInput").value)}>
-            🔍
-          </span>
-        </div>
       </div>
       {/* Logica pensada para ordenar los recorridos segun el atributo que apreta el usuario, todavian no hecha */ }
       <RecorridoList recorridos={recorridos} handleAscOrder={handleAscOrder} ascOrder={ascOrder} fetchNextPage={fetchNextPage} hasNextPage={hasNextPage} handleEdit={handleEdit} deleteMutation={deleteMutation}/>

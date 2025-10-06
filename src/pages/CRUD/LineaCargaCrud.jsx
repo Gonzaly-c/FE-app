@@ -2,10 +2,8 @@ import { Modal } from '../../components/Modal.jsx'
 import { LineaCargaForm } from '../../components/lineaCarga/LineaCargaForm.jsx'
 import { LineaCargaList } from '../../components/lineaCarga/LineaCargaList.jsx'
 import { useLineaCargaCrud } from '../../hooks/lineaCarga/useLineaCargaCrud.js'
-import { useQueryClient } from '@tanstack/react-query'
 
 export function LineaCargaCrud() {
-  const queryClient = useQueryClient()
   const {
     lineaCargas,
     showModal,
@@ -18,7 +16,6 @@ export function LineaCargaCrud() {
     isError,
     error,
     ascOrder,
-    handleFilter,
     handleEdit,
     handleCreate,
     handleAscOrder
@@ -39,19 +36,6 @@ export function LineaCargaCrud() {
         >
           Crear una Linea de Carga
         </button>
-
-        <div className='input-group w-auto'>
-          <p role='button' onClick={async () => { document.getElementById('findOneInput').value = ''; await queryClient.invalidateQueries({ queryKey: ['lineaCargasInfinite'] }) }}>X</p>
-          <input
-            type='number'
-            className='form-control'
-            placeholder='Buscar por id'
-            id='findOneInput'
-          />
-          <span role='button' className='input-group-text' onClick={() => handleFilter(document.getElementById('findOneInput').value)}>
-            🔍
-          </span>
-        </div>
       </div>
       {/* Logica pensada para ordenar los LineaCargas segun el atributo que apreta el usuario, todavia no hecha */}
       <LineaCargaList lineaCargas={lineaCargas} handleAscOrder={handleAscOrder} ascOrder={ascOrder} fetchNextPage={fetchNextPage} hasNextPage={hasNextPage} handleEdit={handleEdit} deleteMutation={deleteMutation} />

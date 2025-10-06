@@ -2,10 +2,9 @@ import { Modal } from '../../components/Modal.jsx'
 import { EstadoTrenForm } from '../../components/estadoTren/EstadoTrenForm.jsx'
 import { EstadoTrenList } from '../../components/estadoTren/EstadoTrenList.jsx'
 import { useEstadoTrenCrud } from '../../hooks/estadoTren/useEstadoTrenCrud.js'
-import { useQueryClient } from '@tanstack/react-query'
 
 export function EstadoTrenCrud() {
-  const queryClient = useQueryClient()
+  
   const {
     estadoTrenes,
     showModal,
@@ -18,7 +17,6 @@ export function EstadoTrenCrud() {
     isError,
     error,
     ascOrder,
-    handleFilter,
     handleEdit,
     handleCreate,
     handleAscOrder
@@ -40,19 +38,6 @@ export function EstadoTrenCrud() {
         >
           Crear un estado de Tren
         </button>
-
-        <div className='input-group w-auto'>
-          <p role='button' onClick={async () => {document.getElementById("findOneInput").value = ''; await queryClient.invalidateQueries({queryKey: ['estadoTrenesInfinite']})}}>X</p>
-          <input
-            type='number'
-            className='form-control'
-            placeholder='Buscar por id'
-            id='findOneInput'
-          />
-          <span role='button' className='input-group-text' onClick={() => handleFilter(document.getElementById("findOneInput").value)}>
-            🔍
-          </span>
-        </div>
       </div>
       {/* Logica pensada para ordenar los estadoTrenes segun el atributo que apreta el usuario, todavian no hecha */ }
       <EstadoTrenList estadoTrenes={estadoTrenes} handleAscOrder={handleAscOrder} ascOrder={ascOrder} fetchNextPage={fetchNextPage} hasNextPage={hasNextPage} handleEdit={handleEdit} deleteMutation={deleteMutation}/>
